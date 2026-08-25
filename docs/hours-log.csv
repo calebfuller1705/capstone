@@ -1,1 +1,3 @@
 date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes
+2026-08-24,14:00,15:30,2,Inception,Project Manager,Scaffolded repository and set up reporting tools,1.5,0,Setup went smoothly using the terminal and VS Code
+2026-08-25,12:30,13:15,1,Inception,Project Manager,Drafted charter non-goals and completed 16-week Hat Map,0.75,0,Mapped out project dependencies and set strict 15-hour boundaries
