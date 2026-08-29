@@ -1,6 +1,6 @@
 # Project Charter — Caleb Fuller
 
-**Owner:** Caleb Fuller · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-26
+**Owner:** Caleb Fuller · **Course:** Capstone · **Started:** 2026-08-24 · **Last revised:** 2026-08-28
 
 ## 1. Purpose
 
