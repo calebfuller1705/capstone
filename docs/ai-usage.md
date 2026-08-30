@@ -22,4 +22,6 @@ I take full responsibility for every line of code, documentation, and configurat
 
 | 2026-08-25 | Gemini | "Generate a .gitignore for a Windows, VS Code, and Python stack" | A standard .gitignore file with OS, IDE, and Python exclusions | I manually reviewed the file and added `*.sqlite3` at the bottom | Added the database extension just in case I use a local SQLite store before moving to SQL Server |
 
-| 2026-08-26 | Gemini | "Turn my 16-week Hat Map into a 15-hour/week calendar with blocked sessions" | A pristine, perfectly distributed 15-week daily schedule | I manually ripped out the generated hours for Weeks 8 and 14 and moved them to earlier weeks | The AI had no knowledge of my midterm exams or the Thanksgiving holiday break |
+| 2026-08-26 | Gemini | "Turn my 16-week Hat Map into a 15-hour/week calendar with blocked sessions" | A perfectly distributed 15-week daily schedule | I manually ripped out the generated hours for Weeks 8 and 14 and moved them to earlier weeks | The AI had no knowledge of my midterm exams or the Thanksgiving holiday break |
+
+| 2026-08-30 | Gemini | "It is Week 16. This project failed and I am writing the post-mortem. Give me the three most likely causes... | Gave me the three most likely points of failure with a paragraph for each |

@@ -1,0 +1,4 @@
+candidate,features,integrations,auth,persistence,deploy,data,new_tech
+Candidate A (Phishing Verification Platform),3,2,no,no,yes,simple,2
+Candidate B (Open-Source Vulnerability Scanner),3,1,no,no,yes,moderate,1
+Candidate C (Password Hygiene Auditor),3,1,no,no,yes,simple,1
