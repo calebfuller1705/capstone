@@ -4,13 +4,13 @@
 
 ## 1. Purpose
 
-To establish a disciplined, professional engineering foundation and produce a complete software system accompanied by industry-standard documentation. By the end of the semester, a stranger will be able to clone the repository, run the application locally without errors, and read through the requirements, architecture, and handoff documents exactly as a professional team would expect.
+To establish a disciplined, professional engineering foundation and build a complete software system that aligns with industry-standard documentation. By the end of the semester, a stranger will be able to clone the repository, run the application locally without errors, and read through the requirements, architecture, and handoff documents exactly as a professional team would expect.
 
 ## 2. Project (filled in Week 2, after the scoping decision)
 
-- **One-sentence description:** <fill in Week 2>
-- **Primary user:** <fill in Week 2>
-- **The one thing it must do to be worth finishing:** <fill in Week 2>
+- **One-sentence description:** A web-based security tool that looks at suspicious links using the VirusTotal API and gives a plain-English safety score for non-technical users.
+- **Primary user:** Everyday corporate employees.
+- **The one thing it must do to be worth finishing:** It must successfully translate deeply technical API security data into a definitive, trustworthy "safe" or "unsafe" verdict so the user does not have to escalate routine checks to the IT helpdesk.
 
 ## 3. Capacity and constraints
 
