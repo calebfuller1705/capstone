@@ -86,3 +86,15 @@ The one hard part will probably be mapping the technical VirusTotal JSON attribu
 
 **Signed:** Caleb Fuller, 2026-08-31
 **AI use for this document:** Prompted LLM to synthesize the previous days' interview notes, hour estimations, and pre-mortem risks into the required course template. I kept the generated risk tables and hour calculations. Logged in `docs/ai-usage-log.md`.
+
+
+## 11. Appendix: Dependency Verification
+
+*This table confirms that all external API dependencies were manually exercised via command line to ensure active response codes and feasibility before scoping was finalized.*
+
+| Dependency | Candidate | Exercised | Result | Key? | Rate limit | Terms read |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| VirusTotal Public API | A | `curl -X GET https://www.virustotal.com/api/v3/urls/{id}` | 200 OK | Yes | 500 requests/day | 2026-08-29 |
+| urlscan.io API (CUT) | A | `curl -X POST https://urlscan.io/api/v1/scan/` | 200 OK | Yes | X-Rate-Limit | 2026-08-29 |
+| OSV.dev API | B | `curl -X POST https://api.osv.dev/v1/query` | 200 OK | No | None | 2026-08-29 |
+| HIBP Passwords API | C | `curl https://api.pwnedpasswords.com/range/21BD1` | 200 OK | No | None | 2026-08-29 |
