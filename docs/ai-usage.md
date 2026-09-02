@@ -25,3 +25,5 @@ I take full responsibility for every line of code, documentation, and configurat
 | 2026-08-26 | Gemini | "Turn my 16-week Hat Map into a 15-hour/week calendar with blocked sessions" | A perfectly distributed 15-week daily schedule | I manually ripped out the generated hours for Weeks 8 and 14 and moved them to earlier weeks | The AI had no knowledge of my midterm exams or the Thanksgiving holiday break |
 
 | 2026-08-30 | Gemini | "It is Week 16. This project failed and I am writing the post-mortem. Give me the three most likely causes... | Gave me the three most likely points of failure with a paragraph for each |
+
+| 2026-09-02 | Gemini | "INTERROGATE prompt from section 3.8: twenty questions..." | 20 edge-case and failure-state questions | Answered 15 in my notes, moved the 5 I couldn't answer into Section 8 of my requirements doc | The model was extremely effective at finding failure states (like URL shorteners and exact scoring thresholds) that I hadn't formally defined yet |
