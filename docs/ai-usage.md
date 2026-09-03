@@ -27,3 +27,5 @@ I take full responsibility for every line of code, documentation, and configurat
 | 2026-08-30 | Gemini | "It is Week 16. This project failed and I am writing the post-mortem. Give me the three most likely causes... | Gave me the three most likely points of failure with a paragraph for each |
 
 | 2026-09-02 | Gemini | "INTERROGATE prompt from section 3.8: twenty questions..." | 20 edge-case and failure-state questions | Answered 15 in my notes, moved the 5 I couldn't answer into Section 8 of my requirements doc | The model was extremely effective at finding failure states (like URL shorteners and exact scoring thresholds) that I hadn't formally defined yet |
+
+| 2026-09-03 | Gemini | "FIND THE HOLES prompt from section 3.8" | 4 potential edge cases missing from requirements | Kept 1 (handling empty/corrupted JSON payloads). Discarded 3: extreme URL length is unlikely, API key expiration is already planned for, and double-clicking will be prevented by the UI hiding the submit button. | The AI found 1 genuine hole and 3 invented/already covered ones. Ratio of genuine to invented was 1:3. |
