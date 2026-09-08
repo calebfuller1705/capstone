@@ -8,10 +8,11 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 
 # The persona set, with evidence
 
-| Persona | Who | Needs | Constraining behavior | Evidence |
-| :--- | :--- | :--- | :--- | :--- |
-| **Corporate Employee** (Primary) | A non-technical office worker who frequently receives external emails. | To instantly know if a link is safe to click without parsing technical data. | Will close the app and escalate to the IT helpdesk if the results are confusing or take too long to load. | Interview 2026-08-29; quoted stating they "have no clue whether it is real." |
-| **The next maintainer** | The person who clones the repository in Week 17 knowing nothing about it. | To understand what every feature was for, from the document alone. | Will fail the deployment test if environment variables and API keys are not clearly documented in a setup file. | The course's own handoff test. |
+| Persona | Who they are | What they need from the system | Evidence they exist |
+|---|---|---|---|
+| Corporate Employee | A non-technical office worker receiving suspicious emails | A definitive Safe/Unsafe verdict without technical jargon | Interview 2026-08-29 |
+| IT/Helpdesk Analyst | A technical support staff member handling escalations | Reduced ticket volume for baseline URL safety checks | Interview 2026-08-29 |
+| Technical Maintainer | The developer inheriting the repository | Clear documentation on API credentials and application deployment | Capstone project parameters |
 
 
 ### FR-INP-01 — URL Submission
