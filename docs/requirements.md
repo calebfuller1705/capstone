@@ -13,17 +13,6 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 | **Corporate Employee** (Primary) | A non-technical office worker who frequently receives external emails. | To instantly know if a link is safe to click without parsing technical data. | Will close the app and escalate to the IT helpdesk if the results are confusing or take too long to load. | Interview 2026-08-29; quoted stating they "have no clue whether it is real." |
 | **The next maintainer** | The person who clones the repository in Week 17 knowing nothing about it. | To understand what every feature was for, from the document alone. | Will fail the deployment test if environment variables and API keys are not clearly documented in a setup file. | The course's own handoff test. |
 
-## 8. Open Questions
-
-| Question | Owner | Date Added | Target Resolution |
-| :--- | :--- | :--- | :--- |
-| What exact mathematical threshold of VirusTotal vendor flags or community votes turns a link from "safe" to "unsafe"? | Caleb | 2026-09-02 | |
-| How are URL shorteners (like `bit.ly`) handled—does the app automatically resolve the redirect, or does it only scan the short link itself? | Caleb | 2026-09-02 | |
-| If the backend loses connection to the internet mid-query, what is the observable result on the frontend? | Caleb | 2026-09-02 | |
-| Does the app support scanning raw IP addresses, or only standard domain URLs? | Caleb | 2026-09-02 | |
-| How are the API keys injected into the application during the clean-machine deployment test? | Caleb | 2026-09-02 | |
-| What constitutes a "malformed" URL during the input validation step (e.g., missing https://, spaces in the text)? | Caleb | 2026-09-02 | |
-| Are there any specific characters (like <script>) that the input field must actively sanitize to prevent cross-site scripting (XSS)? | Caleb | 2026-09-02 | |
 
 ### FR-INP-01 — URL Submission
 **Priority:** Must
@@ -31,8 +20,8 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 **Rationale:** The corporate employee needs a mechanism to pass the suspicious link to the system.
 **Source:** Interview 2026-08-29
 **Acceptance Criteria:**
-- Given a user on the main dashboard, when they submit a correctly formatted URL (e.g., starting with `https://`), then the system starts the API call and displays the loading indicator.
-- Given a user on the main dashboard, when they submit a string containing spaces or lacking a valid domain format, then the system rejects the input and displays a "Malformed URL" error message without calling the API.
+- Given a user on the main dashboard, when they submit a URL string starting with exactly http:// or https:// followed by a standard domain format, then the system initiates the API call and displays the loading indicator.
+- Given a user on the main dashboard, when they submit a string containing spaces, a raw IP address, or lacking the http(s):// prefix, then the system rejects the input and displays a "Malformed URL" error message without calling the API.
 
 ### FR-INP-02 — Empty Submission Rejection
 **Priority:** Must
@@ -85,7 +74,7 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 **Rationale:** Users will abandon the check and escalate to IT if they think the application is frozen.
 **Source:** Interview 2026-08-29
 **Acceptance Criteria:**
-- Given a valid URL submission is accepted, when the network request to VirusTotal is initiated, then the screen displays a spinning wheel and cycles through security tips.
+- Given a valid URL submission is accepted, when the network request to VirusTotal is initiated, then the screen displays a spinning wheel and cycles through a hardcoded array of three local security tips, rotating every 3 seconds.
 - Given the loading indicator is active, when the API request resolves or hits the 10-second timeout, then the spinning wheel and tips immediately disappear and are replaced by the verdict.
 
 ### FR-DASH-02 — Successive Submissions
@@ -97,12 +86,39 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 - Given a user is viewing a finalized risk verdict, when they click the "Upload another URL" button, then the system clears the current results and presents a blank submission field without requiring a page reload.
 - Given a user is viewing a finalized risk verdict, when they click the "Upload another URL" button, then the previous URL's data is cleared from the dashboard to ensure the new submission is not confused with the old one.
 
-## 7. Out of Scope
+## 6. Non-Functional Requirements
 
-| Feature (Won't Have) | Reason for exclusion | Revisit condition |
-| :--- | :--- | :--- |
-| Full Email Text Parser | Extracting URLs from raw email bodies brings in complex string parsing and MIME-type handling that threatens the 57-hour budget. | Revisit in Week 14 only if the core construction budget has unused hours remaining. |
-| User Accounts & Scan History | Keeping a history of checked links requires a database, an authentication system, and session management, which exceeds the scope of a stateless utility tool. | Will not be revisited this release; the application remains strictly stateless. |
+Placeholder for Week 4. Do not write vague quality words here now; write nothing
+and fill it in when you can make each one measurable.
+
+## 7. Out of Scope (the Won't-Have List)
+
+| Not building | Why not | Revisit when |
+|---|---|---|
+| Full Email Text Parser | Extracting URLs from raw email bodies introduces complex string parsing and MIME-type handling that threatens the 57-hour budget. | Revisit in Week 14 only if the core construction budget has unused hours remaining. |
+| User Accounts & Scan History | Retaining a history of checked links requires a database, an authentication system, and session management, which exceeds the scope of a stateless utility tool. | Will not be revisited this release; the application remains strictly stateless. |
 | Secondary API Integration | Adding a fallback API (like urlscan.io) increases integration time and test surface area unnecessarily for the baseline requirement. | Revisit in Week 12 if the VirusTotal integration is completed comfortably under its 14-hour budget. |
-| Raw IP Address Scanning | Validating and scanning raw IPs needs different API endpoints and risk-scoring metrics than standard domain URLs. | Revisit post-launch as a potential v2.0 feature. |
+| Raw IP Address Scanning | Validating and scanning raw IPs requires different API endpoints and risk-scoring metrics than standard domain URLs. | Revisit post-launch as a potential v2.0 feature. |
 | Browser Extension | Building an extension to automatically scan links inside an email client requires a completely different tech stack and deployment model than a standalone web app. | Will not be revisited this semester. |
+
+
+## 8. Open Questions
+
+| Question | Owner | Date Added | Target Resolution |
+| :--- | :--- | :--- | :--- |
+| What exact mathematical threshold of VirusTotal vendor flags or community votes turns a link from "safe" to "unsafe"? | Caleb | 2026-09-02 | |
+| How are URL shorteners (like `bit.ly`) handled—does the app automatically resolve the redirect, or does it only scan the short link itself? | Caleb | 2026-09-02 | |
+| If the backend loses connection to the internet mid-query, what is the observable result on the frontend? | Caleb | 2026-09-02 | |
+| Does the app support scanning raw IP addresses, or only standard domain URLs? | Caleb | 2026-09-02 | |
+| How are the API keys injected into the application during the clean-machine deployment test? | Caleb | 2026-09-02 | |
+| What constitutes a "malformed" URL during the input validation step (e.g., missing https://, spaces in the text)? | Caleb | 2026-09-02 | |
+| Are there any specific characters (like <script>) that the input field must actively sanitize to prevent cross-site scripting (XSS)? | Caleb | 2026-09-02 | |
+
+
+## 9. Document Change Log
+
+| Date | Version | Change | Reason |
+|---|---|---|---|
+| 2026-09-03 | 1.0 | Initial specification | Milestone 3 |
+| 2026-09-07 | 1.0 | Ambiguity pass after external | Updated FR-INP-01 and FR-DASH-01 criteria for absolute clarity |
+
