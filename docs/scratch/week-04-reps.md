@@ -43,3 +43,125 @@
 ### 6. "The app should work on mobile."
 * **Defects:** missing condition, no measurement method.
 * **Rewrite:** `NFR-POR-01` (Must) — The core URL submission form and results dashboard come in without horizontal scrolling and are fully functional on an iOS Safari viewport (390x844). Measured by: manual smoke test of the main flow using browser dev tools mobile device.
+
+
+## Rep 4: The Data Inventory
+
+| Data element | Why you need it | Where it lives | How long you keep it | How a user gets rid of it |
+| :--- | :--- | :--- | :--- | :--- |
+| **Submitted URLs** | Needed to evaluate security risk | In-memory while moving, and on VirusTotal's servers | *Verify* (VirusTotal policy) | *Verify* (VirusTotal policy) |
+| **API Keys (VirusTotal)** | Needed to authenticate to the API | Environment variables / Server config | Until project is done / rotation | Manual get deleted from server config |
+| **Action Log (Domains/Scores)** | IT Helpdesk audit trail (`FR-SYS-02`) | Local .txt file on the server | Life of the server instance | Admin must manually delete the file |
+| **Server Access Logs (IPs)** | Standard web hosting operations | Hosting provider's logging system | *Verify* (Host policy of whatever I end up choosing) | *Verify* (Host policy) |
+
+
+## Rep 5: The Mouse-Unplugged Pass
+
+**Stuck Points for the URL Scanner:**
+1. **Invisible Focus:** Tabbing from the URL input field to the "Submit" button might not show a clear outline, which would make it impossible to know where the cursor is.
+2. **Silent Results:** When the API finishes after a few seconds and renders "Safe" or "Unsafe" on the screen, a keyboard/screen-reader user wouldn't know the page updated unless focus is intentionally moved to the result.
+3. **Unreachable Copy Button:** Unless the "Copy Verdict" button (FR-ACT-01) is an actual button, the `Tab` key goes right over it.
+
+**Accessibility Requirements (NFRs):**
+
+### NFR-ACC-01 — Keyboard Navigation & Focus
+**Priority:** Must
+**Requirement:** 100% of controls on the URL scanner page will be reachable and able to run by keyboard alone, in a logical order, with a highly visible focus indicator.
+**Metric:** Percentage of interactive controls reachable by keyboard.
+**Threshold:** 100%.
+**Condition:** Using only the `Tab`, `Shift+Tab`, `Space`, and `Enter` keys during the core URL submission and result-copying flow.
+**Method:** Unplug the mouse; complete the scan-and-copy flow; write down every spot the focus ring goes away or a control is skipped.
+
+### NFR-ACC-02 — Dynamic Result Announcement
+**Priority:** Must
+**Requirement:** The system will programmatically announce the final scan verdict (Safe, Unsafe, Ambiguous, Error) to all technologies immediately when it renders on the screen.
+**Metric:** Screen reader result announcement.
+**Threshold:** 100% of the time upon result render.
+**Condition:** When the API completes and the UI moves from loading to the final verdict.
+**Method:** Run a test URL with a screen reader active or manually inspect the DOM to make sure the results container uses `aria-live="polite"`.
+
+### NFR-ACC-03 — Semantic Form Labels
+**Priority:** Must
+**Requirement:** The main URL input field will need to be associated with a descriptive text label.
+**Metric:** Percentage of form inputs with an associated `<label>`.
+**Threshold:** 100%.
+**Condition:** On the primary URL submission form.
+**Method:** Manual DOM inspection in browser developer tools to make sure the `<label for="url-input">` matches the `<input id="url-input">`.
+
+## Rep 6: Contrast and Grayscale
+
+**Simulated Grayscale & Contrast Failures:**
+1. **Color-Only Severity:** If a URL comes back as dangerous and the UI only turns the background red without specifically writing "Unsafe" or showing a warning icon, a user with red-green colorblindness will not understand what is going on. 
+2. **Low Contrast Text:** A bright lime green "Safe" on a white background would probably fail the contrast ratio, which would make the text unreadable.
+
+**Accessibility Requirements (NFRs):**
+
+### NFR-ACC-04 — Text Contrast Ratio
+**Priority:** Must
+**Requirement:** All body text and important UI text will have a contrast ratio of at least 4.5:1 against whatever background it is on.
+**Metric:** Contrast ratio.
+**Threshold:** >= 4.5:1.
+**Condition:** Over all UI states and result displays (Safe/Unsafe).
+**Method:** Run a WCAG contrast checker tool on the specific hex codes used for the green/red text against the background color.
+
+### NFR-ACC-05 — Color Independence
+**Priority:** Must
+**Requirement:** The system shall never convey information, severity, or state changes by color alone.
+**Metric:** Occurrences of color-only information.
+**Threshold:** Exactly 0.
+**Condition:** During the display of the final scan verdict.
+**Method:** Set the operating system display to grayscale and complete the core URL scan flow; verify that the text explicitly communicates the result without relying on the green or red hues.
+
+
+## Rep 7: The Prohibitions, and the History Check
+
+**Security Prohibitions:**
+* `NFR-SEC-01` (Must) — No credential, API key, or token shows up in the repo at any point.
+* `NFR-SEC-02` (Must) — The system stores 0 bytes of user-specific scanned URL history to the server or database.
+
+**History Check Result:**
+Ran the history scanner on the repo and came back with nothing. The history is clean of secrets. I'm pretty sure I had a false positive, however.
+
+**Definition of Done Addition:**
+To make sure this doesn't happen in the future, I will be adding this exact line to my Definition of Done: "No secret, key, or real user data was added to the repo."
+
+
+## Rep 8: Constraints, Assumptions, and Dependencies
+
+### Constraints (Limits I did not choose and cannot change)
+| ID | Constraint | Source | What it rules out |
+| :--- | :--- | :--- | :--- |
+| **CON-01** | ~57 hours of effort across 16 weeks | Course | Complex custom UI frameworks or massive scope expansions |
+| **CON-02** | Solo developer | Course | Any plan that relies on different workstreams or pair programming |
+| **CON-03** | Zero budget for paid services | Course/Self | Premium VirusTotal API tiers or paid hosting plans |
+| **CON-04** | Stateless architecture | Project Charter | User accounts, consistent relational databases, or login systems |
+
+### Assumptions (Bets that need to be verified)
+| ID | Assumption | Owner | Verify by | If it is false |
+| :--- | :--- | :--- | :--- | :--- |
+| **ASM-01** | VirusTotal free tier limit (4 calls/minute) is good enough for a demo | Me | Week 5 | Build a queue or be able to reject rapid requests |
+| **ASM-02** | Free hosting tier keeps the app reachable for a live demo | Me | Week 5 | Demo run locally and record a fallback video |
+| **ASM-03** | Non-technical employees will know the Safe/Unsafe UI | Me | Week 9 | Redesign the result messaging and color scheme |
+
+### Dependencies (Outside code/services that will eventually fail)
+| ID | Dependency | Pinned | Failure mode | Fallback |
+| :--- | :--- | :--- | :--- | :--- |
+| **DEP-01** | VirusTotal API | v3 | Rate limit exceeded or API issues | System displays "Scan currently unavailable" without completely shutting down |
+| **DEP-02** | Web Hosting Provider | Free Tier | Service goes down while doing my demo | Run the app through localhost |
+
+
+## Rep 9: Verify One Obligation at the Source
+
+| Obligation | Source URL | Date Checked | What it requires of me |
+| :--- | :--- | :--- | :--- |
+| **VirusTotal Data Sharing (Free Tier)** | `https://docs.virustotal.com/docs/historic-privacy-policy` | 2026-09-10 | Any URL submitted through the free API is stored in the VirusTotal Corpus and shared with global security partners. I will have to warn users not to submit proprietary or private internal URLs so that they are at the very least aware. |
+
+
+## Rep 10: The Enumeration Pass, and the Cull
+
+**New Privacy Requirement (Given to me by AI):**
+*`NFR-PRI-01` (Must) — The UI shall display a clear, visible disclaimer immediately adjacent to the submit button stating: "Warning: URLs scanned here are shared publicly with third-party security researchers. Do not submit internal or proprietary company links."
+    * **Metric:** Presence of disclaimer text.
+    * **Threshold:** 100% visibility on the main form.
+    * **Condition:** On page load for all users.
+    * **Method:** Manual visual inspection of the deployed URL input form.

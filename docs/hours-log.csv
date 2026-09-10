@@ -5,15 +5,17 @@ date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes
 2026-08-26,14:00,16:00,2,Inception,Project Manager,Audited calendar and finalized project charter capacity/purpose,1.75,0,Locked in 15-hour weekly blocks on actual Google calendar
 2026-08-26,16:30,17:30,1,Inception,Release Engineer,Executed clean-clone smoke test and ran hours report,1,0,Repository cloned successfully to tmp folder and python script executed without errors
 2026-08-28,13:30,16:30,3.25,Inception,Product Owner,Executed Reps 1-3: generated cybersecurity candidate portfolio and completed idea canvases,3.5,0,Created docs/ideas/ directory and completed candidate-a.md candidate-b.md and candidate-c.md
-2026-08-29,12:00,15:00,3,Inception,Product Owner,Executed Reps 4-7: conducted user interview, verified API dependencies, audited novelty load, and completed bottom-up estimate,3.0,0,Saved interview notes and generated dependency table
-2026-08-30,13:00,15:00,3,Inception,Product Owner,Executed Reps 8-10: ran Scope Sizer script reconciled estimates and conducted blind pre-mortem,2.75,0,Updated personal notes with scope sizing and risk reflections
+2026-08-29,12:00,15:00,3.0,Inception,Product Owner,Executed Reps 4-7: conducted user interview, verified API dependencies, audited novelty load, and completed bottom-up estimate,3.0,0,Saved interview notes and generated dependency table
+2026-08-30,13:00,15:00,3.0,Inception,Product Owner,Executed Reps 8-10: ran Scope Sizer script reconciled estimates and conducted blind pre-mortem,2.75,0,Updated personal notes with scope sizing and risk reflections
 2026-08-31,13:30,14:30,1.5,Inception,Product Owner,Executed Reps 11 and 12 to lock in the final scope cut and 57-hour construction budget,1.0,0,Cut URLScan.io to save 12 hours
 2026-08-31,14:30,15:45,1.75,Inception,Product Owner,Drafted and formatted the final Scoping Decision Memo,1.75,0,Synthesized all milestone data into the required course template
-2026-08-31,15:45,16:30,1,Inception,Product Owner,Updated Project Charter and finalized milestone deliverables,0.75,0,Completed Milestone 2 documentation
-2026-09-01,14:00,16:00,3,Requirements,Business Analyst,Executed Reps 1-3 establishing feature areas personas and elicitation note tagging,2.75,0,Reused Week 2 interview notes for Rep 3
+2026-08-31,15:45,16:30,1.0,Inception,Product Owner,Updated Project Charter and finalized milestone deliverables,0.75,0,Completed Milestone 2 documentation
+2026-09-01,14:00,16:00,3.0,Requirements,Business Analyst,Executed Reps 1-3 establishing feature areas personas and elicitation note tagging,2.75,0,Reused Week 2 interview notes for Rep 3
 2026-09-02,14:00,16:00,4.5,Requirements,Business Analyst,Ran Reps 4-8 including INVEST screening and drafting functional requirements with acceptance criteria,4.0,0,Locked in 8 Must/Should requirements
 2026-09-03,09:00,09:30,3.0,Requirements,Business Analyst,Executed Rep 11 (AI Audit) and Rep 12 (Project board Must cards),3.0,0,Completed Week 3 reps pending final Stranger Read
 2026-09-03, 14:00, 16:00, 2.0, Requirements, Business Analyst, Discussed with stranger about requirements, 2.5,0, Stranger provided feedback on requirements and suggested improvements
 2026-09-07, 13:00, 15:00, 2.0, Requirements, Business Analyst, Conducted second round of discussion with stranger about requirements, 1.5,0, Stranger gave a second round of feedback on revised requirements
-2026-09-07,16:00, 19:30, 3.5,Requirements,Business Analyst, Executed ambiguity pass fixes/ formatted elicitation interview notes/ updated AI usage log (finished Milestone 3),3 ,0, Week 3 requirements phase is mapped out
-2026-09-08,14:00,15:00,3.0,Requirements,Risk Owner,Completed Week 4 Block A reps (1-3) translating adjectives to measurable NFRs,3.0,0, Going to move onto Block B of Week 4 next
+2026-09-07,16:00, 19:30, 3.5,Requirements, Business Analyst, Executed ambiguity pass fixes/ formatted elicitation interview notes/ updated AI usage log (finished Milestone 3),3 ,0, Week 3 requirements phase is mapped out
+2026-09-08,14:00, 15:00,3.0,Requirements, Risk Owner,Completed Week 4 Block A reps (1-3) translating adjectives to measurable NFRs,3.0,0, Going to move onto Block B of Week 4 next
+2026-09-09,12:30, 14:30 , 3.5,Requirements, Risk Owner,Completed Week 4 Block B reps (4-7) which went over data inventory/accessibility and security history check",3,0, Moving onto Block C next
+2026-09-10,07:30,10:30, 3.0,Requirements,Risk Owner,"Completed Week 4 Block C reps (9-10), and some other reformatting things to clean up", 2.5,0, Will continue with Week 4 next session
