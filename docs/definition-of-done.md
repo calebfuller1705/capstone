@@ -43,4 +43,9 @@ Every one of these is unverifiable by anyone but the author, which means the lis
 
 ---
 
+## Change from the Template
+The requirements for "100% automated test coverage" and a "green CI/CD pipeline" taken out of the original template. With the strict 57-hour budget and it just being myself for this capstone, making automated pipelines would take much needed development hours. Verification will be done through local, manual testing.
+
+---
+
 **Adopted:** 2026-09-14 **Revised:** <YYYY-MM-DD, with a one-line reason>

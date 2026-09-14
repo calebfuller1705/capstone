@@ -227,7 +227,55 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 | NFR-ACC-04 | All body text and important UI text have a ratio of >= 4.5:1 against the background on all UI states and result displays. | Must | Run a WCAG contrast checker tool on the hex codes that I used for the green/red text against the background color of the app. |
 | NFR-ACC-05 | 0 occurrences of information, severity, or state changes are shown by color alone when displaying the final scan answer. | Must | Set device running the test's display to grayscale and go through the main URL flow; making sure that the text specifically shows the result without just using the green or red hues. |
 
-## 7. Out of Scope (the Won't-Have List)
+### 6.6 Maintainability
+
+| ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
+|---|---|---|---|
+| NFR-MNT-01 | A clean clone from the repository gets to a running local instance in less than 10 minutes from only the instructions in the README. | Must | Clean-machine test: timed manual setup in a fresh directory once per big iteration. |
+
+### 6.7 Omitted Categories
+* **Portability:** Portability is not taken into account because the app is a web-based tool reached through typical browsers, without needing installation on mobile or desktop operating systems.
+
+### 6.8 Data Inventory
+
+| Data Element | Why it is needed | Where it lives | Retention | How a user deletes it |
+| :--- | :--- | :--- | :--- | :--- |
+| **Submitted URL** | Core function: needs to be scanned by VirusTotal | In-memory during the request. | Dropped right after the API brings back the result. | No action needed; not stored all the time. |
+| **User IP Address** | Free-tier host standard network traffic routing | Hosting provider access logs | TBD (Up to whatever the hosting provider's retention is) | Not possible (No admin access to host logs) |
+
+## Constraints
+
+| ID | Constraint | Source | What it rules out |
+| :--- | :--- | :--- | :--- |
+| **CON-01** | ~57 hours of effort through 16 weeks | Course | Crazy custom UI frameworks or huge scope expansions |
+| **CON-02** | Solo developer | Course | Any plan counting on different workstreams or pair programming |
+| **CON-03** | Zero budget for paid services | Course/Self | Premium VirusTotal API tiers or paid hosting plans |
+| **CON-04** | Stateless architecture | Project Charter | User accounts, relational databases, or login systems |
+
+## Assumptions
+
+| ID | Assumption | Owner | Verify by | If it is false |
+| :--- | :--- | :--- | :--- | :--- |
+| **ASM-01** | VirusTotal free tier limit (4 calls/minute) is good enough for a demo | Caleb | Week 5 | Build a queue or calmly turn away rapid requests |
+| **ASM-02** | Free hosting tier keeps the app reachable for a live demo | Caleb | Week 5 | Demo from a local run and record a video just in case |
+| **ASM-03** | Non-technical employees will be able to comprehend the Safe/Unsafe UI | Caleb | Week 9 | Redesign the result messaging and color scheme |
+
+## Dependencies
+
+| ID | Dependency | Pinned | Failure mode | Fallback |
+| :--- | :--- | :--- | :--- | :--- |
+| **DEP-01** | VirusTotal API | v3 | Rate limit exceeded or API outage | Program gives the message "Scan currently unavailable" without stopping the app entirely |
+| **DEP-02** | Web Hosting Provider | Free Tier | Service goes down during demo | Run the app locally via localhost |
+
+## Obligations
+
+**License Position:**
+Week 5.
+
+**Third-Party Obligations:**
+* **VirusTotal API (Free Tier):** `https://docs.virustotal.com/docs/historic-privacy-policy` (Verified: 2026-09-10). Any URL that is sent in through the free API is put in the VirusTotal Corpus and shared with global security partners. Required to warn users not to put in any proprietary or private internal URLs.
+
+## Out of Scope (the Won't-Have List)
 
 | Not building | Why not | Revisit when |
 |---|---|---|

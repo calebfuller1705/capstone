@@ -11,6 +11,7 @@ The project idea will be chosen in Week 2.
 - `docs/ai-usage.md` — which AI tools are used on this project, and how
 - `docs/` — one document per life-cycle phase; each header says the week it is written
 - `src/`, `tests/` — empty until Week 9
+- **Definition of Done:** View the [Definition of Done](docs/definition-of-done.md) checklist for all work items.
 
 ## How to run it
 Nothing to run yet. From Week 9 onward, this section will contain the clean-machine setup path.
