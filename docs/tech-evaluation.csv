@@ -1,17 +1,17 @@
 decision,criterion,weight,option,score,evidence
-backend,low novelty load (CON-01/CON-02),0.40,FastAPI,,
-backend,low novelty load (CON-01/CON-02),0.40,Flask,,
-backend,stateless API routing simplicity (CON-04),0.35,FastAPI,,
-backend,stateless API routing simplicity (CON-04),0.35,Flask,,
-backend,job board relevance / employability,0.25,FastAPI,,
-backend,job board relevance / employability,0.25,Flask,,
-frontend,low novelty load (CON-01/CON-02),0.50,Vanilla HTML/JS,,
-frontend,low novelty load (CON-01/CON-02),0.50,React,,
-frontend,easy to achieve 100% manual accessibility (NFR-ACC-01),0.30,Vanilla HTML/JS,,
-frontend,easy to achieve 100% manual accessibility (NFR-ACC-01),0.30,React,,
-frontend,job board relevance / employability,0.20,Vanilla HTML/JS,,
-frontend,job board relevance / employability,0.20,React,,
-hosting,has a $0 free tier for web services (CON-03),0.60,Render,,
-hosting,has a $0 free tier for web services (CON-03),0.60,PythonAnywhere,,
-hosting,deploy from a git push,0.40,Render,,
-hosting,deploy from a git push,0.40,PythonAnywhere,,
+backend,low novelty load (CON-01/CON-02),0.40,FastAPI,3,"Python syntax I know but async/await and Pydantic schemas are new concepts I would need to learn"
+backend,low novelty load (CON-01/CON-02),0.40,Flask,5,"I have built multi-route HTTP web servers in Python before so no learning curve there"
+backend,stateless API routing simplicity (CON-04),0.35,FastAPI,5,"Gives support for stateless API routes and automatic OpenAPI documentation"
+backend,stateless API routing simplicity (CON-04),0.35,Flask,4,"It is capable of stateless routing but requires me to do JSON response formatting"
+backend,job board relevance / employability,0.25,FastAPI,5,"Widely listed as one of the fastest growing Python backend frameworks in 2026 job data"
+backend,job board relevance / employability,0.25,Flask,3,"Widely used in industry but usually for maintaining legacy systems"
+frontend,low novelty load (CON-01/CON-02),0.50,Vanilla HTML/JS,5,"I have written standard HTML/JS before and this requires zero build tools"
+frontend,low novelty load (CON-01/CON-02),0.50,React,1,"Means I would need to learn JSX, state management, hooks, and setting up a build pipeline"
+frontend,easy to achieve 100% manual accessibility (NFR-ACC-01),0.30,Vanilla HTML/JS,5,"Allows me to write raw semantic HTML tags directly with 1:1 control over DOM output"
+frontend,easy to achieve 100% manual accessibility (NFR-ACC-01),0.30,React,3,"Can be accessible but means I need to learn React-specific accessibility patterns"
+frontend,job board relevance / employability,0.20,Vanilla HTML/JS,2,"Foundational knowledge but not really listed as a primary framework requirement"
+frontend,job board relevance / employability,0.20,React,5,"The most requested frontend framework by far in entry-level postings"
+hosting,has a $0 free tier for web services (CON-03),0.60,Render,4,"Free tier exists but sleeps after 15 mins of inactivity (pricing page as of 2026-09-17)"
+hosting,has a $0 free tier for web services (CON-03),0.60,PythonAnywhere,4,"Free tier exists but requires a manual button click every 3 months to keep alive (pricing page as of 2026-09-17)"
+hosting,deploy from a git push,0.40,Render,5,"Native CI/CD integration, would let me push to GitHub trigger automatic deployments"
+hosting,deploy from a git push,0.40,PythonAnywhere,2,"Needs a browser-based bash console and running git pull manually"
