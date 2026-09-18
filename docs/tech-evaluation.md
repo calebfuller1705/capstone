@@ -70,3 +70,32 @@ I tested the fragility of the Frontend decision by taking half the weight of my 
 *   **Assessment:** A novelty load of 2 is manageable, but I can see how it would be dangerous because FastAPI and Render are on the exact same seam (Backend ↔ Host). If a deployment fails, I won't know right away if it's a FastAPI configuration issue or a Render environment issue.
 *   **Action Plan:** Because they are on the same seam, I will need to spike both of them early (Weeks 5-7). I will budget learning hours in Week 7 for configuring Render deployments.
 *   **Innovation Token:** I am spending my one "Innovation Token" on FastAPI. Even though Flask would be a novelty load of 0, learning FastAPI helps me in my employability goals and handles stateless API routing natively (CON-04).
+
+## 8. Cost Sheet
+
+| Line | What to estimate | Monthly Cost |
+| :--- | :--- | :--- |
+| **Compute / Hosting** | Render Web Service (Free Tier) | $0.00 |
+| **Database** | N/A (Stateless architecture per CON-04) | $0.00 |
+| **Third-Party API** | VirusTotal v3 Public API | $0.00 |
+| **Domain / TLS** | Render default subdomain (`.onrender.com`) | $0.00 |
+| **Total** | Estimated cost at student scale | **$0.00** |
+
+## 9. Free-Tier Watch List
+
+| Service | What is free | Verified on | Where I read it | Risk / Expiry | What I do if it ends |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Render** | 1 Web Service, 512MB RAM, shuts down after 15 mins of idle time | 2026-09-18 | Render Pricing Page | Low risk of it ending; high risk of slow cold-starts for grader. | Deploy to a local Docker container for grading. |
+| **VirusTotal API** | 500 requests/day, 4 requests/min | 2026-09-18 | VirusTotal API Docs | Low risk. This line will be plenty for my demo scale. | Go to Google Safe Browsing API or do a recorded video demo. |
+
+## 10. License Inventory
+
+| Component | License | Compatible with Capstone? | Notes |
+| :--- | :--- | :--- | :--- |
+| **FastAPI** | MIT | Yes | Highly permissive; standard copyright notice required. |
+| **Uvicorn** (Web Server) | BSD 3-Clause | Yes | Permissive; typical Python web server license. |
+| **Requests** (HTTP library) | Apache 2.0 | Yes | Permissive; allows me to use for acadmemic use. |
+| **Python** | PSF License Agreement | Yes | Standard permissive license for Python development. |
+| **Vanilla HTML/JS** | N/A | Yes | Open web standards; no license required. |
+
+**License Assessment:** All chosen dependencies use permissive, open-source licenses (MIT, BSD, Apache 2.0, PSF). There are no restrictive "viral" copyleft licenses (such as GPL or AGPL) in the way that would complicate the project.
