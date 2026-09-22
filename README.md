@@ -2,8 +2,12 @@
 
 Senior capstone by Caleb Fuller, Fall 2026. 
 
-**Status: Week 1 — engineering system only. No application code yet.** 
-The project idea will be chosen in Week 2.
+## Current Status (Milestone 5)
+* **Shipped:** Milestone 5 complete: Tech stack evaluated, 4 ADRs accepted, and VirusTotal API successfully spiked.
+* **Cut:** React and complex frontend build tools (cut to protect the 57-hour budget; documented in ADR 0002).
+* **Hours:** planned 15.0 / actual 15.75 (from docs/hours-log.csv)
+* **Blocked on:** nothing
+* **Ship confidence:** green
 
 ## What is here
 - `docs/charter.md` — scope, constraints, non-goals, risks, working agreement
