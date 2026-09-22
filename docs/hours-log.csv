@@ -23,3 +23,7 @@ date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes
 2026-09-14,13:00, 15:30, 2.5,Requirements,Risk Owner, Did Rep 12 made my DoD checklist along with some other formatting things, 2.5,0, Finished up Milestone 4
 2026-09-14,15:30, 16:30, 1.0,Requirements,Risk Owner, I missed a few things that were on the rubric so I came back to add them, 1.0,0,Milestone 4 officially complete
 2026-09-16,10:45, 13:45,3.0,Architecture,Architect, Got through Milestone 5 Reps 1-4: architectural drivers/job board test/option prunining/matrix weights,2.5,0, Moving on to Rep 5 next
+2026-09-16,07:00, 10:00, 3.0,Architecture,Architect, Did Reps 5-6: matrix scoring and sensitivity pass with score-stack.py checker, 3.0,0, Will move on to Rep 7 next
+2026-09-17,06:00, 09:30, 3.5,Architecture,Architect, Did Reps 7-9: seam inventory/novelty load analysis/SP-01 VirusTotal API spike, 3.0,0, Ready for Rep 10 with no blockers
+2026-09-18,12:00, 14:45, 2.75,Architecture,Architect, "Did Reps 10-12: cost sheet, license inventory, and verification log",3.0,0, Will wrap it up with ADR 0001 next time hopefully
+2026-09-22,12:00,13:30,1.5,Architecture,Architect,"Drafted and committed ADR 0001 for backend framework selection",1.75,0,Ready to write remaining ADRs after review is done shortly
