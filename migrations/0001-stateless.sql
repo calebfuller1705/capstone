@@ -1,0 +1,1 @@
+-- CON-04: System is stateless. No tables are created.
