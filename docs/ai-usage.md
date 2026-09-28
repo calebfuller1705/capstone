@@ -35,3 +35,22 @@ I take full responsibility for every line of code, documentation, and configurat
 | 2026-09-10 | Gemini | "Review my functional requirements and brainstorm non-functional requirements I missed." | 3 NFR candidates (Accessibility, Privacy, Legal). | Kept and modified the Privacy one to give a warning label based on the data that VirusTotal keeps. Threw away the Accessibility one (already covered manually). Got rid of the Legal one because it hallucinated a GDPR (for English laws) mandate that doesn't apply. | Helped me catch a privacy UI gap, but showed I have to actually check legal/compliance claims. |
 
 | 2026-09-16 | Option Space Generation (Rep 3) | "For a solo developer building a stateless URL security scanner over 57 remaining hours, list eight options for the backend framework, frontend, and hosting. Include unfashionable ones. For each: one sentence on what it is best at, and its failure mode." | The assistant generated a wide field of options. I used this to manually prune the list down to 2-3 realistic candidates per category (e.g., keeping FastAPI/Flask and discarding Django/Spring Boot) before building the evaluation matrix. |
+
+# Milestone 6 - Architecture Red-Team Review
+**Date:** 2026-09-28
+**Tool:** Gemini
+**Prompt:** "You are the senior engineer who will inherit this project. Name the five places this design will break first, and for each, the requirement it violates and the cheapest change that would prevent it. Do not compliment the design." (Supplied with Container diagram, Responsibility table, and Interface list).
+
+**Output Summary & Fact Verification:**
+The AI provided five failure points:
+1. Intranet filter bypass via integer/IPv6 addresses (FR-EVAL-01).
+2. Polling clock overshoot if a 3s HTTP call starts at 9.5s (FR-API-02).
+3. Quota burn if a user closes the tab during a 50s Render cold-start (FR-API-01).
+4. Uncaught TCP/DNS exceptions bypassing HTTP status checks (FR-API-02).
+5. JSON CPU exhaustion via deeply nested 4KB payloads (NFR-SEC-01).
+
+**Evaluation:**
+All five critiques were fair and accurate. I verified that Python's `requests` library does indeed throw `ConnectionError` on DNS failures (point 4), and that a 3.0s timeout started at 9.5s would violate a 10s cap (point 2). Point 3 (FastAPI `request.is_disconnected()`) is relevant for Render's cold starts. 
+
+**Action Taken:**
+No immediate changes made to v0.1 of the architecture document, but these edge cases will be brought into Week 8 for the design review and added to the Week 11 testing plan.
