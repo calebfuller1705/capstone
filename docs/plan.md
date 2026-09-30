@@ -21,7 +21,7 @@
 | **T-1.3** | JSON Parsing & Evaluator | FR-UI-01, FR-UI-02 | 1 | 2 | 4 | 2.2 | VT JSON response is parsed safely; Safe/Unsafe answer is returned based on `stats.malicious > 0`. | T-1.2 |
 | **T-1.4** | Upstream Error Degradation | FR-API-01 | 1 | 2.5 | 5 | 2.7 | 429 Rate Limit and 500 Internal errors from VT are caught and mapped to our custom error envelope. | T-1.1 |
 
-### Rep 3: The Bad-WBS Autopsy
+# Rep 3: The Bad-WBS Autopsy
 
 **The Bad WBS:**
 1. Set up project (1 week)
@@ -46,3 +46,28 @@
 | **T-2.2** | URL Validation & Intranet Blocking | FR-INP-01, 03, 04, FR-EVAL-01 | 2 | 3 | 5 | 3.2 | Strings > 2048 chars, missing domains, or local IPs return exact 400/422 status codes. | T-2.1 |
 | **T-2.3** | VirusTotal Polling Integration | FR-API-02, NFR-PERF-01 | 3 | 4 | 7 | 4.3 | System submits URL, polls VT asynchronously, and returns Safe/Unsafe verdict within 10s. | T-2.2 |
 | **T-2.4** | Global Error Envelope & Degradation | FR-API-01 | 1 | 2 | 4 | 2.2 | Upstream 429/500 errors map cleanly to the custom system error envelope and do not crash the app. | T-2.3 |
+
+# Rep 4: Three-Point Estimate Everything
+
+**WP-3: Frontend UI & Client Logic**
+| Task | Name | Reqs | O | M | P | E | Done when | Depends on |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **T-3.1** | HTML/CSS Scaffold | FR-INP-01 | 1.0 | 2.0 | 3.0 | 2.0 | Input field and submit button render; basic styling applied. | None |
+| **T-3.2** | Async Fetch & DOM Updates | FR-UI-01 | 2.0 | 3.0 | 5.0 | 3.2 | Client successfully POSTs to API and displays spinning loading state until 200 OK returns. | T-2.1 |
+| **T-3.3** | Client-Side Error States | FR-INP-02 | 1.0 | 2.0 | 4.0 | 2.2 | Network drops or 400/429/504 HTTP codes correctly render user-friendly error messages in the DOM. | T-3.2 |
+| **T-3.4** | Accessibility Pass | NFR-ACC-* | 1.0 | 2.0 | 4.0 | 2.2 | Keyboard-only navigation works; screen reader announces verdict; contrast is 4.5:1. | T-3.1 |
+
+**WP-4: CI, Deployment, & Documentation**
+| Task | Name | Reqs | O | M | P | E | Done when | Depends on |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **T-4.1** | Repository CI & Spec-Check | (Internal) | 1.0 | 1.5 | 3.0 | 1.7 | GitHub Actions runs `spec-check.py` on every push and blocks merges on failure. | None |
+| **T-4.2** | Render Deployment & Secrets | NFR-REL-01 | 1.0 | 2.5 | 6.0 | 2.8 | API Service is live on Render; VirusTotal API key is securely injected via environment variables. | T-2.1 |
+| **T-4.3** | README & Handoff Guide | (Internal) | 2.0 | 3.0 | 5.0 | 3.2 | A stranger can clone the repo, inject their own VT key, and run it locally strictly from the instructions. | T-4.2 |
+
+### Rep 5: The Spread Test
+
+| Task | O | P | P/O | Verdict (split / spike) | Spike cap | Spike deliverable |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **T-1.4** (Upstream Error Degradation) | 1.0 | 5.0 | 5.0 | Spike | 1.5h | A short Python script proving how to catch a `urllib3` timeout or 500 error without crashing FastAPI. |
+| **T-4.2** (Render Deployment & Secrets) | 1.0 | 6.0 | 6.0 | Spike | 2.0h | A dummy FastAPI "Hello World" deployed to Render that successfully reads one `.env` variable. |
+
