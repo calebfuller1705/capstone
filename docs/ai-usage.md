@@ -54,3 +54,5 @@ All five critiques were fair and accurate. I verified that Python's `requests` l
 
 **Action Taken:**
 No immediate changes made to v0.1 of the architecture document, but these edge cases will be brought into Week 8 for the design review and added to the Week 11 testing plan.
+
+| 2026-10-01 | Breadth Pass & Risk Generation (Rep 11) | "List every task required to deliver a FastAPI backend with VT polling, including setup, error handling, tests, and documentation. Do not estimate anything." Separately: "Name fifteen risks for a solo nine-week build with a third-party API dependency. Give each a cause, an event, and a consequence." | The assistant proposed 18 tasks and 15 risks. I harvested the genuinely new insights (e.g., Render cold starts for the Risk Register, and a Global Error Envelope for WP-2) and discarded the generic filler and inaccurate time estimates. |

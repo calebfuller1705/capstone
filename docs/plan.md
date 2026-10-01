@@ -102,7 +102,7 @@
 **Available** 57.0 h · **Buffer (25%)** 14.25 h · **Plannable** 42.75 h
 **Calibrated WBS total** 45.4 h · **Gap** 2.65 h over budget
 
-### Rep 10: The Risk Register
+# Rep 10: The Risk Register
 
 | ID | Risk | Category | L | I | E | Trigger | Owner | Response |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -114,3 +114,17 @@
 | **R-06** | **CORS Blocking:** Because the frontend and backend are separate, Render blocks requests through CORS. | Technical | 3 | 3 | 9 | Browser console CORS blocked error | Me | **Mitigate:** Config FastAPI CORS middleware early. |
 | **R-07** | **Schema Change:** Because VT is a third party, their JSON response structure is different from documentation. | Dependency | 2 | 3 | 6 | `KeyError` when parsing JSON | Me | **Mitigate:** Defensive dictionary `.get()` parsing (T-1.3). |
 | **R-08** | **API Key Leak:** Because the repo is public, my VT API key is accidentally put on GitHub. | Security | 1 | 5 | 5 | GitHub secret scanning alert | Me | **Avoid:** Configure `.env` and `.gitignore` before first commit. |
+
+
+# Rep 11: The Breadth Pass, and Its Price
+
+**Audit of AI Generation:**
+*   Tasks proposed: **18** | kept: **12** | genuinely new to me: **3**
+*   Risks proposed: **15** | kept: **5** | genuinely new to me: **2**
+*   Of the durations it produced: how many were identical? **Almost all (it defaulted to "2 hours" or "1 day" for everything)** | spread given? **0**
+
+# Rep 12: Budget What AI Costs You
+
+**Estimating T-2.3 (VirusTotal Polling Integration):**
+*   **T-2.3 by hand:** O: 3.0 | M: 4.0 | P: 7.0 -> **E: 4.33 h**
+*   **T-2.3 generated:** generation: 0.5 h + review: 1.0 h + debugging: 2.5 h = **4.0 h**
