@@ -35,3 +35,5 @@ date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes
 2026-09-28,8:00, 11:30, 3.50, Design, Architect,"Made tech spec v0.1, ran spec-check.py (0 findings), conducted red-team review", 4.0,0,Completed Milestone 6 (still need to have a peer read it. Will add time spent looking over it to time log later today.)
 2026-09-28,14:00, 14:30, .50, Design, Architect,"Reviewed with peer, have my week 7 review now", .50,0,Finished with Milestone 6 now
 2026-09-29,13:00, 15:00, 2.50, Planning,Project Manager,"Completed Week 7 Reps 1-3: invisible work inventory, VT polling WBS, and bad-WBS autopsy",3.0,0, Will do Group B next time
+2026-09-30,11:00, 13:30, 2.50,Planning,Project Manager,"Completed Reps 4-7: PERT estimates, spread test, calibration factor, and plan-check execution",,0, Milestone 7 B done; moving onto C next
+2026-10-01,07:00, 10:00, 3.0,Planning,Project Manager,"Completed Reps 8-10: capacity table, gap analysis, and formal Risk Register",42.75,0, Milestone 7 Group C done; will do Group D later today hopefully
