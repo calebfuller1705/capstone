@@ -207,7 +207,7 @@ DASH,Dashboard,Everything about loading the final risk score in plain English fo
 
 | ID | Requirement (metric · threshold · condition) | Priority | How it is measured |
 |---|---|---|---|
-| NFR-USE-01 | A first-time Corporate Employee user finishes the task in under 30 seconds. | Should | Two sessions with a stopwatch; time and find any UI stumbles recorded in notes. |
+| NFR-USE-01 | A first-time Corporate Employee user finishes the task in under 30 seconds. | Won't (Done in MS7 scope-cut. Will look at MS8) | Two sessions with a stopwatch; time and find any UI stumbles recorded in notes. |
 
 ### 6.4 Security & Privacy
 

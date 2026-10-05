@@ -41,3 +41,24 @@
 · **Owner:** Caleb. · **Response:** accept — I have put in a strict 25% project buffer (14.25 hours) specifically to absorb weeks where life events limit my ability to get work done.
 · **Contingency:** draw from the project buffer, document the draw in `docs/plan.md`, and drop the lowest-priority feature in the backlog to compensate.
 · **Status:** open.
+
+**R-06** — Because I am using a public GitHub repository, my VT API key might accidentally be committed in the source code, in which my key could be taken by VirusTotal (done before).
+· data/security · L 2 · I 4 · **E 8**
+· **Trigger:** A GitHub automated secret-scanning alert email is received.
+· **Owner:** Caleb. · **Response:** avoid — make `.gitignore` exclude `.env` files before the very first commit in Week 8.
+· **Contingency:** immediately move the API key in the VT dashboard and update the Render environment variables.
+· **Status:** open.
+
+**R-07** — Because VirusTotal may update their JSON response schema without me knowing, the Python dictionary parsing logic may give me a `KeyError`, crashing the scanning endpoint.
+· dependency · L 2 · I 3 · **E 6**
+· **Trigger:** A 500 Internal Server Error appears when scanning a previously working URL.
+· **Owner:** Caleb. · **Response:** get rid of by Week 10 — use defensive `.get()` methods for all JSON parsing with safe fallback values.
+· **Contingency:** check VT documentation for schema changes and use a hotfix for the parsing logic.
+· **Status:** open.
+
+**R-08** — Because Render's free tier goes to sleep after 15 minutes of inactivity, the very first user to hit the UI might experience a 50+ second load time, causing them to assume the app is broken and leave.
+· technical · L 5 · I 1 · **E 5**
+· **Trigger:** The browser network tab shows a pending request taking > 30 seconds.
+· **Owner:** Caleb. · **Response:** stop by Week 11 — build a loading state in the UI so the user knows the system is working, even if it's waking up.
+· **Contingency:** hit the Render URL myself 2 minutes before any live demonstration to pre-warm the server.
+· **Status:** open.

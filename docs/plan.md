@@ -1,4 +1,4 @@
-# Rep 1: Invisible Work Inventory
+# Invisible Work Inventory
 
 | Invisible work package | In my WBS already? | Rough hours |
 | :--- | :--- | :--- |
@@ -12,7 +12,7 @@
 | *Specific 2: VT API key local `.env` setup* | [ ] yes  [x] no | 0.5 |
 | *Specific 3: API rate-limit mocking for local dev* | [ ] yes  [x] no | 2.0 |
 
-# Rep 2: Decompose One Work Package Properly
+# Decompose One Work Package Properly
 
 | Task | Name | Reqs | O | M | P | E | Done when | Depends on |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -21,7 +21,7 @@
 | **T-1.3** | JSON Parsing & Evaluator | FR-UI-01, FR-UI-02 | 1 | 2 | 4 | 2.2 | VT JSON response is parsed safely; Safe/Unsafe answer is returned based on `stats.malicious > 0`. | T-1.2 |
 | **T-1.4** | Upstream Error Degradation | FR-API-01 | 1 | 2.5 | 5 | 2.7 | 429 Rate Limit and 500 Internal errors from VT are caught and mapped to our custom error envelope. | T-1.1 |
 
-# Rep 3: The Bad-WBS Autopsy
+# The Bad-WBS Autopsy
 
 **The Bad WBS:**
 1. Set up project (1 week)
@@ -47,41 +47,89 @@
 | **T-2.3** | VirusTotal Polling Integration | FR-API-02, NFR-PERF-01 | 3 | 4 | 7 | 4.3 | System submits URL, polls VT asynchronously, and returns Safe/Unsafe verdict within 10s. | T-2.2 |
 | **T-2.4** | Global Error Envelope & Degradation | FR-API-01 | 1 | 2 | 4 | 2.2 | Upstream 429/500 errors map cleanly to the custom system error envelope and do not crash the app. | T-2.3 |
 
-# Rep 4: Three-Point Estimate Everything
+# Three-Point Estimate Everything
 
-**WP-3: Frontend UI & Client Logic**
-| Task | Name | Reqs | O | M | P | E | Done when | Depends on |
+# Work Breakdown Structure (WBS)
+
+| ID | Task Name | Req | Dep | Done-When | O | M | P | E |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **T-3.1** | HTML/CSS Scaffold | FR-INP-01 | 1.0 | 2.0 | 3.0 | 2.0 | Input field and submit button; basic styling done. | None |
-| **T-3.2** | Async Fetch & DOM Updates | FR-UI-01 | 2.0 | 3.0 | 5.0 | 3.2 | Client successfully POSTs to API and shows spinning loading state until 200 OK comes back. | T-2.1 |
-| **T-3.3** | Client-Side Error States | FR-INP-02 | 1.0 | 2.0 | 4.0 | 2.2 | Network drops or 400/429/504 HTTP codes correctly show user-friendly error messages in the DOM. | T-3.2 |
-| **T-3.4** | Accessibility Pass | NFR-ACC-* | 1.0 | 2.0 | 4.0 | 2.2 | Keyboard-only navigation works; screen reader will announce verdict; contrast is 4.5:1. | T-3.1 |
+| **WP-1** | **VT API Integration** |
+| T-1.1 | Register VT API & Setup Postman | NFR-01 | None | API key is active and gives 200 in Postman | 0.5 | 1.0 | 2.0 | 1.08 |
+| T-1.2 | Write sync Python script to hit VT | FR-01 | T-1.1 | Script puts URL score in console | 0.5 | 1.0 | 2.0 | 1.08 |
+| T-1.3 | Implement 10-second polling loop | FR-02 | T-1.2 | Script  waits for `queued` status | 1.0 | 2.0 | 4.0 | 2.17 |
+| T-1.4 | Parse JSON for score/stats | FR-03 | T-1.3 | Script prints integer values for malicious/clean | 1.0 | 2.0 | 4.0 | 2.17 |
+| T-1.5 | Catch 429 errors safely | NFR-02 | T-1.3 | Script gives error on rate limit instead of crashing | 1.0 | 2.5 | 5.0 | 2.67 |
 
-**WP-4: CI, Deployment, & Documentation**
-| Task | Name | Reqs | O | M | P | E | Done when | Depends on |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **T-4.1** | Repository CI & Spec-Check | (Internal) | 1.0 | 1.5 | 3.0 | 1.7 | GitHub Actions runs `spec-check.py` on every push and blocks on failure. | None |
-| **T-4.2** | Render Deployment & Secrets | NFR-REL-01 | 1.0 | 2.5 | 6.0 | 2.8 | API Service is live on Render; VirusTotal API key is securely put in through environment variables. | T-2.1 |
-| **T-4.3** | README & Handoff Guide | (Internal) | 2.0 | 3.0 | 5.0 | 3.2 | A stranger can clone the repo, put in their own VT key, and run it locally just from the instructions. | T-4.2 |
+| **WP-2** | **FastAPI Backend Service** |
+| T-2.1 | FastAPI project scaffold & CORS | NFR-03 | None | GET `/` returns 200 via browser | 1.0 | 2.0 | 3.0 | 2.00 |
+| T-2.2 | POST `/scan` endpoint skeleton | FR-04 | T-2.1 | Endpoint takes JSON and returns dummy 200 | 1.0 | 1.5 | 3.0 | 1.67 |
+| T-2.3 | Pydantic validation for URL input | FR-05 | T-2.2 | Endpoint doesn't take malformed URLs (422 error) | 1.0 | 1.5 | 2.0 | 1.50 |
+| T-2.4 | Make VT loop into async route | FR-06 | T-1.4, T-2.2 | Endpoint gives VT score for valid URL | 2.0 | 3.0 | 5.0 | 3.17 |
+| T-2.5 | Global error envelope wrapper | NFR-04 | T-2.4 | Internal errors return JSON format | 1.0 | 2.0 | 4.0 | 2.17 |
 
-# Rep 5: The Spread Test
+| **WP-3** | **Frontend UI** |
+| T-3.1 | HTML index structure & form | FR-07 | None | Form shows locally in browser | 0.5 | 1.0 | 2.0 | 1.08 |
+| T-3.2 | CSS layout & styling baseline | NFR-05 | T-3.1 | Flexbox layout lines up with wireframe | 0.5 | 1.0 | 1.0 | 0.92 |
+| T-3.3 | JS fetch logic to hit POST `/scan` | FR-08 | T-2.1, T-3.1 | JS logs from JSON via local FastAPI | 1.0 | 1.5 | 3.0 | 1.67 |
+| T-3.4 | Dynamic DOM loading state | FR-09 | T-3.3 | UI shows spinning wheel while waiting for response | 1.0 | 1.5 | 3.0 | 1.67 |
+| T-3.5 | Client-side error state rendering | FR-10 | T-3.3 | Red error 500/400 response | 1.0 | 1.5 | 3.0 | 1.67 |
+| T-3.6 | Accessibility Pass (DEFERRED) | NFR-06 | T-3.2 | Axe DevTools gives me 0 violations | 1.0 | 2.0 | 4.0 | 2.17 |
+
+| **WP-4** | **CI/CD & Deployment** |
+| T-4.1 | "Hello World" Deploy Spike | NFR-07 | None | Dummy app is live on Render domain | 1.0 | 2.5 | 6.0 | 2.83 |
+| T-4.2 | Render `render.yaml` configuration | NFR-08 | T-4.1 | Render dashboard comes from IaC file | 0.5 | 1.0 | 2.0 | 1.08 |
+| T-4.3 | Secret/Env setup on Render | NFR-09 | T-4.2 | Production app is able to read VT API Key | 0.5 | 1.0 | 2.0 | 1.08 |
+| T-4.4 | Deploy finalized combined code | FR-11 | T-2.4, T-3.5 | Fully working app on live URL | 1.0 | 1.5 | 3.0 | 1.67 |
+
+| **WP-5** | **Testing & QA** |
+| T-5.1 | Create offline VT mock JSON | NFR-10 | T-1.4 | Local testing does not build onto VT quota | 0.5 | 1.0 | 1.5 | 1.00 |
+| T-5.2 | Unit test URL Pydantic validator | NFR-11 | T-2.3 | Pytest suite has 5 valid/invalid cases | 0.5 | 1.0 | 2.0 | 1.08 |
+| T-5.3 | End-to-end manual test matrix | NFR-12 | T-4.4 | Safe, Malicious, and Timeout states verified | 1.0 | 1.0 | 1.0 | 1.00 |
+
+| **WP-6** | **Project Handoff** |
+| T-6.1 | OpenAPI/Swagger review | NFR-13 | T-2.5 | UI shows all expected endpoints | 0.5 | 1.0 | 1.5 | 1.00 |
+| T-6.2 | README & architecture diagram | NFR-14 | T-4.4 | Repo has setup instructions and diagram | 1.0 | 1.5 | 2.0 | 1.50 |
+
+
+# The Spread Test
 
 | Task | O | P | P/O | Verdict (split / spike) | Spike cap | Spike deliverable |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **T-1.4** (Upstream Error Degradation) | 1.0 | 5.0 | 5.0 | Spike | 1.5h | A short Python script proving how to catch a `urllib3` timeout or 500 error without crashing FastAPI. |
 | **T-4.2** (Render Deployment & Secrets) | 1.0 | 6.0 | 6.0 | Spike | 2.0h | A dummy FastAPI "Hello World" sent to Render that successfully reads one `.env` variable. |
 
-# Rep 6: Compute Your Calibration Factor
+# Compute Your Calibration Factor
 
 **Calibration Factor:** 1.16x
 
-# Rep 7: Run the Checker
+# Schedule & Gates
+
+| Week | Work Package Focus | Weekly Gate (Must be true to proceed) |
+| :--- | :--- | :--- |
+| **Week 8** | WP-1: VT API Polling | A local Python script is able to retrieve a VT score. |
+| **Week 9** | WP-4: Deployment Spike | A dummy FastAPI "Hello World" is live on Render. |
+| **Week 10** | WP-2: API Service | FastAPI gives the VT score over local HTTP on port 8000. |
+| **Week 11** | WP-3: Frontend UI | The browser UI POSTs to the local backend. |
+| **Week 12** | Integration & Bugs | UI and Backend are successfully combined on Render. |
+| **Week 13+** | Buffer & QA | N/A (Buffer weeks to absorb overruns). |
+
+# Run the Checker
 
 **Verdict:** `VERDICT: OVER BUDGET by 2.6 h - cut, defer, or re-estimate`
 **First Week Exceeded:** (N/A - The plan never exceeds raw capacity)
+**Burn-Down Baseline (Adjusted after fixing the over):**
+| Week | Capacity | Ideal | Projected |
+| :--- | :--- | :--- | :--- |
+| 8 | 6.5 | 42.8 | 45.4 |
+| 9 | 6.5 | 36.3 | 38.9 |
+| 10 | 6.5 | 29.8 | 32.4 |
+| 11 | 6.5 | 23.3 | 25.9 |
+| 12 | 6.5 | 16.8 | 19.4 |
+| 13 | 6.5 | 10.3 | 12.9 |
+| 14 | 6.5 | 3.8 | 6.4 |
+| 15 | 6.5 | -2.7 | -0.1 |
 
-### Rep 8: Build the Capacity Table
-
+# Build the Capacity Table
 
 | Week | Course overhead | Known losses | Available for the project |
 | :--- | :--- | :--- | :--- |
@@ -97,12 +145,12 @@
 | **Total** | | | **57.0h** |
 
 
-# Rep 9: Declare the Buffer and Find the Gap
+# Declare the Buffer and Find the Gap
 
 **Available** 57.0 h · **Buffer (25%)** 14.25 h · **Plannable** 42.75 h
 **Calibrated WBS total** 45.4 h · **Gap** 2.65 h over budget
 
-# Rep 10: The Risk Register
+# The Risk Register
 
 | ID | Risk | Category | L | I | E | Trigger | Owner | Response |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -116,15 +164,21 @@
 | **R-08** | **API Key Leak:** Because the repo is public, my VT API key is accidentally put on GitHub. | Security | 1 | 5 | 5 | GitHub secret scanning alert | Me | **Avoid:** Configure `.env` and `.gitignore` before first commit. |
 
 
-# Rep 11: The Breadth Pass, and Its Price
+# The Breadth Pass, and Its Price
 
 **Audit of AI Generation:**
 *   Tasks proposed: **18** | kept: **12** | genuinely new to me: **3**
 *   Risks proposed: **15** | kept: **5** | genuinely new to me: **2**
 *   Of the durations it produced: how many were identical? **Almost all (it defaulted to "2 hours" or "1 day" for everything)** | spread given? **0**
 
-# Rep 12: Budget What AI Costs You
+# Budget What AI Costs You
 
 **Estimating T-2.3 (VirusTotal Polling Integration):**
 *   **T-2.3 by hand:** O: 3.0 | M: 4.0 | P: 7.0 -> **E: 4.33 h**
 *   **T-2.3 generated:** generation: 0.5 h + review: 1.0 h + debugging: 2.5 h = **4.0 h**
+
+### Final Scope Decision
+
+| Cut / Deferred | Requirements | Hours Recovered | MoSCoW (Before & After) | Why |
+| :--- | :--- | :--- | :--- | :--- |
+| **Formal First-Time User Usability Testing Sessions** | NFR-USE-01 | 2.5 calibrated hours | NFR-USE-01 was the lowest-priority requirement in the specification. Deferring external stopwatch sessions and usability stumble analysis protects the 25% deployment buffer without compromising any functional, security, or accessibility requirements. |
