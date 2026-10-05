@@ -38,3 +38,4 @@ date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes, ai_used?
 2026-09-30,11:00, 13:30, 2.50, Planning,Project Manager,"Completed Reps 4-7: PERT estimates, spread test, calibration factor, and plan-check execution",2.50,0, Milestone 7 B done; moving onto C next
 2026-10-01,07:00, 10:00, 3.0, Planning,Project Manager,"Completed Reps 8-10: capacity table, gap analysis, and formal Risk Register",3.0,0, Milestone 7 Group C done; will do Group D later today hopefully
 2026-10-01,13:00, 14:30, 1.50, Planning,Project Manager,"Finished Group D: Reps 11 and 12, AI usage logging, and scope cutting",1.50,0, Will wrap up Week 7 with the last thing, Yes
+2026-10-05,06:30, 09:45, 3.25, Planning,Project Manager,"Finished up Milestone 7: put in my WBS with 25 tasks with 6 WPs, put in schedule gates and burn-down baseline, updated risk register to 8 risks, and oput final scope cut in requirements.md", 4.0,0, Will start on Milestone 8 sometime today hopefully, Yes
