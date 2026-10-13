@@ -2,10 +2,10 @@
 
 Senior capstone by Caleb Fuller, Fall 2026. 
 
-## Current Status (Milestone 5)
-* **Shipped:** Milestone 5 complete: Tech stack evaluated, 4 ADRs accepted, and VirusTotal API successfully spiked.
-* **Cut:** React and complex frontend build tools (cut to protect the 57-hour budget; documented in ADR 0002).
-* **Hours:** planned 15.0 / actual 15.75 (from docs/hours-log.csv)
+## Current Status (Milestone 7)
+* **Shipped:** Milestone 7 complete: Project Plan baselined (`docs/plan.md`). Made a 6-work-package, 25-task Work Breakdown Structure (WBS) with three-point PERT estimates, weekly gates, and a burn-down baseline. I have my 25% project buffer (14.25 h) against a 57.0 h build capacity (Weeks 8–16), computed a 1.16x calibration factor, audited AI efficiency, and baselined an 8-item Risk Register (`docs/risk-register.md`).
+* **Cut:** Deferred `NFR-USE-01` (First-Time User Usability Testing Sessions) from Should to Won't to recover 2.5 calibrated hours, successfully closed my budget gap to fit within the 42.75 h plannable capacity and protecting the full 25% deployment buffer. Flagged for change control at the Week-8 review.
+* **Hours:** actual 12.5
 * **Blocked on:** nothing
 * **Ship confidence:** green
 
