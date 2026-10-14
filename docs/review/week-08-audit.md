@@ -4,8 +4,6 @@
 **Logged Through Week 8:** 52.25 hours  
 **Course Total Budget:** 240.0 hours (120.0 h expected at Week 8 mark)  
 
----
-
 ## 1. Six-Question Audit Assessment
 
 ### 1. Hours (Logged vs. Budgeted)
@@ -43,12 +41,3 @@ Every risk in `docs/risk-register.md` was audited:
 
 ### 6. Stakeholder Availability
 * **Status:** Corporate employee stakeholder remains engaged and confirmed for usability verification during Iteration 1 (Week 11).
-
----
-
-## 2. The Honest Paragraph
-
-*My Reflection:*  
-Running `tools/pace-audit.py` shows I am 67.75 hours behind the 120-hour halfway course pace, but that number is a reflection of course overhead rather than a failing project. My actual build capacity for Weeks 9–16 is 57.0 hours. With our 25% project buffer (14.25 hours) locked in reserve, my plannable ceiling is exactly 42.75 hours. 
-
-Because I made the scope cut in Milestone 7—demoting `NFR-USE-01` to save 2.5 calibrated hours—my 25-task WBS stands at 42.6 calibrated hours, fitting within budget by 0.15 hours. I do not need to make an emergency scope cut today, nor do I need to make the amateur promise of "working 25 hours a week in November." The budget holds because the cut was made before writing code. To keep it intact, CR-001 (+2.0h for cache pre-checking) is formally assigned to Week 10 where it will absorb a portion of the project buffer without expanding the baseline Must set.

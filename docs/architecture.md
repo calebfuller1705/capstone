@@ -85,6 +85,7 @@ All non-200 responses return this uniform JSON structure:
     "retry_after": 15
   }
 }
+```
 
 ## 6. Data Model
 *Constraint Override: Per CON-04 (which says my project will have a stateless architecture) and NFR-SEC-02 (which takes 0 bytes of user history stored), this system has no persistent database. The following model shows the transient, in-memory state that is a thing only for the time of the HTTP request.*
@@ -111,7 +112,7 @@ All non-200 responses return this uniform JSON structure:
 ### Flow 1 & 2 — The Money Path & Risky Path (URL Scan) (serves FR-INP-01, FR-DASH-01, FR-UI-01)
 1. **Client** POSTs `{ "url": "http://example.com" }` to API Service.
 2. **API Service** validates, trims whitespace, and enforces the 2048-char limit.
-3. 3. **API Service** encodes the canonical URL into unpadded URL-safe base64 (DR-001) and POSTs to VirusTotal using the secret API Key.
+3. 3. **API Service** encodes the URL into unpadded URL-safe base64 (DR-001) and POSTs to VirusTotal using the secret API Key.
 4. **VirusTotal** brings back a 200 OK with an `id` (the analysis ID).
 5. **API Service** starts a polling loop: GET to VirusTotal (`/api/v3/analyses/{id}`).
 6. **VirusTotal** returns `{"status": "completed", "stats": {"malicious": 0}}`.
@@ -126,15 +127,15 @@ All non-200 responses return this uniform JSON structure:
 | 3 | VT gives a 429 Rate Limit on first submit | Abort process; log ERROR; return 429. | "You have reached the daily request limit, please try again tomorrow." |
 | 4 | VT gives a 500 Internal Server Error | Abort process; log ERROR; return 500. | "500 Error. Please try again." |
 | 6 | VT gives a `{"status": "queued"}` over and over | Continue polling until the 10.0-second clock expires. | Spinning wheel / local security tips. |
-| 5b | User closes tab or navigates away during polling (DR-014) | `request.is_disconnected()` returns true; poller breaks loop immediately, freeing connection without burning further VT quota. | N/A (Session terminated). |
-| 6b | 10.0 seconds elapse and VT is still "queued" (DR-004, DR-011) | Break the polling loop; return HTTP 504 Gateway Timeout with standard RFC 7807 error envelope. | "Timeout: Analysis took too long." accompanied by an active **[Retry Scan]** button that preserves the entered URL. |
+| 5b | User closes tab or goes away during polling (DR-014) | `request.is_disconnected()` returns true; poller breaks loop immediately, which frees the connection without burning further VT quota. | N/A (Session terminated). |
+| 6b | 10.0 seconds elapse and VT is still "queued" (DR-004, DR-011) | Break the polling loop; send back HTTP 504 Gateway Timeout with RFC 7807 error envelope. | "Timeout: Analysis took too long." accompanied by an active **[Retry Scan]** button that preserves the entered URL. |
 
 ## 8. Error Handling and Edge Cases
 
 | Category | Policy |
 |---|---|
 | **Invalid input** | Reject at the FastAPI boundary before any network I/O. Return 400. |
-| **Not authorized**| Catch VT's 401, log a CRITICAL alert, and return a generic 500 to the user. |
+| **Not authorized**| Catch VT's 401 or 403, log a CRITICAL alert, and return a **502 Bad Gateway** (`upstream_error`) to the user (DR-012).
 | **Not found** | Standard 404 response. |
 | **Conflict** | (Not applicable) System is stateless; no database conflicts can happen. |
 | **Dependency failure**| Immediate abort; no retries to save time. Log error, send 504 Gateway Timeout or 500. |
@@ -149,7 +150,7 @@ All non-200 responses return this uniform JSON structure:
 | # | Edge case | Expected behavior |
 |---|---|---|
 | 1 | **Empty state:** User clicks submit with a blank field. | Frontend stops the request and displays "Blank field" error (FR-INP-02). |
-| 2 | **Render Cold Start:** Backend is asleep and takes 50 seconds to boot up. | Frontend `fetch` timeout is set to 60s to allow the initial wake-up, but the backend still enforces its 10s VT timeout once awake. |
+| 2 | **Render Cold Start / Client Timeout (DR-006):** Frontend `fetch` uses an `AbortController` set to 12.0s maximum duration. If the backend does not respond within 12.0s, the client leaves the request and gives a connection timeout error.
 | 3 | **Whitespace URL:** `  http://example.com  ` | Leading/trailing spaces trimmed prior to validation (FR-INP-04). |
 | 4 | **No protocol:** `example.com` | System prepends `http://` before scanning (FR-EVAL-04). |
 | 5 | **Intranet URL:** `http://192.168.1.1` | Blocked by backend, brings back 422 (FR-EVAL-01). |
@@ -158,7 +159,7 @@ All non-200 responses return this uniform JSON structure:
 | 8 | **Double submit:** User double-clicks "Submit" rapidly. | Frontend gets rid of the submit button on the first click until the request resolves. |
 | 9 | **Emoji/Unicode URL:** `http://😂.ws` | Parsed via Punycode conversion or not accepted safely as malformed without crashing backend. |
 | 10 | **VT Free Tier Exhaustion:** We hit the 501st request. | VT returns 429, backend catches it and returns 429 to client (FR-API-01). |
-| 11 | **VT Queued Forever:** VT takes 15s to analyze a new URL. | Backend strictly breaks the loop at 10.0s and returns 504 (FR-API-02). |
+| 11 | **VT Queued Forever (DR-011):** Backend breaks the loop at 10.0s and returns 504. The UI shows an error banner with a **[Retry]** action button that lets the user re-submit without refreshing the page.
 | 12 | **Network Drop:** User loses Wi-Fi while waiting for result. | Frontend catches the failed `fetch` and displays a local connection error. |
 
 ## 9. External and Nondeterministic Dependencies
@@ -221,3 +222,4 @@ As an external, unowned network dependency, the VirusTotal API can go against th
 | Version | Date | Change | Why |
 |---|---|---|---|
 | v0.1 | 2026-09-28 | Initial draft assembled (Reps 1-12) | Completion of Milestone 6 |
+| v0.2 | 2026-10-14 | Rework from Design Review (DR-001..DR-007, DR-009, DR-011..DR-014, DR-018, DR-019): base64 encoding rules, 504/429/422 error envelopes, slowapi rate limiting, 12s client abort, retry CTA, trailing slash normalization. | Milestone 8 Design Review Gate |
