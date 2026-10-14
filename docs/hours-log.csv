@@ -1,44 +1,46 @@
-date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes, ai_used?
-2026-08-24,14:00, 15:30, 2,Inception,Project Manager,Scaffolded repository and set up reporting tools,1.5,0,Setup went smoothly using the terminal and VS Code
-2026-08-25,12:30, 13:15, 2,Inception,Project Manager,Drafted charter non-goals and Did 16-week Hat Map,1.75,0,Mapped out project dependencies and set strict 15-hour boundaries
-2026-08-25,14:30, 15:30, 1.5,Inception,Compliance,Drafted AI usage policy and generated gitignore,1.25,0,Policy set and first Amber-zone use logged successfully
-2026-08-26,14:00, 16:00, 2,Inception,Project Manager,Audited calendar and finalized project charter capacity/purpose,1.75,0,Locked in 15-hour weekly blocks on actual Google calendar
-2026-08-26,16:30, 17:30, 1,Inception,Release Engineer,Executed clean-clone smoke test and ran hours report,1,0,Repository cloned successfully to tmp folder and python script executed without errors
-2026-08-28,13:30, 16:30, 3.25,Inception,Product Owner,Executed Reps 1-3: generated cybersecurity candidate portfolio and did idea canvases,3.5,0,Created docs/ideas/ directory and did candidate-a.md candidate-b.md and candidate-c.md
-2026-08-29,12:00, 15:00, 3.0,Inception,Product Owner,Executed Reps 4-7: conducted user interview, verified API dependencies, audited novelty load, and did bottom-up estimate,3.0,0,Saved interview notes and generated dependency table
-2026-08-30,13:00, 15:00, 3.0,Inception,Product Owner,Executed Reps 8-10: ran Scope Sizer script reconciled estimates and conducted blind pre-mortem,2.75,0,Updated personal notes with scope sizing and risk reflections
-2026-08-31,13:30, 14:30, 1.5,Inception,Product Owner,Executed Reps 11 and 12 to lock in the final scope cut and 57-hour construction budget,1.0,0,Cut URLScan.io to save 12 hours
-2026-08-31,14:30, 15:45, 1.75,Inception,Product Owner,Drafted and formatted the final Scoping Decision Memo,1.75,0,Synthesized all milestone data into the required course template
-2026-08-31,15:45, 16:30, 1.0,Inception,Product Owner,Updated Project Charter and finalized milestone deliverables,0.75,0, did Milestone 2 documentation
-2026-09-01,14:00, 16:00, 3.0,Requirements,Business Analyst,Executed Reps 1-3 establishing feature areas personas and elicitation note tagging,2.75,0,Reused Week 2 interview notes for Rep 3
-2026-09-02,14:00, 16:00, 4.5,Requirements,Business Analyst,Ran Reps 4-8 including INVEST screening and drafting functional requirements with acceptance criteria,4.0,0,Locked in 8 Must/Should requirements
-2026-09-03,09:00, 09:30, 3.0,Requirements,Business Analyst,Executed Rep 11 (AI Audit) and Rep 12 (Project board Must cards),3.0,0, did Week 3 reps pending final Stranger Read
-2026-09-03, 14:00, 16:00, 2.0, Requirements, Business Analyst, Discussed with stranger about requirements, 2.5,0, Stranger provided feedback on requirements and suggested improvements
-2026-09-07, 13:00, 15:00, 2.0, Requirements, Business Analyst, Conducted second round of discussion with stranger about requirements, 1.5,0, Stranger gave a second round of feedback on revised requirements
-2026-09-07,16:00, 19:30, 3.5,Requirements, Business Analyst, Executed ambiguity pass fixes/ formatted elicitation interview notes/ updated AI usage log (finished Milestone 3),3 ,0, Week 3 requirements phase is mapped out
-2026-09-08,14:00, 15:00, 3.0,Requirements, Risk Owner,Did Week 4 Block A reps (1-3) translating adjectives to measurable NFRs,3.0,0, Going to move onto Block B of Week 4 next
-2026-09-09,12:30, 14:30 , 3.5,Requirements, Risk Owner,Did Week 4 Block B reps (4-7) which went over data inventory/accessibility and security history check",3,0, Moving onto Block C next
-2026-09-10,07:30,10:30, 3.0,Requirements, Risk Owner, Did Week 4 Block C reps (9-10) and some other reformatting things to clean up", 2.5,0, Will continue with Week 4 next session
-2026-09-14,08:00, 11:00, 3.0,Requirements,Risk Owner, Did Rep 11 and mapped all FRs/NFRs to fit inside the traceability.csv format", 2.5,0, Traceability clean and reformatted a few NFRs to be more measurable and testable
-2026-09-14,13:00, 15:30, 2.5,Requirements,Risk Owner, Did Rep 12 made my DoD checklist along with some other formatting things, 2.5,0, Finished up Milestone 4
-2026-09-14,15:30, 16:30, 1.0,Requirements,Risk Owner, I missed a few things that were on the rubric so I came back to add them, 1.0,0,Milestone 4 officially complete
-2026-09-16,10:45, 13:45,3.0,Architecture,Architect, Got through Milestone 5 Reps 1-4: architectural drivers/job board test/option prunining/matrix weights,2.5,0, Moving on to Rep 5 next
-2026-09-16,07:00, 10:00, 3.0,Architecture,Architect, Did Reps 5-6: matrix scoring and sensitivity pass with score-stack.py checker, 3.0,0, Will move on to Rep 7 next
-2026-09-17,06:00, 09:30, 3.5,Architecture,Architect, Did Reps 7-9: seam inventory/novelty load analysis/SP-01 VirusTotal API spike, 3.0,0, Ready for Rep 10 with no blockers
-2026-09-18,12:00, 14:45, 2.75,Architecture,Architect, "Did Reps 10-12: cost sheet, license inventory, and verification log",3.0,0, Will wrap it up with ADR 0001 next time hopefully
-2026-09-22,12:00, 13:30, 1.5,Architecture,Architect,"Drafted and committed ADR 0001 for backend framework selection",1.75,0,Ready to write remaining ADRs after review is done shortly
-2026-09-22,14:00, 15:45, 1.75,Architecture,Architect,"Drafted and committed ADR 0002, 0003, and 0004",2.0,0,Milestone 5 is finished
-2026-09-23,12:00, 16:00, 4.0,Design,Architect,"Milestone 6 Reps 1-4: decision inventory, context/container/component diagrams, and responsibility table",3.5,0,Will pick up with Rep 5 next time
-2026-09-24,07:00, 08:45, 1.75,Design,Architect,"Milestone 6 Reps 5-6: interface contract and error policy",1.50,0, Will continue with Week 6 later today
-2026-09-24,11:30, 14:00, 2.50,Design,Architect,"Milestone 6 Reps 7-9: data model, sequence flows, and migration",3.0,0,Stopping at Rep 9 for today
-2026-09-25,13:00,16:00, 3.0, Design,Architect,"Milestone6 Reps 10-12: error policy, spec rewrite, and riskiest dependency",2.5,0,Completed Reps from Milestone 6; will do "spec-check" before wrapping up the week.
-2026-09-28,8:00, 11:30, 3.50, Design, Architect,"Made tech spec v0.1, ran spec-check.py (0 findings), conducted red-team review", 4.0,0,Completed Milestone 6 (still need to have a peer read it. Will add time spent looking over it to time log later today.)
-2026-09-28,14:00, 14:30, .50, Design, Architect,"Reviewed with peer, have my week 7 review now", .50,0,Finished with Milestone 6 now
-2026-09-29,13:00, 15:00, 2.50, Planning,Project Manager,"Completed Week 7 Reps 1-3: invisible work inventory, VT polling WBS, and bad-WBS autopsy",3.0,0, Will do Group B next time
-2026-09-30,11:00, 13:30, 2.50, Planning,Project Manager,"Completed Reps 4-7: PERT estimates, spread test, calibration factor, and plan-check execution",2.50,0, Milestone 7 B done; moving onto C next
-2026-10-01,07:00, 10:00, 3.0, Planning,Project Manager,"Completed Reps 8-10: capacity table, gap analysis, and formal Risk Register",3.0,0, Milestone 7 Group C done; will do Group D later today hopefully
-2026-10-01,13:00, 14:30, 1.50, Planning,Project Manager,"Finished Group D: Reps 11 and 12, AI usage logging, and scope cutting",1.50,0, Will wrap up Week 7 with the last thing, Yes
-2026-10-05,06:30, 09:45, 3.25, Planning,Project Manager,"Finished up Milestone 7: put in my WBS with 25 tasks with 6 WPs, put in schedule gates and burn-down baseline, updated risk register to 8 risks, and oput final scope cut in requirements.md", 4.0,0, Will start on Milestone 8 sometime today hopefully, Yes
-2026-10-07,09:45, 12:15, 2.50, Review, Moderator,"Completed Design Review Block A: entry criteria gate, bidirectional traceability matrix, and reviewer brief",2.50,0, Will wait a couple days and then conduct my walkthrough with stranger, No
-2026-10-13,09:15, 12:00, 2.75,Review,Reviewer,"Design Review Block B Reps 4 and 5: solo cold walkthrough out loud and Design Review Auditor evaluation with pace-audit script configuration",3.0,0, Will conduct my walkthrough with a peer later today to finish Block B, No
-2026-10-13,13:30,16:30, 3.00,Review,Recorder,"Design Review Block B (Part 2): Rep 6 human peer review walkthrough and Rep 7 adversarial AI verification and fabrication rate audit",3.0,0,Yes
+date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes,ai_used?
+2026-08-24,14:00,15:30,2.00,Inception,Project Manager,Scaffolded repository and set up reporting tools,1.50,0,Setup went smoothly using the terminal and VS Code,No
+2026-08-25,12:30,13:15,2.00,Inception,Project Manager,Drafted charter non-goals and Did 16-week Hat Map,1.75,0,Mapped out project dependencies and set strict 15-hour boundaries,No
+2026-08-25,14:30,15:30,1.50,Inception,Compliance,Drafted AI usage policy and generated gitignore,1.25,0,Policy set and first Amber-zone use logged successfully,No
+2026-08-26,14:00,16:00,2.00,Inception,Project Manager,Audited calendar and finalized project charter capacity/purpose,1.75,0,Locked in 15-hour weekly blocks on actual Google calendar,No
+2026-08-26,16:30,17:30,1.00,Inception,Release Engineer,Executed clean-clone smoke test and ran hours report,1.00,0,Repository cloned successfully to tmp folder and python script executed without errors,No
+2026-08-28,13:30,16:30,3.25,Inception,Product Owner,Executed Reps 1-3: generated cybersecurity candidate portfolio and did idea canvases,3.50,0,Created docs/ideas/ directory and did candidate-a.md candidate-b.md and candidate-c.md,No
+2026-08-29,12:00,15:00,3.00,Inception,Product Owner,Executed Reps 4-7: conducted user interview, verified API dependencies, audited novelty load, and did bottom-up estimate,3.00,0,Saved interview notes and generated dependency table,No
+2026-08-30,13:00,15:00,3.00,Inception,Product Owner,Executed Reps 8-10: ran Scope Sizer script reconciled estimates and conducted blind pre-mortem,2.75,0,Updated personal notes with scope sizing and risk reflections,No
+2026-08-31,13:30,14:30,1.50,Inception,Product Owner,Executed Reps 11 and 12 to lock in the final scope cut and 57-hour construction budget,1.00,0,Cut URLScan.io to save 12 hours,No
+2026-08-31,14:30,15:45,1.75,Inception,Product Owner,Drafted and formatted the final Scoping Decision Memo,1.75,0,Synthesized all milestone data into the required course template,No
+2026-08-31,15:45,16:30,1.00,Inception,Product Owner,Updated Project Charter and finalized milestone deliverables,0.75,0,did Milestone 2 documentation,No
+2026-09-01,14:00,16:00,3.00,Requirements,Business Analyst,Executed Reps 1-3 establishing feature areas personas and elicitation note tagging,2.75,0,Reused Week 2 interview notes for Rep 3,No
+2026-09-02,14:00,16:00,4.50,Requirements,Business Analyst,Ran Reps 4-8 including INVEST screening and drafting functional requirements with acceptance criteria,4.00,0,Locked in 8 Must/Should requirements,No
+2026-09-03,09:00,09:30,3.00,Requirements,Business Analyst,Executed Rep 11 (AI Audit) and Rep 12 (Project board Must cards),3.00,0,did Week 3 reps pending final Stranger Read,No
+2026-09-03,14:00,16:00,2.00,Requirements,Business Analyst,Discussed with stranger about requirements,2.50,0,Stranger provided feedback on requirements and suggested improvements,No
+2026-09-07,13:00,15:00,2.00,Requirements,Business Analyst,Conducted second round of discussion with stranger about requirements,1.50,0,Stranger gave a second round of feedback on revised requirements,No
+2026-09-07,16:00,19:30,3.50,Requirements,Business Analyst,Executed ambiguity pass fixes/ formatted elicitation interview notes/ updated AI usage log (finished Milestone 3),3.00,0,Week 3 requirements phase is mapped out,No
+2026-09-08,14:00,15:00,3.00,Requirements,Risk Owner,Did Week 4 Block A reps (1-3) translating adjectives to measurable NFRs,3.00,0,Going to move onto Block B of Week 4 next,No
+2026-09-09,12:30,14:30,3.50,Requirements,Risk Owner,"Did Week 4 Block B reps (4-7) which went over data inventory/accessibility and security history check",3.00,0,Moving onto Block C next,No
+2026-09-10,07:30,10:30,3.00,Requirements,Risk Owner,"Did Week 4 Block C reps (9-10) and some other reformatting things to clean up",2.50,0,Will continue with Week 4 next session,No
+2026-09-14,08:00,11:00,3.00,Requirements,Risk Owner,"Did Rep 11 and mapped all FRs/NFRs to fit inside the traceability.csv format",2.50,0,Traceability clean and reformatted a few NFRs to be more measurable and testable,No
+2026-09-14,13:00,15:30,2.50,Requirements,Risk Owner,Did Rep 12 made my DoD checklist along with some other formatting things,2.50,0,Finished up Milestone 4,No
+2026-09-14,15:30,16:30,1.00,Requirements,Risk Owner,I missed a few things that were on the rubric so I came back to add them,1.00,0,Milestone 4 officially complete,No
+2026-09-16,10:45,13:45,3.00,Architecture,Architect,Got through Milestone 5 Reps 1-4: architectural drivers/job board test/option prunining/matrix weights,2.50,0,Moving on to Rep 5 next,No
+2026-09-16,07:00,10:00,3.00,Architecture,Architect,Did Reps 5-6: matrix scoring and sensitivity pass with score-stack.py checker,3.00,0,Will move on to Rep 7 next,No
+2026-09-17,06:00,09:30,3.50,Architecture,Architect,Did Reps 7-9: seam inventory/novelty load analysis/SP-01 VirusTotal API spike,3.00,0,Ready for Rep 10 with no blockers,No
+2026-09-18,12:00,14:45,2.75,Architecture,Architect,"Did Reps 10-12: cost sheet, license inventory, and verification log",3.00,0,Will wrap it up with ADR 0001 next time hopefully,No
+2026-09-22,12:00,13:30,1.50,Architecture,Architect,"Drafted and committed ADR 0001 for backend framework selection",1.75,0,Ready to write remaining ADRs after review is done shortly,No
+2026-09-22,14:00,15:45,1.75,Architecture,Architect,"Drafted and committed ADR 0002, 0003, and 0004",2.00,0,Milestone 5 is finished,No
+2026-09-23,12:00,16:00,4.00,Design,Architect,"Milestone 6 Reps 1-4: decision inventory, context/container/component diagrams, and responsibility table",3.50,0,Will pick up with Rep 5 next time,No
+2026-09-24,07:00,08:45,1.75,Design,Architect,"Milestone 6 Reps 5-6: interface contract and error policy",1.50,0,Will continue with Week 6 later today,No
+2026-09-24,11:30,14:00,2.50,Design,Architect,"Milestone 6 Reps 7-9: data model, sequence flows, and migration",3.00,0,Stopping at Rep 9 for today,No
+2026-09-25,13:00,16:00,3.00,Design,Architect,"Milestone6 Reps 10-12: error policy, spec rewrite, and riskiest dependency",2.50,0,"Completed Reps from Milestone 6; will do 'spec-check' before wrapping up the week.",No
+2026-09-28,08:00,11:30,3.50,Design,Architect,"Made tech spec v0.1, ran spec-check.py (0 findings), conducted red-team review",4.00,0,Completed Milestone 6 (still need to have a peer read it. Will add time spent looking over it to time log later today.),No
+2026-09-28,14:00,14:30,0.50,Design,Architect,"Reviewed with peer, have my week 7 review now",0.50,0,Finished with Milestone 6 now,No
+2026-09-29,13:00,15:00,2.50,Planning,Project Manager,"Completed Week 7 Reps 1-3: invisible work inventory, VT polling WBS, and bad-WBS autopsy",3.00,0,Will do Group B next time,No
+2026-09-30,11:00,13:30,2.50,Planning,Project Manager,"Completed Reps 4-7: PERT estimates, spread test, calibration factor, and plan-check execution",2.50,0,Milestone 7 B done; moving onto C next,No
+2026-10-01,07:00,10:00,3.00,Planning,Project Manager,"Completed Reps 8-10: capacity table, gap analysis, and formal Risk Register",3.00,0,Milestone 7 Group C done; will do Group D later today hopefully,No
+2026-10-01,13:00,14:30,1.50,Planning,Project Manager,"Finished Group D: Reps 11 and 12, AI usage logging, and scope cutting",1.50,0,Will wrap up Week 7 with the last thing,Yes
+2026-10-05,06:30,09:45,3.25,Planning,Project Manager,"Finished up Milestone 7: put in my WBS with 25 tasks with 6 WPs, put in schedule gates and burn-down baseline, updated risk register to 8 risks, and oput final scope cut in requirements.md",4.00,0,Will start on Milestone 8 sometime today hopefully,Yes
+2026-10-07,09:45,12:15,2.50,Review,Moderator,"Completed Design Review Block A: entry criteria gate, bidirectional traceability matrix, and reviewer brief",2.50,0,Will wait a couple days and then conduct my walkthrough with stranger,No
+2026-10-13,09:15,12:00,2.75,Review,Reviewer,"Design Review Block B Reps 4 and 5: solo cold walkthrough out loud and Design Review Auditor evaluation with pace-audit script configuration",3.00,0,Will conduct my walkthrough with a peer later today to finish Block B,No
+2026-10-13,13:30,16:30,3.00,Review,Recorder,"Design Review Block B (Part 2): Rep 6 human peer review walkthrough and Rep 7 adversarial AI verification and fabrication rate audit",3.00,0,Will finish up Milestone 8 tomorrow,Yes
+2026-10-14,09:30,11:45,2.25,Review,Moderator,"Design Review Block C: Rep 8 defect dispositioning master log, Rep 9 technical rework on docs/architecture.md (v0.2), independent verification pass, and logging secondary defect DR-019",2.50,0,Will end Milestone 8 later today,Yes
+2026-10-14,12:30,14:30,2.00,Review,Moderator,"Design Review Block D: Rep 10 baseline declaration spec-baseline-v1.0, Rep 11 change control infrastructure (CR-000 & CR-001), Rep 12 halfway pace audit, and formal Design Review Report",2.00,0,Finished Milestone 8. Will start Week 9 later this week,No
