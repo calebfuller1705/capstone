@@ -35,6 +35,10 @@ graph TD
 | **Web Client** | Input validation, a11y UI rendering | Vanilla HTML/JS | Client-Side / Untrusted | No |
 | **API Service** | Holds API Key, polls VT, enforces 10s timeout | Python / FastAPI (Render) | Server-Side / Trust Boundary | Yes |
 
+**Container Configuration Policies:**
+- **CORS Lockdown (DR-005):** In production on Render, the API Service constrains `CORSMiddleware` allowed origins strictly to the frontend static site origin (`FRONTEND_URL` environment variable). Localhost wildcards (`*`) are disabled in production builds.
+- **Form Accessibility (DR-018):** The Web Client single-input form explicitly matches the `<label for="url-input">` attribute to `<input id="url-input">` to satisfy NFR-ACC-03 screen reader binding.
+
 **Trust boundary:** The client-side is untrusted. The API Service container acts as the trust boundary where the API key is held and never exposed to the client.
 
 ## 4. Components (Level 3 — API Service)
@@ -52,26 +56,35 @@ Diagram: `docs/diagrams/level-3-components.mmd`
 
 * **Dependency graph is acyclic:** Yes, dependencies go one way: `ui_controller` ➔ `api_router` ➔ `poller` ➔ `vt_client` / `evaluator`. No cycles exist.
 * **Every piece of state has exactly one owner:** Yes, the API key is owned by `vt_client`. The timeout clock is owned by `poller`. The DOM is owned by `ui_controller`.
+* **Request Throttling (DR-009):** The `api_router` uses `slowapi` in-memory rate limiting set to `2 requests/minute` per client IP on `POST /scan`. This saves the free-tier 4 req/min VirusTotal quota from scripted exhaustion while keeping zero disk persistence (CON-04).
 
 ## 5. Interface Contracts
 
 ### POST /scan                                         (serves FR-INP-01, FR-SYS-01)
 **Purpose**      Accepts a URL from the client, coordinates the asynchronous VirusTotal risk analysis, and returns a safe/unsafe verdict.
-**Auth**         None; public-facing endpoint protected by rate limiting.
-**Request**      `{ "url": string }` required, 1-2048 chars, valid domain format.
-**Success**      200 OK — `{ "url": "http://example.com", "verdict": "Safe", "source": "virustotal", "scan_time_ms": 1240 }`
-**Errors**       400 malformed_url, 422 unscannable_intranet_address, 429 rate_limited, 500 internal_error, 504 gateway_timeout
+**Auth**         None; public-facing endpoint protected by client IP rate limiting (2 req/min).
+**Request**      `{ "url": string }` required, 1–2048 characters.
+                 - Protocol must be strictly `http://` or `https://` (DR-013).
+                 - Leading and trailing whitespace is stripped prior to validation (DR-003).
+                 - Trailing slashes on root domains are stripped before identifier hashing to avoid cache misses (DR-019).
+**Upstream ID**  VirusTotal v3 requires URLs to be encoded as unpadded URL-safe base64: `base64.urlsafe_b64encode(url.encode()).decode().strip("=")` (DR-001).
+**Success**      200 OK — `{ "url": "https://example.com", "verdict": "Safe", "source": "virustotal", "scan_time_ms": 1240 }`
+**Errors**       400 malformed_url, 422 unscannable_intranet, 429 rate_limited, 500 internal_error, 502 upstream_error, 504 gateway_timeout
 **Idempotency**  Fully idempotent; repeated calls return the same result, no state changes.
 **Side effects** None; system is entirely stateless (CON-04, NFR-SEC-02).
 **Limits**       Body <= 4 KB; execution time hard-capped at 10.0 seconds.
 
-**Error envelope used system-wide:** `{ "error": { "code": "...", "field": "...", "message": "..." } }`
-**Status-code policy:**
-* **400** `malformed_url` — The input is does not have a valid domain, contains spaces/IPs, or goes over 2048 characters.
-* **422** `unscannable_intranet` — URL is validly formatted but points to a local/intranet address.
-* **429** `rate_limited` — The 500-request daily VirusTotal quota has been exhausted.
-* **500** `internal_error` — Unhandled backend exception or crash.
-* **504** `gateway_timeout` — The backend did not get a legit result from VirusTotal within the 10-second limit.
+**Standard Error Envelope (RFC 7807 Problem Details):**
+All non-200 responses return this uniform JSON structure:
+```json
+{
+  "error": {
+    "code": "rate_limited",
+    "field": "url",
+    "message": "Upstream VirusTotal quota exhausted. Retry in 15 seconds.",
+    "retry_after": 15
+  }
+}
 
 ## 6. Data Model
 *Constraint Override: Per CON-04 (which says my project will have a stateless architecture) and NFR-SEC-02 (which takes 0 bytes of user history stored), this system has no persistent database. The following model shows the transient, in-memory state that is a thing only for the time of the HTTP request.*
@@ -98,7 +111,7 @@ Diagram: `docs/diagrams/level-3-components.mmd`
 ### Flow 1 & 2 — The Money Path & Risky Path (URL Scan) (serves FR-INP-01, FR-DASH-01, FR-UI-01)
 1. **Client** POSTs `{ "url": "http://example.com" }` to API Service.
 2. **API Service** validates, trims whitespace, and enforces the 2048-char limit.
-3. **API Service** POSTs the URL to VirusTotal using my secret API Key.
+3. 3. **API Service** encodes the canonical URL into unpadded URL-safe base64 (DR-001) and POSTs to VirusTotal using the secret API Key.
 4. **VirusTotal** brings back a 200 OK with an `id` (the analysis ID).
 5. **API Service** starts a polling loop: GET to VirusTotal (`/api/v3/analyses/{id}`).
 6. **VirusTotal** returns `{"status": "completed", "stats": {"malicious": 0}}`.
@@ -113,7 +126,8 @@ Diagram: `docs/diagrams/level-3-components.mmd`
 | 3 | VT gives a 429 Rate Limit on first submit | Abort process; log ERROR; return 429. | "You have reached the daily request limit, please try again tomorrow." |
 | 4 | VT gives a 500 Internal Server Error | Abort process; log ERROR; return 500. | "500 Error. Please try again." |
 | 6 | VT gives a `{"status": "queued"}` over and over | Continue polling until the 10.0-second clock expires. | Spinning wheel / local security tips. |
-| 6b | 10.0 seconds elapse and VT is still "queued" | Break the loop; abort request; return 504. | "Timeout: Analysis took too long. Please try again." |
+| 5b | User closes tab or navigates away during polling (DR-014) | `request.is_disconnected()` returns true; poller breaks loop immediately, freeing connection without burning further VT quota. | N/A (Session terminated). |
+| 6b | 10.0 seconds elapse and VT is still "queued" (DR-004, DR-011) | Break the polling loop; return HTTP 504 Gateway Timeout with standard RFC 7807 error envelope. | "Timeout: Analysis took too long." accompanied by an active **[Retry Scan]** button that preserves the entered URL. |
 
 ## 8. Error Handling and Edge Cases
 
