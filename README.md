@@ -18,4 +18,47 @@ Senior capstone by Caleb Fuller, Fall 2026.
 - **Definition of Done:** View the [Definition of Done](docs/definition-of-done.md) checklist for all work items.
 
 ## How to run it
-Nothing to run yet. From Week 9 onward, this section will contain the clean-machine setup path.
+
+## Run it (about five minutes)
+
+Requires Python 3.12 (pinned in `.python-version`) and Git. No administrator rights or database installation required.
+
+On Windows, execute the commands below in **Git Bash**[cite: 1]:
+
+```bash
+# 1. Clone repository
+git clone <this repo>
+cd capstone
+
+# 2. Setup environment and install locked dependencies
+./script/setup
+
+# 3. Execute automated test suite
+./script/test
+
+# 4. Start local development server
+./script/start
+
+# Verifying Success
+# 1. Health Endpoint
+#Open http://127.0.0.1:8000/health in your browser. You should see:
+
+JSON
+{"status":"ok"}
+
+#2. Walking Skeleton Scan Route
+
+# In a separate terminal, test the real request dispatch hop:
+Bash
+curl -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) \
+  -H "Content-Type: application/json" \
+  -d '{"url":"[https://example.com](https://example.com)"}'
+
+# Expected response:
+JSON
+{
+  "url": "[https://example.com](https://example.com)",
+  "verdict": "Safe",
+  "source": "skeleton-stub",
+  "scan_time_ms": 15
+}
