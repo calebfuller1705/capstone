@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+elif [ -f ".venv/Scripts/activate" ]; then
+    source .venv/Scripts/activate
+fi
+
+echo "==> Running linter..."
+flake8 src tests --max-line-length=120 --exclude=.venv
+echo "==> Lint clean."
