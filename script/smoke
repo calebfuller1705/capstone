@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_BASE_URL="${APP_BASE_URL:-http://127.0.0.1:8000}"
+SMOKE_EXPECT="${SMOKE_EXPECT:-Safe}"
+
+echo "==> Polling ${APP_BASE_URL}/health for up to 30 seconds..."
+for i in {1..30}; do
+  if curl -sf "${APP_BASE_URL}/health" > /dev/null 2>&1; then
+    echo "==> Service is up. Dispatching walking skeleton smoke scan..."
+    RESPONSE=$(curl -sf -X POST "${APP_BASE_URL}/scan" \
+      -H "Content-Type: application/json" \
+      -d '{"url":"https://example.com"}')
+
+    if echo "$RESPONSE" | grep -q "$SMOKE_EXPECT"; then
+      echo "==> Smoke test passed: response contains expected verdict '${SMOKE_EXPECT}'."
+      exit 0
+    else
+      echo "==> Smoke test failed: expected '${SMOKE_EXPECT}', but received:"
+      echo "$RESPONSE"
+      exit 1
+    fi
+  fi
+  sleep 1
+done
+
+echo "==> Smoke test failed: timed out after 30s waiting for ${APP_BASE_URL}/health."
+exit 1

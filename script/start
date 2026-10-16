@@ -7,5 +7,6 @@ elif [ -f ".venv/Scripts/activate" ]; then
     source .venv/Scripts/activate
 fi
 
-echo "==> Starting API server on http://127.0.0.1:8000..."
-uvicorn src.api.main:app --host 0.0.0.0 --port 8000
+PORT="${PORT:-8000}"
+echo "==> Starting API server on http://127.0.0.1:${PORT}..."
+uvicorn src.api.main:app --host 0.0.0.0 --port "${PORT}"

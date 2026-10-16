@@ -8,4 +8,4 @@ elif [ -f ".venv/Scripts/activate" ]; then
 fi
 
 echo "==> Running test suite..."
-pytest tests
+python -m pytest tests
