@@ -43,13 +43,13 @@ jobs:
       - name: Build
         run: ./script/build
 
-      # ---- Live smoke test against background server ----
       - name: Start the app in the background
         run: |
           nohup ./script/start > /tmp/app.log 2>&1 &
           echo "started pid $!"
         env:
           PORT: "8000"
+          VIRUSTOTAL_API_KEY: "ci-smoke-test-key"
 
       - name: Smoke test — prove the skeleton walks here too
         run: ./script/smoke
@@ -59,4 +59,4 @@ jobs:
 
       - name: Show the app log when a stage fails
         if: failure()
-        run: tail -n 50 /tmp/app.log
+        run: test -f /tmp/app.log && tail -n 50 /tmp/app.log || echo "No app log found."

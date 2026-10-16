@@ -1,5 +1,8 @@
+import os
 from fastapi.testclient import TestClient
 from src.api.main import app
+
+os.environ.setdefault("VIRUSTOTAL_API_KEY", "unit-test-key")
 
 client = TestClient(app)
 

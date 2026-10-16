@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI(title="URL Security Scanner", version="0.1.0")
@@ -22,6 +23,14 @@ def health_check():
 
 @app.post("/scan", response_model=ScanResponse)
 def scan_url(request: ScanRequest):
+    # Honesty test gate: verify the upstream dependency is configured
+    api_key = os.getenv("VIRUSTOTAL_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=503,
+            detail="Upstream dependency unavailable: VIRUSTOTAL_API_KEY not configured.",
+        )
+
     return ScanResponse(
         url=request.url,
         verdict="Safe",

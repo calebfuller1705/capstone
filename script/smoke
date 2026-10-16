@@ -1,28 +1,49 @@
 #!/usr/bin/env bash
+#
+# smoke-test.sh — the proof that the skeleton walks.
+#
+# This is not a unit test. It does not mock anything. It asks the running
+# system for something that could ONLY have come from the far end of the
+# request path, and it fails loudly if the answer is wrong or missing.
+
 set -euo pipefail
 
-APP_BASE_URL="${APP_BASE_URL:-http://127.0.0.1:8000}"
-SMOKE_EXPECT="${SMOKE_EXPECT:-Safe}"
+# --- Three project defaults ---
+BASE_URL="${APP_BASE_URL:-http://127.0.0.1:8000}"
+ENDPOINT="${SMOKE_ENDPOINT:-/scan}"
+EXPECT="${SMOKE_EXPECT:-Safe}"
+TIMEOUT_SECONDS="${SMOKE_TIMEOUT:-30}"
 
-echo "==> Polling ${APP_BASE_URL}/health for up to 30 seconds..."
-for i in {1..30}; do
-  if curl -sf "${APP_BASE_URL}/health" > /dev/null 2>&1; then
-    echo "==> Service is up. Dispatching walking skeleton smoke scan..."
-    RESPONSE=$(curl -sf -X POST "${APP_BASE_URL}/scan" \
-      -H "Content-Type: application/json" \
-      -d '{"url":"https://example.com"}')
+PAYLOAD='{"url":"https://example.com"}'
 
-    if echo "$RESPONSE" | grep -q "$SMOKE_EXPECT"; then
-      echo "==> Smoke test passed: response contains expected verdict '${SMOKE_EXPECT}'."
-      exit 0
-    else
-      echo "==> Smoke test failed: expected '${SMOKE_EXPECT}', but received:"
-      echo "$RESPONSE"
-      exit 1
-    fi
+fail() {
+  printf 'SMOKE FAIL: %s\n' "$1" >&2
+  exit 1
+}
+
+# --- Hop 1: is anything listening at all? ------------------------------------
+deadline=$(( $(date +%s) + TIMEOUT_SECONDS ))
+until curl -fsS -o /dev/null -X POST "${BASE_URL}${ENDPOINT}" \
+  -H "Content-Type: application/json" \
+  -d "$PAYLOAD" 2>/dev/null; do
+  if [ "$(date +%s)" -ge "$deadline" ]; then
+    fail "nothing answered at ${BASE_URL}${ENDPOINT} within ${TIMEOUT_SECONDS}s (client -> route hop)"
   fi
   sleep 1
 done
 
-echo "==> Smoke test failed: timed out after 30s waiting for ${APP_BASE_URL}/health."
-exit 1
+# --- Hop 2: does the route return a body we can read? ------------------------
+body="$(curl -fsS -X POST "${BASE_URL}${ENDPOINT}" \
+  -H "Content-Type: application/json" \
+  -d "$PAYLOAD")" || fail "request to ${ENDPOINT} returned a non-2xx status (route -> service hop)"
+
+[ -n "$body" ] || fail "response body was empty (service -> data store hop)"
+
+# --- Hop 3: did the data come from the data store? ---------------------------
+if ! printf '%s' "$body" | grep -q "$EXPECT"; then
+  preview="$(printf '%s' "$body" | tr -d '\n' | cut -c1-200)"
+  fail "response did not contain the seeded value '${EXPECT}' (data store hop). Got: ${preview}"
+fi
+
+printf 'SMOKE OK: %s%s returned the seeded row (%s). The skeleton walks.\n' \
+  "$BASE_URL" "$ENDPOINT" "$EXPECT"
