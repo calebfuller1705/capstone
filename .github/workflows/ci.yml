@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build-and-verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ---- Toolchain pinned from repo file ----
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+          cache: pip
+
+      # ---- Script contract ----
+      - name: Install from the lock file
+        run: ./script/setup
+
+      - name: Lint
+        run: ./script/lint
+
+      - name: Test
+        run: ./script/test
+
+      - name: Build
+        run: ./script/build
+
+      # ---- Live smoke test against background server ----
+      - name: Start the app in the background
+        run: |
+          nohup ./script/start > /tmp/app.log 2>&1 &
+          echo "started pid $!"
+        env:
+          PORT: "8000"
+
+      - name: Smoke test — prove the skeleton walks here too
+        run: ./script/smoke
+        env:
+          APP_BASE_URL: http://127.0.0.1:8000
+          SMOKE_EXPECT: "Safe"
+
+      - name: Show the app log when a stage fails
+        if: failure()
+        run: tail -n 50 /tmp/app.log
