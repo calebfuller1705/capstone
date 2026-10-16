@@ -7,7 +7,8 @@ client = TestClient(app)
 def test_health_returns_ok():
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    # DELIBERATE FAILURE FOR REP 8:
+    assert response.json() == {"status": "broken"}
 
 
 def test_scan_endpoint_skeleton_response():
