@@ -21,23 +21,19 @@ Senior capstone by Caleb Fuller, Fall 2026.
 
 ## Run it (about five minutes)
 
-Requires Python 3.12 (pinned in `.python-version`) and Git. No administrator rights or database installation required.
-
-On Windows, execute the commands below in **Git Bash**[cite: 1]:
+Requires: Python 3.12 (pinned in `.python-version`)
 
 ```bash
-# 1. Clone repository
-git clone <this repo>
+git clone [https://github.com/calebfuller1705/capstone.git](https://github.com/calebfuller1705/capstone.git)
 cd capstone
+cp .env.example .env              # provides default development settings
+./script/setup                    # installs pinned dependencies from requirements.lock
+./script/start                    # serves API on [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-# 2. Setup environment and install locked dependencies
-./script/setup
+# In a second terminal, verify the system by running:
+./script/smoke
 
-# 3. Execute automated test suite
-./script/test
-
-# 4. Start local development server
-./script/start
+# Success looks like: SMOKE OK: http://127.0.0.1:8000/scan returned the seeded row (Safe). The skeleton walks.
 
 # Verifying Success
 # 1. Health Endpoint
