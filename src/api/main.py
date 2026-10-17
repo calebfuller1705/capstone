@@ -28,7 +28,10 @@ def scan_url(request: ScanRequest):
     if not api_key:
         raise HTTPException(
             status_code=503,
-            detail="Upstream dependency unavailable: VIRUSTOTAL_API_KEY not configured.",
+            detail=(
+                "Upstream dependency unavailable: "
+                "VIRUSTOTAL_API_KEY not configured."
+            ),
         )
 
     return ScanResponse(
