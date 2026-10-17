@@ -2,12 +2,12 @@
 
 Senior capstone by Caleb Fuller, Fall 2026. 
 
-## Current Status (Milestone 7)
-* **Shipped:** Milestone 7 complete: Project Plan baselined (`docs/plan.md`). Made a 6-work-package, 25-task Work Breakdown Structure (WBS) with three-point PERT estimates, weekly gates, and a burn-down baseline. I have my 25% project buffer (14.25 h) against a 57.0 h build capacity (Weeks 8–16), computed a 1.16x calibration factor, audited AI efficiency, and baselined an 8-item Risk Register (`docs/risk-register.md`).
-* **Cut:** Deferred `NFR-USE-01` (First-Time User Usability Testing Sessions) from Should to Won't to recover 2.5 calibrated hours, successfully closed my budget gap to fit within the 42.75 h plannable capacity and protecting the full 25% deployment buffer. Flagged for change control at the Week-8 review.
-* **Hours:** actual 12.5
-* **Blocked on:** nothing
-* **Ship confidence:** green
+## Current Status (Milestone 9)
+- **Shipped:** Milestone 9 complete: Walking Skeleton and CI pipeline verified (`v0.1.0-skeleton`). Built standard repository structure (`docs/`, `src/api/`, `tests/`), full POSIX `script/` contract (`setup`, `lint`, `test`, `build`, `start`, `smoke`), runtime pinning (`.python-version`, `requirements.lock`), automated 5-stage GitHub Actions CI, upstream dependency honesty check (`VIRUSTOTAL_API_KEY` 503 gate), 8 requirement-traced issues (`[FR-1]` through `[NFR-2]`), clean secrets audit, and rotation runbook (`docs/runbook.md`).
+- **Cut:** None; upstream VirusTotal v3 client integration kept as an honestly labeled stub in the request path pending Sprint 1 implementation.
+- **Hours:** actual 13.00 h
+- **Blocked on:** nothing
+- **Ship confidence:** green
 
 ## What is here
 - `docs/charter.md` — scope, constraints, non-goals, risks, working agreement
