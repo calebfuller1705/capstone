@@ -1,51 +1,78 @@
+# Definition of Done — URL Security Scanner
+
+Copy this into your repository as `docs/definition-of-done.md` and adapt the
+bracketed parts to your stack. Then reference it from your pull-request template
+so you cannot merge without seeing it.
+
+## The template (adapt, do not delete lines)
+
+A task is DONE when ALL of the following are true:
+
+1. The acceptance criteria on its requirement are met, verbatim. (`FR-__ AC-__`)
+2. At least one automated test in `tests/` exercises the new behavior and passes under `pytest`.
+3. The full test suite passes locally (`./script/lint`, `./script/test`, `./script/smoke`) AND in CI on the pushed branch.
+4. Errors and edge cases named in the technical specification are handled (malformed URLs, RFC 3986 violations, upstream 429 rate limits, 503 outages, timeouts).
+5. The four-pass self-review below is complete; findings fixed or logged.
+6. No secrets, credentials, or personal data appear anywhere in the diff (`VIRUSTOTAL_API_KEY` read strictly from environment; zero disk persistence).
+7. Any assistant contribution is recorded in `docs/ai-usage.md`.
+8. The issue links to its requirement id and has been moved on the board.
+9. Docs touched: `README.md`, `docs/runbook.md`, or `.env.example` updated if this
+   changed how the system is built, run, or configured.
+10. Hours are logged in `docs/hours-log.csv` with a real description.
+
+
+## The bad version, and what each line costs you
+
 # Definition of Done
+Code is written        <- unfalsifiable; that is what makes it a task
+It works               <- under what input? on whose machine? which criterion?
+Committed to GitHub    <- a commit proves a file changed, not that work finished
 
-## What this is
+Nothing there can be checked by anyone but the author, which means it earns
+nothing on a rubric a stranger applies.
 
-One checklist. It applies to **every** work item — every card, issue, or task — before that item may be moved to Done. It is not a plan and it is not per-feature acceptance criteria; those live with each requirement in `docs/requirements.md`.
 
-## The honesty rule
+## Worked example — URL Security Scanner, FR-2 (integrate VirusTotal API client)
 
-If you will not do an item every single time, take it off the list. A definition of done that you routinely skip is worse than no definition of done, because it teaches you that written commitments are decorative.
+| Check | Evidence |
+|---|---|
+| 1 | AC-1 unpadded base64url SHA-256 identifier generated; AC-2 `x-apikey` header sent; AC-3 returns engine stats |
+| 2 | `tests/unit/test_vt_client.py::test_lookup_200`, `test_lookup_404`, `test_lookup_timeout` |
+| 3 | Run #24 green on `feat/fr-2-vt-client` |
+| 4 | Upstream 404 (unseen URL), 429 (quota hit), and 5-second socket timeout handled per tech spec §3.2 |
+| 5 | Four passes done 2026-10-19; 2 findings fixed, DEF-002 logged and deferred |
+| 6 | Key read from `VIRUSTOTAL_API_KEY`; zero disk caching; `git diff --staged` reviewed hunk by hunk |
+| 7 | `docs/ai-usage.md` entry 2026-10-19 (client draft, ~35 of 80 lines kept) |
+| 8 | Issue #2 closed, labeled `FR-2`, moved to Done on GitHub board |
+| 9 | `README.md` prerequisites and `.env.example` verified for `VIRUSTOTAL_API_KEY` |
+| 10 | 2.50 h construction + 0.75 h debugging logged 2026-10-19 in `docs/hours-log.csv` |
 
-Eight to twelve items. Every item must be answerable **yes or no** by someone who is not you.
 
----
+## The four-pass self-review (check 5, expanded)
 
-## The checklist
+**Pass 1 — Diff (mechanical).** `git diff --staged` and `git diff --staged --stat`.
+Hunt debug prints, commented-out blocks, files staged by accident, hard-coded
+hosts, and TODOs you forgot. Five minutes; finds about half of everything.
 
-An item is Done when all of the following are true:
+**Pass 2 — Stranger (comprehension).** Read from the entry point (`src/api/main.py`) as if you had
+never seen it. Flag ambiguous names, functions doing three jobs, magic numbers,
+nesting deeper than three.
 
-- [ ] It points to a requirement ID in `docs/requirements.md`, and `docs/traceability.csv` is updated so `check-traceability.py` still brings back 0 blockers.
-- [ ] Every acceptance criterion for that requirement goes, checked by running it manually locally.
-- [ ] No secret, API key, token, or real user data shows up in the repository.
-- [ ] Error paths are dealt with: the biggest issue a user is most likely to hit gives a message that names what failed.
-- [ ] New user-facing updates are keyboard-operable, labeled, and pass the 4.5:1 contrast check.
-- [ ] Any behavior change a random person would need to know shows up in `README.md` or `docs/requirements.md`.
-- [ ] Any use of an AI assistant is recorded in `docs/ai-usage.md`, and every generated line was read and made sense.
-- [ ] Time worked on the project is written to `docs/hours-log.csv` right after.
-- [ ] The thing made is run through once end to end from a clean state without giving any exceptions.
-- [ ] The task card in GitHub is moved to 'Done' to keep up with the work schedule.
-- [ ] The code is merged and pushed to GitHub.
+**Pass 3 — Adversary (destruction).** For every input ask what the worst version
+looks like:
 
----
+| Input | Hostile version |
+|---|---|
+| target URL field | empty · 10,000 chars · emoji · `javascript:...` · private IP (`127.0.0.1`, `10.0.0.1`) · padded whitespace |
+| scan timeout / latency | zero · negative · float precision · upstream timeout > 5.0 s |
+| engine statistics | missing keys · 0 engines reported · 100+ engines reported · unexpected category strings |
+| network call | slow (>5s) · timed out · 500 · 429 · valid HTTP, HTML error page |
+| headers / auth | empty `VIRUSTOTAL_API_KEY` · invalid token · extra whitespace |
 
-## What a bad definition of done looks like
+Fix now, log a defect, or accept with a written reason. All three are fine.
+Silence is not.
 
-Keep this next to yours as a warning:
+**Pass 4 — Contract (traceability).** Read each acceptance criterion out loud and
+point at the line of code that satisfies it. No line, no criterion met.
 
-- [ ] It works.
-- [ ] Code is clean.
-- [ ] Tested.
-- [ ] Documented if needed.
-
-Every one of these is unverifiable by anyone but the author, which means the list enforces nothing. "If needed" is where documentation goes to die.
-
----
-
-## Change from the Template
-The requirements for "100% automated test coverage" and a "green CI/CD pipeline" taken out of the original template. With the strict 57-hour budget and it just being myself for this capstone, making automated pipelines would take much needed development hours. Verification will be done through local, manual testing.
-
----
-
-**Adopted:** 2026-09-14 **Revised:** <YYYY-MM-DD, with a one-line reason>
+**Adopted:** 2026-09-14 **Revised:** <2026-10-19, Week 10 modifications as in Milestone>

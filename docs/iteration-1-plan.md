@@ -50,3 +50,17 @@
   - [ ] Enforces that API keys and environment variables never appear in logs or client-facing responses.
 * **Estimate (three-point):** Optimistic 1.0 h | Likely 2.0 h | Pessimistic 3.5 h
 * **Riskiest unknown:** Consistent behavior of async HTTP client timeouts (`httpx.TimeoutException` vs. raw socket disconnects) across differing host environments.
+
+
+## Rep 2: Board Task Audit (Vertical vs. Horizontal)
+
+| Issue # | Title | Type | Action / Resolution |
+| :--- | :--- | :---: | :--- |
+| #1 | [FR-1] Validate and normalize target URL inputs | V | Standalone slice (ingress validation) |
+| #2 | [FR-2] Integrate VirusTotal v3 API client for URL report lookup | V | Standalone slice (upstream integration) |
+| #3 | [FR-3] Handle asynchronous scan submissions when URL report is missing | V | Standalone slice (polling loop) |
+| #4 | [FR-4] Combine multi-engine detection statistics into unified verdict | V | Standalone slice (domain scoring) |
+| #5 | [FR-5] Compute and serialize scan execution latency | H | Folded into [FR-4] response contract |
+| #6 | [FR-6] Map upstream API error states and 429 rate limits | V | Standalone slice (handled failure paths) |
+| #7 | [NFR-1] Enforce 5-second fail-fast timeout on upstream calls | H | Folded into [FR-2] client configuration |
+| #8 | [NFR-2] Guarantee zero disk persistence and in-memory boundaries | H | Kept standalone as architectural audit gate |
