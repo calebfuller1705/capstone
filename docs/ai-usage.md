@@ -36,6 +36,8 @@ I take full responsibility for every line of code, documentation, and configurat
 
 | 2026-09-16 | Option Space Generation (Rep 3) | "For a solo developer building a stateless URL security scanner over 57 remaining hours, list eight options for the backend framework, frontend, and hosting. Include unfashionable ones. For each: one sentence on what it is best at, and its failure mode." | The assistant generated a wide field of options. I used this to manually prune the list down to 2-3 realistic candidates per category (e.g., keeping FastAPI/Flask and discarding Django/Spring Boot) before building the evaluation matrix. |
 
+| 2026-10-22 | Gemini | "Write an async function fetch_url_report(url, api_key, client) that calls VT v3 GET /urls/{id} with 5s timeout, 404 returning None, custom typed exceptions, and no disk writes." | An async client wrapper querying VirusTotal v3 with status code checks, timeout handling, and custom exception classes. | Replaced direct dict lookups with chained `.get()` accessors, added `should_close_client` logic to safely await `client.aclose()`, injected the client parameter for test mocking, and wrapped line lengths under 79 characters. | The assistant's raw draft would crash with a `KeyError` on partial JSON payloads and leak client sockets under high request volume; explicit mocking injection was needed to test hostile inputs under `pytest`. |
+
 # Milestone 6 - Architecture Red-Team Review
 **Date:** 2026-09-28
 **Tool:** Gemini
