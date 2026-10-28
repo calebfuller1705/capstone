@@ -34,3 +34,55 @@ Could I rewrite it?        yes — and what I had to look up: the exact exceptio
 
 ### Proper Entry (Committed to docs/ai-usage.md)
 | 2026-10-22 | Gemini | "Write an async function fetch_url_report(url, api_key, client) that calls VT v3 GET /urls/{id} with 5s timeout, 404 returning None, custom typed exceptions, and no disk writes." | An async client wrapper querying VirusTotal v3 with status code checks, timeout handling, and custom exception classes. | Replaced direct dict lookups with chained `.get()` accessors, added `should_close_client` logic to safely await `client.aclose()`, injected the client parameter for test mocking, and wrapped line lengths under 79 characters. | The assistant's raw draft would crash with a `KeyError` on partial JSON payloads and leak client sockets under high request volume; explicit mocking injection was needed to test hostile inputs under `pytest`. |
+
+## Rep 9 — Rewrite Five Bad Commit Messages
+
+| Actual message | What it should have said |
+| :--- | :--- |
+| `33be093 docs: complete week 4 block c reps, reformatted a few things, committed yesterday's work as well` | `docs(requirements): define NFR-1 latency and NFR-2 zero-persistence verification criteria`<br><br>Specify automated test bounds and measurement methods for 10s latency cap and memory-only execution to satisfy Milestone 4 audit gates.<br><br>Closes #4. Traces to NFR-1, NFR-2. |
+| `252e7eb Wrote ADR 0001 for backend framework selection; will continue after my roommate reads ADR 0001` | `docs(adr): record ADR-0001 selecting FastAPI for URL scanner backend`<br><br>Document architecture trade-offs against Flask and Django, selecting FastAPI for native async I/O and Pydantic v2 schemas required by stateless scanning.<br><br>Closes #5. Traces to NFR-1. |
+| `ef984c7 Finished traceability matrix, built my  DoD, and wrapped up Week 4` | `docs(governance): establish requirements traceability matrix and Definition of Done`<br><br>Map all functional requirements to verification tests and define a 10-point quality gate for iteration merges to prevent untested code entering main.<br><br>Closes #6. Traces to FR-1..FR-6. |
+| `2728db8 Logged hours and locked in Reps 5-9 with API spike` | `feat(spike): validate VirusTotal v3 API endpoint latency and base64url encoding`<br><br>Verify that the unpadded base64url URL identifier format works against VirusTotal /api/v3/urls/{id} and establish the 5.0-second timeout baseline.<br><br>Closes #2. Traces to FR-2, NFR-1. |
+| `8558d66 Started MS6 with Reps 1-4 and the diagrams` | `docs(arch): add C4 Context and Container diagrams for scanner system`<br><br>Model structural boundaries between browser client, FastAPI service, and VirusTotal v3 upstream API to establish architectural baseline v0.1.<br><br>Closes #3. Traces to FR-2, FR-5. |
+
+## Rep 10 — Reconstruct one honest day, then run the report
+
+### 1. Reconstructed Session
+* **Target Date:** 2026-10-17 (Milestone 9 completion)
+* **Evidence:** Commits `b5a188e` (14:14) and `8de6673` (14:16) shipping walking skeleton traceability and updating project status.
+* **Row Added to `docs/hours-log.csv`:**
+  `2026-10-17,13:45,14:30,0.75,construction,developer,[reconstructed from commits] Ship Milestone 9 walking skeleton and traceability,0.75,0.00,Reconstructed from commits b5a188e and 8de6673: verified walking skeleton traceability matrix and updated project status,yes`
+
+### 2. Report Findings & Metrics Summary
+* **Total Logged:** 133.00 hours across 53 sessions in 9 calendar weeks (55.4% of 240h target budget).
+* **Remaining Budget:** 107.00 hours.
+* **Calibration (Estimate-to-Actual Ratio):** 1.07 (estimated 124.75h vs. actual 133.00h, showing an honest 6.6% underestimation bias).
+
+#### Top Phase Distribution
+* **Requirements:** 34.00 h (25.6%)
+* **Inception:** 22.00 h (16.5%)
+* **Construction:** 18.50 h (13.9%)
+* **Architecture:** 15.50 h (11.7%)
+* **Design:** 15.25 h (11.5%)
+* **Review:** 15.00 h (11.3%)
+* **Planning:** 12.75 h (9.6%)
+
+## Rep 11 — Secret hunting and process fix
+
+### Audit Results
+* **History Pattern Search:** `git log --all --oneline -- '*.env' '*.env.*' '*credentials*' '*secrets*'` matched commits `7673bc2` and `6b1e6ab`. Inspection via `git show --name-only` confirmed the committed files were `.env.example` and `docs/.env.example` (sanitized templates containing placeholder variable names only).
+* **Working Tree & History Grep:** All literal matches for `api_key` in the codebase and git history belong to test mocks in `tests/unit/test_vt_client.py` using dummy values (`"dummy-key-12345"`). No real secrets exist in repository history.
+
+### Rep 11 Form
+Credentials my project uses:  `VIRUSTOTAL_API_KEY`
+Read from:                    env var (`os.getenv("VIRUSTOTAL_API_KEY")` in `src/services/vt_client.py`)
+In history?                   no (confirmed `.env.example` and `docs/.env.example` were templates only; test fixtures use `"dummy-key-12345"`)
+Ignore file covers:           `.env`, `.env.*` (with `!.env.example` allowlisted) in `.gitignore`
+
+## Rep 12 — The five-minute demo, rehearsed and recorded
+
+Act 1 opening line (write it verbatim): "This system is a stateless, zero-persistence URL scanner designed to provide immediate threat intelligence without logging query history or writing user data to disk."
+Act 2 script steps: 1. curl -s http://127.0.0.1:8000/health 2. python -c "from src.services.vt_client import encode_vt_url_id; print(encode_vt_url_id('https://example.com'))" 3. pytest tests/unit/test_vt_client.py -k "test_fetch_url_report_success" -v 4. pytest tests/unit/test_vt_client.py -k "test_fetch_url_report_404" -v
+Act 2 failure path shown: Upstream 5.0-second socket timeout via pytest tests/unit/test_vt_client.py -k "timeout" raising typed UpstreamServiceError without leaking TCP connections.
+Act 3 what is NOT done, and when it is scheduled: Browser HTML submission form (FR-1) and background rescan worker queue (FR-4); scheduled for Iteration 2 (Weeks 11–12).
+Recorded fallback saved at: docs/demo/iteration-1-demo.mp4
