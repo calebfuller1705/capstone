@@ -86,3 +86,13 @@ Act 2 script steps: 1. curl -s http://127.0.0.1:8000/health 2. python -c "from s
 Act 2 failure path shown: Upstream 5.0-second socket timeout via pytest tests/unit/test_vt_client.py -k "timeout" raising typed UpstreamServiceError without leaking TCP connections.
 Act 3 what is NOT done, and when it is scheduled: Browser HTML submission form (FR-1) and background rescan worker queue (FR-4); scheduled for Iteration 2 (Weeks 11–12).
 Recorded fallback saved at: docs/demo/iteration-1-demo.mp4
+
+## Dress Rehearsal Sign-Off (One Last Thing)
+
+* **Date:** 2026-10-28
+* **Gate 1 (DoD 10/10):** Verified. All 10 Definition of Done criteria pass for Slice 1 (`FR-2`).
+* **Gate 2 (Commit Hygiene):** Verified via `git log -15 --oneline`. Clean Conventional Commits with zero `wip` or unlabeled commits.
+* **Gate 3 (AI Usage):** Verified. `docs/ai-usage.md` documents prompt contracts, manual defensive modifications, and adversarial verification.
+* **Gate 4 (Hours Report):** Clean run via `tools/hours_report.py`. Cumulative hours calibrated at ~134.50h with no fatal pattern anomalies.
+* **Gate 5 (Demo Rehearsal):** Verified on committed seed data (`docs/demo-seed.json`). Rehearsed timing under 5 minutes with unhandled 404/timeout failure paths shown and Iteration 2 scope gaps declared.
+* **Gate 6 (Remote & CI):** Working tree clean, pushed to `origin/main`, CI green.

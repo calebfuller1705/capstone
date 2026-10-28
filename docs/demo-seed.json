@@ -1,0 +1,25 @@
+{
+  "test_cases": [
+    {
+      "id": "benign-sample",
+      "url": "https://example.com",
+      "expected_vt_id": "aHR0cHM6Ly9leGFtcGxlLmNvbQ",
+      "expected_status": 200,
+      "description": "Established domain returning harmless analysis stats"
+    },
+    {
+      "id": "malicious-sample",
+      "url": "http://malware.testing.google.test/testing/malware/",
+      "expected_vt_id": "aHR0cDovL21hbHdhcmUudGVzdGluZy5nb29nbGUudGVzdC90ZXN0aW5nL21hbHdhcmUv",
+      "expected_status": 200,
+      "description": "Standard EICAR/malware test URI returning positive threat engine detections"
+    },
+    {
+      "id": "unseen-sample",
+      "url": "https://nonexistent-random-domain-2026-test.org/check",
+      "expected_vt_id": "aHR0cHM6Ly9ub25leGlzdGVudC1yYW5kb20tZG9tYWluLTIwMjYtdGVzdC5vcmcvY2hlY2s",
+      "expected_status": 404,
+      "description": "Never-before-seen URL triggering upstream 404 fallback (returns None without 500 error)"
+    }
+  ]
+}
