@@ -2,12 +2,12 @@
 
 Senior capstone by Caleb Fuller, Fall 2026. 
 
-## Current Status (Milestone 9)
-- **Shipped:** Milestone 9 complete: Walking Skeleton and CI pipeline verified (`v0.1.0-skeleton`). Built standard repository structure (`docs/`, `src/api/`, `tests/`), full POSIX `script/` contract (`setup`, `lint`, `test`, `build`, `start`, `smoke`), runtime pinning (`.python-version`, `requirements.lock`), automated 5-stage GitHub Actions CI, upstream dependency honesty check (`VIRUSTOTAL_API_KEY` 503 gate), 8 requirement-traced issues (`[FR-1]` through `[NFR-2]`), clean secrets audit, and rotation runbook (`docs/runbook.md`).
-- **Cut:** None; upstream VirusTotal v3 client integration kept as an honestly labeled stub in the request path pending Sprint 1 implementation.
-- **Hours:** actual 13.00 h
-- **Blocked on:** nothing
-- **Ship confidence:** green
+## Current Status (Milestone 10)
+- Shipped: Milestone 10 complete: Iteration 1 development and verification gates passed. Implemented Slice 1 ([FR-2]) with an async VirusTotal v3 client (`src/services/vt_client.py`), deterministic unpadded base64url encoding, a 5.0-second fail-fast timeout ([NFR-1]), and typed error handling for 404 cache misses, 429 rate limits, and network timeouts. Extracted typed Pydantic v2 schemas (`src/api/schemas.py`). 10 automated unit and adversary tests passing green (100% pass rate). Completed 10-point Definition of Done checklist, 4-pass self-review (`docs/review/iteration-1-self-review.md`), amber-zone AI usage audit (`docs/ai-usage.md`), commit hygiene audit with 5 Conventional Commit rewrites, hours log weekly rollup audit (`tools/hours_report.py`), credential search confirming zero history leaks and in-memory credential boundaries ([NFR-2]), deterministic seed data (`docs/demo-seed.json`), and rehearsed 5-minute demo script with video fallback. Closed GitHub issue #2 and verified #9.
+- Cut: Target URL input validation ([FR-1]), asynchronous scan submission queue ([FR-3]), multi-engine detection aggregation ([FR-4]), latency reporting ([FR-5]), and route-level HTTP status code exception mapping ([FR-6]) explicitly deferred to Iteration 2 (Milestones 11–12).
+- Hours: actual 13.5 h
+- Blocked on: nothing
+- Ship confidence: green
 
 ## What is here
 - `docs/charter.md` — scope, constraints, non-goals, risks, working agreement
