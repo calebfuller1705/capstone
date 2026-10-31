@@ -1,0 +1,187 @@
+{
+  "seed": 20261031,
+  "family": "happy",
+  "record_count": 30,
+  "records": [
+    {
+      "id": "HAPPY-001",
+      "family": "happy",
+      "url": "http://example.com",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-002",
+      "family": "happy",
+      "url": "https://example.com/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-003",
+      "family": "happy",
+      "url": "http://example.com/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-004",
+      "family": "happy",
+      "url": "https://github.com",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-005",
+      "family": "happy",
+      "url": "https://github.com/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-006",
+      "family": "happy",
+      "url": "https://github.com/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-007",
+      "family": "happy",
+      "url": "https://python.org",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-008",
+      "family": "happy",
+      "url": "http://python.org/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-009",
+      "family": "happy",
+      "url": "https://python.org/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-010",
+      "family": "happy",
+      "url": "https://wikipedia.org",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-011",
+      "family": "happy",
+      "url": "https://wikipedia.org/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-012",
+      "family": "happy",
+      "url": "https://wikipedia.org/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-013",
+      "family": "happy",
+      "url": "http://fastapi.tiangolo.com",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-014",
+      "family": "happy",
+      "url": "https://fastapi.tiangolo.com/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-015",
+      "family": "happy",
+      "url": "https://fastapi.tiangolo.com/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-016",
+      "family": "happy",
+      "url": "https://mozilla.org",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-017",
+      "family": "happy",
+      "url": "http://mozilla.org/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-018",
+      "family": "happy",
+      "url": "https://mozilla.org/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-019",
+      "family": "happy",
+      "url": "http://cloudflare.com",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-020",
+      "family": "happy",
+      "url": "http://cloudflare.com/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-021",
+      "family": "happy",
+      "url": "https://cloudflare.com/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-022",
+      "family": "happy",
+      "url": "https://mit.edu",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-023",
+      "family": "happy",
+      "url": "https://mit.edu/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-024",
+      "family": "happy",
+      "url": "http://mit.edu/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-025",
+      "family": "happy",
+      "url": "https://w3.org",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-026",
+      "family": "happy",
+      "url": "http://w3.org/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-027",
+      "family": "happy",
+      "url": "http://w3.org/docs/api/v1",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-028",
+      "family": "happy",
+      "url": "http://iana.org",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-029",
+      "family": "happy",
+      "url": "http://iana.org/about",
+      "description": "Standard realistic web URL"
+    },
+    {
+      "id": "HAPPY-030",
+      "family": "happy",
+      "url": "http://iana.org/docs/api/v1",
+      "description": "Standard realistic web URL"
+    }
+  ]
+}
