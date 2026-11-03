@@ -1,98 +1,92 @@
 import base64
-import os
+import json
+from typing import Any, Dict, Optional
 import httpx
 
+VT_BASE_URL = "https://www.virustotal.com/api/v3"
+DEFAULT_TIMEOUT_SECONDS = 5.0
 
-class VTClientError(Exception):
-    """Base exception for VirusTotal client operations."""
+MALICIOUS_DANGER_THRESHOLD = 2
+SUSPICIOUS_DANGER_THRESHOLD = 3
 
+
+class UpstreamServiceError(Exception):
+    """Raised when upstream API fails, returns malformed data, or times out."""
     pass
 
 
-class UpstreamRateLimitError(VTClientError):
-    """Raised when VirusTotal responds with HTTP 429."""
-
+class UpstreamRateLimitError(UpstreamServiceError):
+    """Raised when upstream API returns HTTP 429."""
     pass
-
-
-class UpstreamServiceError(VTClientError):
-    """Raised on upstream 5xx, timeouts, or network disconnects."""
-
-    pass
-
-
-def get_vt_api_key() -> str:
-    """Retrieve and validate the VirusTotal API key from environment."""
-    api_key = os.getenv("VIRUSTOTAL_API_KEY", "").strip()
-    if not api_key:
-        raise ValueError(
-            "VIRUSTOTAL_API_KEY environment variable is missing or empty."
-        )
-    return api_key
 
 
 def encode_vt_url_id(url: str) -> str:
-    """
-    Encode target URL into unpadded base64url string per VirusTotal v3 spec.
-    """
-    if not url:
-        raise ValueError("URL cannot be empty.")
-    encoded = base64.urlsafe_b64encode(url.encode("utf-8")).decode("utf-8")
-    return encoded.rstrip("=")
+    """Encode URL to VirusTotal v3 unpadded base64url identifier."""
+    return base64.urlsafe_b64encode(url.encode("utf-8")).decode("ascii").rstrip("=")
+
+
+def evaluate_verdict(stats: Optional[Dict[str, int]]) -> str:
+    """Evaluate threat verdict based on analysis stats."""
+    if not stats:
+        return "Safe"
+
+    malicious = stats.get("malicious", 0)
+    suspicious = stats.get("suspicious", 0)
+
+    if malicious >= MALICIOUS_DANGER_THRESHOLD or suspicious >= SUSPICIOUS_DANGER_THRESHOLD:
+        return "Unsafe"
+    if malicious > 0 or suspicious > 0:
+        return "Ambiguous"
+
+    return "Safe"
 
 
 async def fetch_url_report(
     url: str,
     api_key: str,
-    client: httpx.AsyncClient | None = None,
-) -> dict | None:
-    """
-    Query VirusTotal v3 for existing URL analysis stats.
-    Returns analysis dictionary on 200, None on 404 (unseen URL).
-    """
-    vt_id = encode_vt_url_id(url)
-    endpoint = f"https://www.virustotal.com/api/v3/urls/{vt_id}"
-    headers = {"x-apikey": api_key, "Accept": "application/json"}
+    client: Optional[httpx.AsyncClient] = None
+) -> Dict[str, Any]:
+    """Fetch URL security analysis from VirusTotal v3."""
+    url_id = encode_vt_url_id(url)
+    headers = {
+        "x-apikey": api_key,
+        "Accept": "application/json",
+    }
+    endpoint = f"{VT_BASE_URL}/urls/{url_id}"
 
-    should_close_client = False
+    should_close = False
     if client is None:
-        client = httpx.AsyncClient(timeout=5.0)
-        should_close_client = True
+        client = httpx.AsyncClient(timeout=DEFAULT_TIMEOUT_SECONDS)
+        should_close = True
 
     try:
         response = await client.get(endpoint, headers=headers)
-
-        if response.status_code == 200:
-            payload = response.json()
-            return (
-                payload.get("data", {})
-                .get("attributes", {})
-                .get("last_analysis_stats", {})
-            )
-
-        if response.status_code == 404:
-            return None
-
         if response.status_code == 429:
-            raise UpstreamRateLimitError("VirusTotal API quota exceeded.")
+            raise UpstreamRateLimitError("VirusTotal API quota exceeded (HTTP 429)")
+        if response.status_code != 200:
+            raise UpstreamServiceError(f"VirusTotal API returned HTTP {response.status_code}")
 
-        if response.status_code >= 500:
-            raise UpstreamServiceError(
-                f"VirusTotal server error (HTTP {response.status_code})."
-            )
+        try:
+            data = response.json()
+        except (json.JSONDecodeError, ValueError) as exc:
+            raise UpstreamServiceError("Malformed upstream response: expected valid JSON") from exc
 
-        raise UpstreamServiceError(
-            f"Unexpected upstream response (HTTP {response.status_code})."
-        )
+        attributes = data.get("data", {}).get("attributes", {})
+        stats = attributes.get("last_analysis_stats", {})
 
+        return {
+            "url": url,
+            "verdict": evaluate_verdict(stats),
+            "positives": stats.get("malicious", 0) + stats.get("suspicious", 0),
+            "total_engines": sum(stats.values()) if stats else 0,
+            "scan_date": attributes.get("last_analysis_date"),
+            "cached": True,
+            "raw_details": attributes
+        }
     except httpx.TimeoutException as exc:
-        raise UpstreamServiceError(
-            "Upstream connection to VirusTotal timed out."
-        ) from exc
+        raise UpstreamServiceError("Upstream service timed out") from exc
     except httpx.RequestError as exc:
-        raise UpstreamServiceError(
-            "Failed to connect to VirusTotal upstream."
-        ) from exc
+        raise UpstreamServiceError(f"Network error contacting upstream: {exc}") from exc
     finally:
-        if should_close_client:
+        if should_close:
             await client.aclose()

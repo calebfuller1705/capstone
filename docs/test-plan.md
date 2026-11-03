@@ -21,6 +21,7 @@ This plan covers verification and validation for functional requirements FR-1 th
 | Unit | URL normalization, unpadded base64url encoding, schema validation, latency calculation | `pytest tests/unit/` | 15–25 |
 | Integration | VirusTotal v3 client seams, 404 cache misses, 429 rate limit responses, 5.0s socket timeouts | `pytest tests/integration/` | 5–10 |
 | Acceptance | End-to-end FastAPI endpoint contracts (`POST /scan`, `GET /health`), zero-persistence assertions | `pytest tests/acceptance/` | 6–8 |
+| Concurrency & Debounce | Rapid double-clicks, submit button disabling, keyboard focus indicators, client disconnects during scans | Manual exploratory audit & DOM inspection | 4–6 |
 
 ## 4. Environment
 
@@ -30,7 +31,7 @@ This plan covers verification and validation for functional requirements FR-1 th
 | Operating system(s) | Windows 11 / Linux (ubuntu-latest GitHub Actions runner) |
 | Database / storage | None (stateless in-memory execution per NFR-2)[cite: 1] |
 | Third-party services | VirusTotal v3 API (stubbed via `unittest.mock` / `respx` in CI)[cite: 2] |
-| Test data set | `docs/demo-seed.json` (committed deterministic test cases) |
+| Test data set | Generated fixtures (`tests/fixtures/test_data_*.json`) via `python tools/generate_test_data.py --set all` (seed `20261031`) |
 | Where it runs | Local PowerShell and GitHub Actions CI (`.github/workflows/ci.yml`) |
 
 ## 5. Entry criteria — we may begin testing when
@@ -48,6 +49,8 @@ This plan covers verification and validation for functional requirements FR-1 th
 - [ ] Every defect fixed this iteration has a named regression test that fails on the old code[cite: 2].
 - [ ] The full suite runs from one documented command (`pytest` / `script/test`) and passes in CI[cite: 2].
 - [ ] Response latency for upstream socket hangs aborts in <= 5.0 seconds, and mocked endpoint response time is <= 500 ms p95 (NFR-1)[cite: 1, 2].
+- [ ] 5 of 5 golden set historical VirusTotal payloads parse cleanly with property invariants satisfied (`0 <= positives <= total_engines`).
+
 
 ## 7. Risks to the testing itself
 
