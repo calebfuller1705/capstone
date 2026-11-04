@@ -1,5 +1,6 @@
 import base64
 import json
+import os
 from typing import Any, Dict, Optional
 import httpx
 
@@ -20,8 +21,18 @@ class UpstreamRateLimitError(UpstreamServiceError):
     pass
 
 
+def get_vt_api_key() -> str:
+    """Retrieve and validate the VirusTotal API key from environment."""
+    key = os.environ.get("VIRUSTOTAL_API_KEY", "").strip()
+    if not key:
+        raise ValueError("VIRUSTOTAL_API_KEY environment variable is not set or empty")
+    return key
+
+
 def encode_vt_url_id(url: str) -> str:
     """Encode URL to VirusTotal v3 unpadded base64url identifier."""
+    if not url:
+        raise ValueError("URL cannot be empty")
     return base64.urlsafe_b64encode(url.encode("utf-8")).decode("ascii").rstrip("=")
 
 
@@ -47,9 +58,12 @@ async def fetch_url_report(
     client: Optional[httpx.AsyncClient] = None
 ) -> Dict[str, Any]:
     """Fetch URL security analysis from VirusTotal v3."""
+    if not api_key or not str(api_key).strip():
+        raise ValueError("VirusTotal API key is required and cannot be empty")
+
     url_id = encode_vt_url_id(url)
     headers = {
-        "x-apikey": api_key,
+        "x-apikey": api_key.strip(),
         "Accept": "application/json",
     }
     endpoint = f"{VT_BASE_URL}/urls/{url_id}"
@@ -63,6 +77,16 @@ async def fetch_url_report(
         response = await client.get(endpoint, headers=headers)
         if response.status_code == 429:
             raise UpstreamRateLimitError("VirusTotal API quota exceeded (HTTP 429)")
+        if response.status_code == 404:
+            return {
+                "url": url,
+                "verdict": "Safe",
+                "positives": 0,
+                "total_engines": 0,
+                "scan_date": None,
+                "cached": False,
+                "raw_details": {}
+            }
         if response.status_code != 200:
             raise UpstreamServiceError(f"VirusTotal API returned HTTP {response.status_code}")
 
