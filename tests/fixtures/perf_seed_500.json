@@ -1,0 +1,2502 @@
+[
+  {
+    "id": "PERF-001",
+    "url": "https://dropbox.com/dashboard/analytics?client_id=corp_0001&session=438659&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-002",
+    "url": "https://service-now.com/secure/download/attachment?client_id=corp_0002&session=720061&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-003",
+    "url": "https://sharepoint.com/dashboard/analytics?client_id=corp_0003&session=506150&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-004",
+    "url": "https://sharepoint.com/settings/profile/security?client_id=corp_0004&session=714522&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-005",
+    "url": "https://zendesk.com/webhook/receiver/event?client_id=corp_0005&session=826747&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-006",
+    "url": "https://slack.com/secure/download/attachment?client_id=corp_0006&session=493880&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-007",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0007&session=570043&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-008",
+    "url": "https://zendesk.com/api/v1/tokens?client_id=corp_0008&session=673868&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-009",
+    "url": "https://box.com/dashboard/analytics?client_id=corp_0009&session=976000&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-010",
+    "url": "https://zendesk.com/workspace/document/edit?client_id=corp_0010&session=915627&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-011",
+    "url": "https://salesforce.com/reports/quarterly/export?client_id=corp_0011&session=323078&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-012",
+    "url": "https://slack.com/assets/cdn/vendor/bundle?client_id=corp_0012&session=677156&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-013",
+    "url": "https://okta.com/secure/download/attachment?client_id=corp_0013&session=961438&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-014",
+    "url": "https://okta.com/secure/download/attachment?client_id=corp_0014&session=504338&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-015",
+    "url": "http://okta.com/secure/download/attachment?client_id=corp_0015&session=428238&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-016",
+    "url": "https://atlassian.net/oauth/callback?client_id=corp_0016&session=884253&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-017",
+    "url": "https://github.com/api/v1/tokens?client_id=corp_0017&session=733460&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-018",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0018&session=658476&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-019",
+    "url": "https://service-now.com/secure/download/attachment?client_id=corp_0019&session=642427&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-020",
+    "url": "https://sharepoint.com/settings/profile/security?client_id=corp_0020&session=468551&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-021",
+    "url": "https://box.com/oauth/callback?client_id=corp_0021&session=558655&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-022",
+    "url": "https://github.com/dashboard/analytics?client_id=corp_0022&session=967863&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-023",
+    "url": "https://login.microsoftonline.com/settings/profile/security?client_id=corp_0023&session=927510&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-024",
+    "url": "https://hubspot.com/auth/v2/verify?client_id=corp_0024&session=652596&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-025",
+    "url": "https://dropbox.com/secure/download/attachment?client_id=corp_0025&session=659888&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-026",
+    "url": "https://github.com/settings/profile/security?client_id=corp_0026&session=425011&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-027",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0027&session=768405&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-028",
+    "url": "https://sharepoint.com/workspace/document/edit?client_id=corp_0028&session=632418&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-029",
+    "url": "https://slack.com/assets/cdn/vendor/bundle?client_id=corp_0029&session=555119&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-030",
+    "url": "http://atlassian.net/settings/profile/security?client_id=corp_0030&session=105134&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-031",
+    "url": "https://zendesk.com/reports/quarterly/export?client_id=corp_0031&session=742642&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-032",
+    "url": "https://stripe.com/assets/cdn/vendor/bundle?client_id=corp_0032&session=166548&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-033",
+    "url": "https://atlassian.net/workspace/document/edit?client_id=corp_0033&session=980449&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-034",
+    "url": "https://dropbox.com/assets/cdn/vendor/bundle?client_id=corp_0034&session=426461&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-035",
+    "url": "https://login.microsoftonline.com/oauth/callback?client_id=corp_0035&session=352270&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-036",
+    "url": "https://hubspot.com/secure/download/attachment?client_id=corp_0036&session=333582&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-037",
+    "url": "https://atlassian.net/workspace/document/edit?client_id=corp_0037&session=406708&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-038",
+    "url": "https://login.microsoftonline.com/dashboard/analytics?client_id=corp_0038&session=761664&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-039",
+    "url": "https://zoom.us/workspace/document/edit?client_id=corp_0039&session=823368&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-040",
+    "url": "https://aws.amazon.com/webhook/receiver/event?client_id=corp_0040&session=654772&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-041",
+    "url": "https://slack.com/webhook/receiver/event?client_id=corp_0041&session=666293&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-042",
+    "url": "https://zoom.us/workspace/document/edit?client_id=corp_0042&session=689835&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-043",
+    "url": "https://login.microsoftonline.com/settings/profile/security?client_id=corp_0043&session=747182&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-044",
+    "url": "https://aws.amazon.com/reports/quarterly/export?client_id=corp_0044&session=904660&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-045",
+    "url": "http://slack.com/oauth/callback?client_id=corp_0045&session=869515&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-046",
+    "url": "https://github.com/webhook/receiver/event?client_id=corp_0046&session=426845&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-047",
+    "url": "https://aws.amazon.com/dashboard/analytics?client_id=corp_0047&session=417460&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-048",
+    "url": "https://login.microsoftonline.com/settings/profile/security?client_id=corp_0048&session=313662&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-049",
+    "url": "https://dropbox.com/assets/cdn/vendor/bundle?client_id=corp_0049&session=859141&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-050",
+    "url": "https://dropbox.com/secure/download/attachment?client_id=corp_0050&session=683559&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-051",
+    "url": "https://okta.com/auth/v2/verify?client_id=corp_0051&session=764274&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-052",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0052&session=833510&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-053",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0053&session=744905&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-054",
+    "url": "https://salesforce.com/auth/v2/verify?client_id=corp_0054&session=609967&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-055",
+    "url": "https://atlassian.net/workspace/document/edit?client_id=corp_0055&session=513735&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-056",
+    "url": "https://stripe.com/reports/quarterly/export?client_id=corp_0056&session=818623&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-057",
+    "url": "https://salesforce.com/api/v1/tokens?client_id=corp_0057&session=110794&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-058",
+    "url": "https://atlassian.net/reports/quarterly/export?client_id=corp_0058&session=105381&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-059",
+    "url": "https://sharepoint.com/reports/quarterly/export?client_id=corp_0059&session=675156&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-060",
+    "url": "http://box.com/secure/download/attachment?client_id=corp_0060&session=376044&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-061",
+    "url": "https://zendesk.com/secure/download/attachment?client_id=corp_0061&session=253285&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-062",
+    "url": "https://dropbox.com/workspace/document/edit?client_id=corp_0062&session=570327&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-063",
+    "url": "https://zoom.us/reports/quarterly/export?client_id=corp_0063&session=280468&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-064",
+    "url": "https://zendesk.com/reports/quarterly/export?client_id=corp_0064&session=974683&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-065",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0065&session=169658&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-066",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0066&session=406962&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-067",
+    "url": "https://github.com/assets/cdn/vendor/bundle?client_id=corp_0067&session=304091&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-068",
+    "url": "https://hubspot.com/reports/quarterly/export?client_id=corp_0068&session=824309&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-069",
+    "url": "https://zendesk.com/secure/download/attachment?client_id=corp_0069&session=466327&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-070",
+    "url": "https://dropbox.com/dashboard/analytics?client_id=corp_0070&session=696630&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-071",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0071&session=107083&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-072",
+    "url": "https://service-now.com/assets/cdn/vendor/bundle?client_id=corp_0072&session=437433&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-073",
+    "url": "https://hubspot.com/auth/v2/verify?client_id=corp_0073&session=299413&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-074",
+    "url": "https://github.com/workspace/document/edit?client_id=corp_0074&session=302693&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-075",
+    "url": "http://service-now.com/reports/quarterly/export?client_id=corp_0075&session=574197&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-076",
+    "url": "https://atlassian.net/webhook/receiver/event?client_id=corp_0076&session=779659&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-077",
+    "url": "https://github.com/workspace/document/edit?client_id=corp_0077&session=603205&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-078",
+    "url": "https://atlassian.net/assets/cdn/vendor/bundle?client_id=corp_0078&session=905271&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-079",
+    "url": "https://box.com/oauth/callback?client_id=corp_0079&session=793561&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-080",
+    "url": "https://slack.com/settings/profile/security?client_id=corp_0080&session=783664&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-081",
+    "url": "https://zendesk.com/assets/cdn/vendor/bundle?client_id=corp_0081&session=351505&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-082",
+    "url": "https://zoom.us/dashboard/analytics?client_id=corp_0082&session=681457&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-083",
+    "url": "https://aws.amazon.com/workspace/document/edit?client_id=corp_0083&session=311136&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-084",
+    "url": "https://okta.com/api/v1/tokens?client_id=corp_0084&session=711807&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-085",
+    "url": "https://dropbox.com/dashboard/analytics?client_id=corp_0085&session=788350&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-086",
+    "url": "https://sharepoint.com/secure/download/attachment?client_id=corp_0086&session=107989&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-087",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0087&session=292655&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-088",
+    "url": "https://salesforce.com/assets/cdn/vendor/bundle?client_id=corp_0088&session=769182&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-089",
+    "url": "https://hubspot.com/reports/quarterly/export?client_id=corp_0089&session=505777&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-090",
+    "url": "http://hubspot.com/auth/v2/verify?client_id=corp_0090&session=462546&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-091",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0091&session=629370&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-092",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0092&session=257558&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-093",
+    "url": "https://hubspot.com/assets/cdn/vendor/bundle?client_id=corp_0093&session=702825&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-094",
+    "url": "https://salesforce.com/secure/download/attachment?client_id=corp_0094&session=794906&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-095",
+    "url": "https://hubspot.com/auth/v2/verify?client_id=corp_0095&session=159800&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-096",
+    "url": "https://atlassian.net/dashboard/analytics?client_id=corp_0096&session=286049&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-097",
+    "url": "https://box.com/auth/v2/verify?client_id=corp_0097&session=746316&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-098",
+    "url": "https://service-now.com/oauth/callback?client_id=corp_0098&session=893162&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-099",
+    "url": "https://sharepoint.com/workspace/document/edit?client_id=corp_0099&session=336552&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-100",
+    "url": "https://box.com/dashboard/analytics?client_id=corp_0100&session=405770&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-101",
+    "url": "https://login.microsoftonline.com/secure/download/attachment?client_id=corp_0101&session=977503&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-102",
+    "url": "https://sharepoint.com/secure/download/attachment?client_id=corp_0102&session=424995&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-103",
+    "url": "https://service-now.com/dashboard/analytics?client_id=corp_0103&session=723180&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-104",
+    "url": "https://stripe.com/assets/cdn/vendor/bundle?client_id=corp_0104&session=809935&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-105",
+    "url": "http://box.com/oauth/callback?client_id=corp_0105&session=891293&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-106",
+    "url": "https://box.com/auth/v2/verify?client_id=corp_0106&session=373640&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-107",
+    "url": "https://github.com/dashboard/analytics?client_id=corp_0107&session=104834&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-108",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0108&session=311475&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-109",
+    "url": "https://sharepoint.com/workspace/document/edit?client_id=corp_0109&session=277994&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-110",
+    "url": "https://slack.com/oauth/callback?client_id=corp_0110&session=553833&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-111",
+    "url": "https://sharepoint.com/settings/profile/security?client_id=corp_0111&session=355626&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-112",
+    "url": "https://sharepoint.com/secure/download/attachment?client_id=corp_0112&session=947000&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-113",
+    "url": "https://salesforce.com/workspace/document/edit?client_id=corp_0113&session=929549&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-114",
+    "url": "https://dropbox.com/api/v1/tokens?client_id=corp_0114&session=134956&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-115",
+    "url": "https://dropbox.com/dashboard/analytics?client_id=corp_0115&session=464913&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-116",
+    "url": "https://box.com/api/v1/tokens?client_id=corp_0116&session=394112&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-117",
+    "url": "https://box.com/settings/profile/security?client_id=corp_0117&session=856700&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-118",
+    "url": "https://github.com/webhook/receiver/event?client_id=corp_0118&session=372276&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-119",
+    "url": "https://hubspot.com/dashboard/analytics?client_id=corp_0119&session=332224&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-120",
+    "url": "http://dropbox.com/workspace/document/edit?client_id=corp_0120&session=194102&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-121",
+    "url": "https://slack.com/secure/download/attachment?client_id=corp_0121&session=544421&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-122",
+    "url": "https://github.com/reports/quarterly/export?client_id=corp_0122&session=859259&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-123",
+    "url": "https://hubspot.com/settings/profile/security?client_id=corp_0123&session=961703&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-124",
+    "url": "https://service-now.com/webhook/receiver/event?client_id=corp_0124&session=395137&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-125",
+    "url": "https://zoom.us/api/v1/tokens?client_id=corp_0125&session=631148&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-126",
+    "url": "https://atlassian.net/settings/profile/security?client_id=corp_0126&session=823272&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-127",
+    "url": "https://aws.amazon.com/api/v1/tokens?client_id=corp_0127&session=246713&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-128",
+    "url": "https://salesforce.com/settings/profile/security?client_id=corp_0128&session=988303&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-129",
+    "url": "https://aws.amazon.com/api/v1/tokens?client_id=corp_0129&session=695886&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-130",
+    "url": "https://sharepoint.com/webhook/receiver/event?client_id=corp_0130&session=498459&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-131",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0131&session=790457&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-132",
+    "url": "https://salesforce.com/webhook/receiver/event?client_id=corp_0132&session=518759&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-133",
+    "url": "https://zendesk.com/reports/quarterly/export?client_id=corp_0133&session=920637&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-134",
+    "url": "https://login.microsoftonline.com/reports/quarterly/export?client_id=corp_0134&session=134824&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-135",
+    "url": "http://atlassian.net/auth/v2/verify?client_id=corp_0135&session=434926&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-136",
+    "url": "https://github.com/assets/cdn/vendor/bundle?client_id=corp_0136&session=105928&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-137",
+    "url": "https://stripe.com/secure/download/attachment?client_id=corp_0137&session=123187&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-138",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0138&session=239174&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-139",
+    "url": "https://box.com/settings/profile/security?client_id=corp_0139&session=179513&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-140",
+    "url": "https://zendesk.com/oauth/callback?client_id=corp_0140&session=195308&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-141",
+    "url": "https://hubspot.com/reports/quarterly/export?client_id=corp_0141&session=703611&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-142",
+    "url": "https://aws.amazon.com/secure/download/attachment?client_id=corp_0142&session=496927&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-143",
+    "url": "https://github.com/workspace/document/edit?client_id=corp_0143&session=109649&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-144",
+    "url": "https://dropbox.com/secure/download/attachment?client_id=corp_0144&session=249925&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-145",
+    "url": "https://github.com/assets/cdn/vendor/bundle?client_id=corp_0145&session=805981&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-146",
+    "url": "https://service-now.com/webhook/receiver/event?client_id=corp_0146&session=710887&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-147",
+    "url": "https://stripe.com/assets/cdn/vendor/bundle?client_id=corp_0147&session=700657&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-148",
+    "url": "https://github.com/reports/quarterly/export?client_id=corp_0148&session=202669&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-149",
+    "url": "https://aws.amazon.com/api/v1/tokens?client_id=corp_0149&session=851005&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-150",
+    "url": "http://salesforce.com/dashboard/analytics?client_id=corp_0150&session=148986&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-151",
+    "url": "https://box.com/dashboard/analytics?client_id=corp_0151&session=166846&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-152",
+    "url": "https://hubspot.com/reports/quarterly/export?client_id=corp_0152&session=382259&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-153",
+    "url": "https://dropbox.com/webhook/receiver/event?client_id=corp_0153&session=489848&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-154",
+    "url": "https://zendesk.com/assets/cdn/vendor/bundle?client_id=corp_0154&session=200560&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-155",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0155&session=625563&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-156",
+    "url": "https://salesforce.com/reports/quarterly/export?client_id=corp_0156&session=864495&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-157",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0157&session=508558&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-158",
+    "url": "https://service-now.com/assets/cdn/vendor/bundle?client_id=corp_0158&session=384256&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-159",
+    "url": "https://service-now.com/dashboard/analytics?client_id=corp_0159&session=717056&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-160",
+    "url": "https://salesforce.com/workspace/document/edit?client_id=corp_0160&session=924719&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-161",
+    "url": "https://slack.com/secure/download/attachment?client_id=corp_0161&session=743335&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-162",
+    "url": "https://slack.com/workspace/document/edit?client_id=corp_0162&session=697195&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-163",
+    "url": "https://zoom.us/dashboard/analytics?client_id=corp_0163&session=722144&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-164",
+    "url": "https://slack.com/workspace/document/edit?client_id=corp_0164&session=177265&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-165",
+    "url": "http://zendesk.com/auth/v2/verify?client_id=corp_0165&session=909852&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-166",
+    "url": "https://salesforce.com/auth/v2/verify?client_id=corp_0166&session=438001&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-167",
+    "url": "https://sharepoint.com/assets/cdn/vendor/bundle?client_id=corp_0167&session=601107&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-168",
+    "url": "https://atlassian.net/dashboard/analytics?client_id=corp_0168&session=934388&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-169",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0169&session=544028&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-170",
+    "url": "https://service-now.com/dashboard/analytics?client_id=corp_0170&session=687463&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-171",
+    "url": "https://okta.com/dashboard/analytics?client_id=corp_0171&session=532381&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-172",
+    "url": "https://zoom.us/oauth/callback?client_id=corp_0172&session=534800&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-173",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0173&session=520160&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-174",
+    "url": "https://github.com/webhook/receiver/event?client_id=corp_0174&session=590930&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-175",
+    "url": "https://box.com/workspace/document/edit?client_id=corp_0175&session=790253&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-176",
+    "url": "https://aws.amazon.com/assets/cdn/vendor/bundle?client_id=corp_0176&session=235137&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-177",
+    "url": "https://dropbox.com/oauth/callback?client_id=corp_0177&session=139370&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-178",
+    "url": "https://salesforce.com/assets/cdn/vendor/bundle?client_id=corp_0178&session=596364&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-179",
+    "url": "https://aws.amazon.com/oauth/callback?client_id=corp_0179&session=204716&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-180",
+    "url": "http://okta.com/webhook/receiver/event?client_id=corp_0180&session=808872&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-181",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0181&session=515150&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-182",
+    "url": "https://okta.com/secure/download/attachment?client_id=corp_0182&session=334953&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-183",
+    "url": "https://zoom.us/webhook/receiver/event?client_id=corp_0183&session=645803&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-184",
+    "url": "https://hubspot.com/workspace/document/edit?client_id=corp_0184&session=796324&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-185",
+    "url": "https://github.com/webhook/receiver/event?client_id=corp_0185&session=643203&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-186",
+    "url": "https://aws.amazon.com/workspace/document/edit?client_id=corp_0186&session=305001&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-187",
+    "url": "https://okta.com/auth/v2/verify?client_id=corp_0187&session=322918&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-188",
+    "url": "https://zoom.us/settings/profile/security?client_id=corp_0188&session=610091&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-189",
+    "url": "https://dropbox.com/auth/v2/verify?client_id=corp_0189&session=754331&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-190",
+    "url": "https://zendesk.com/webhook/receiver/event?client_id=corp_0190&session=199824&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-191",
+    "url": "https://salesforce.com/oauth/callback?client_id=corp_0191&session=908212&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-192",
+    "url": "https://salesforce.com/auth/v2/verify?client_id=corp_0192&session=906754&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-193",
+    "url": "https://aws.amazon.com/reports/quarterly/export?client_id=corp_0193&session=568605&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-194",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0194&session=479167&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-195",
+    "url": "http://aws.amazon.com/workspace/document/edit?client_id=corp_0195&session=214112&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-196",
+    "url": "https://dropbox.com/settings/profile/security?client_id=corp_0196&session=952730&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-197",
+    "url": "https://zendesk.com/reports/quarterly/export?client_id=corp_0197&session=240954&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-198",
+    "url": "https://service-now.com/settings/profile/security?client_id=corp_0198&session=501507&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-199",
+    "url": "https://okta.com/reports/quarterly/export?client_id=corp_0199&session=163635&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-200",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0200&session=553344&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-201",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0201&session=833066&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-202",
+    "url": "https://sharepoint.com/dashboard/analytics?client_id=corp_0202&session=535199&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-203",
+    "url": "https://atlassian.net/settings/profile/security?client_id=corp_0203&session=416940&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-204",
+    "url": "https://zendesk.com/oauth/callback?client_id=corp_0204&session=855286&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-205",
+    "url": "https://service-now.com/settings/profile/security?client_id=corp_0205&session=188753&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-206",
+    "url": "https://box.com/api/v1/tokens?client_id=corp_0206&session=252671&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-207",
+    "url": "https://salesforce.com/reports/quarterly/export?client_id=corp_0207&session=475912&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-208",
+    "url": "https://atlassian.net/reports/quarterly/export?client_id=corp_0208&session=457835&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-209",
+    "url": "https://github.com/reports/quarterly/export?client_id=corp_0209&session=174574&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-210",
+    "url": "http://slack.com/dashboard/analytics?client_id=corp_0210&session=680811&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-211",
+    "url": "https://sharepoint.com/secure/download/attachment?client_id=corp_0211&session=451715&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-212",
+    "url": "https://okta.com/auth/v2/verify?client_id=corp_0212&session=993912&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-213",
+    "url": "https://box.com/assets/cdn/vendor/bundle?client_id=corp_0213&session=763834&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-214",
+    "url": "https://aws.amazon.com/dashboard/analytics?client_id=corp_0214&session=206649&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-215",
+    "url": "https://aws.amazon.com/workspace/document/edit?client_id=corp_0215&session=192214&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-216",
+    "url": "https://sharepoint.com/oauth/callback?client_id=corp_0216&session=695183&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-217",
+    "url": "https://okta.com/workspace/document/edit?client_id=corp_0217&session=601645&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-218",
+    "url": "https://aws.amazon.com/dashboard/analytics?client_id=corp_0218&session=324199&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-219",
+    "url": "https://salesforce.com/secure/download/attachment?client_id=corp_0219&session=645504&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-220",
+    "url": "https://zoom.us/settings/profile/security?client_id=corp_0220&session=325499&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-221",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0221&session=220607&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-222",
+    "url": "https://aws.amazon.com/api/v1/tokens?client_id=corp_0222&session=157207&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-223",
+    "url": "https://stripe.com/oauth/callback?client_id=corp_0223&session=256417&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-224",
+    "url": "https://salesforce.com/dashboard/analytics?client_id=corp_0224&session=660992&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-225",
+    "url": "http://stripe.com/api/v1/tokens?client_id=corp_0225&session=192257&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-226",
+    "url": "https://aws.amazon.com/auth/v2/verify?client_id=corp_0226&session=619278&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-227",
+    "url": "https://zendesk.com/workspace/document/edit?client_id=corp_0227&session=774674&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-228",
+    "url": "https://stripe.com/assets/cdn/vendor/bundle?client_id=corp_0228&session=607939&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-229",
+    "url": "https://hubspot.com/auth/v2/verify?client_id=corp_0229&session=533014&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-230",
+    "url": "https://zoom.us/settings/profile/security?client_id=corp_0230&session=533490&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-231",
+    "url": "https://salesforce.com/secure/download/attachment?client_id=corp_0231&session=276141&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-232",
+    "url": "https://stripe.com/webhook/receiver/event?client_id=corp_0232&session=708676&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-233",
+    "url": "https://atlassian.net/dashboard/analytics?client_id=corp_0233&session=583802&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-234",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0234&session=816091&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-235",
+    "url": "https://sharepoint.com/secure/download/attachment?client_id=corp_0235&session=937974&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-236",
+    "url": "https://okta.com/assets/cdn/vendor/bundle?client_id=corp_0236&session=696460&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-237",
+    "url": "https://box.com/auth/v2/verify?client_id=corp_0237&session=881900&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-238",
+    "url": "https://slack.com/auth/v2/verify?client_id=corp_0238&session=366470&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-239",
+    "url": "https://dropbox.com/reports/quarterly/export?client_id=corp_0239&session=909159&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-240",
+    "url": "http://hubspot.com/api/v1/tokens?client_id=corp_0240&session=188508&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-241",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0241&session=759613&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-242",
+    "url": "https://stripe.com/dashboard/analytics?client_id=corp_0242&session=626949&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-243",
+    "url": "https://slack.com/assets/cdn/vendor/bundle?client_id=corp_0243&session=718661&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-244",
+    "url": "https://zendesk.com/secure/download/attachment?client_id=corp_0244&session=675467&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-245",
+    "url": "https://atlassian.net/api/v1/tokens?client_id=corp_0245&session=702758&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-246",
+    "url": "https://sharepoint.com/settings/profile/security?client_id=corp_0246&session=397703&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-247",
+    "url": "https://zoom.us/auth/v2/verify?client_id=corp_0247&session=511848&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-248",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0248&session=430903&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-249",
+    "url": "https://login.microsoftonline.com/assets/cdn/vendor/bundle?client_id=corp_0249&session=824717&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-250",
+    "url": "https://service-now.com/settings/profile/security?client_id=corp_0250&session=805962&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-251",
+    "url": "https://login.microsoftonline.com/assets/cdn/vendor/bundle?client_id=corp_0251&session=927068&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-252",
+    "url": "https://service-now.com/api/v1/tokens?client_id=corp_0252&session=987229&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-253",
+    "url": "https://atlassian.net/secure/download/attachment?client_id=corp_0253&session=186928&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-254",
+    "url": "https://zoom.us/reports/quarterly/export?client_id=corp_0254&session=999905&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-255",
+    "url": "http://slack.com/assets/cdn/vendor/bundle?client_id=corp_0255&session=462889&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-256",
+    "url": "https://box.com/oauth/callback?client_id=corp_0256&session=521205&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-257",
+    "url": "https://sharepoint.com/dashboard/analytics?client_id=corp_0257&session=518205&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-258",
+    "url": "https://stripe.com/oauth/callback?client_id=corp_0258&session=475585&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-259",
+    "url": "https://github.com/reports/quarterly/export?client_id=corp_0259&session=887089&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-260",
+    "url": "https://github.com/api/v1/tokens?client_id=corp_0260&session=997188&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-261",
+    "url": "https://hubspot.com/api/v1/tokens?client_id=corp_0261&session=280067&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-262",
+    "url": "https://service-now.com/api/v1/tokens?client_id=corp_0262&session=989696&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-263",
+    "url": "https://box.com/api/v1/tokens?client_id=corp_0263&session=587721&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-264",
+    "url": "https://aws.amazon.com/webhook/receiver/event?client_id=corp_0264&session=617884&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-265",
+    "url": "https://salesforce.com/oauth/callback?client_id=corp_0265&session=508219&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-266",
+    "url": "https://github.com/reports/quarterly/export?client_id=corp_0266&session=823376&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-267",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0267&session=736383&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-268",
+    "url": "https://slack.com/workspace/document/edit?client_id=corp_0268&session=689015&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-269",
+    "url": "https://login.microsoftonline.com/settings/profile/security?client_id=corp_0269&session=421550&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-270",
+    "url": "http://aws.amazon.com/workspace/document/edit?client_id=corp_0270&session=198735&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-271",
+    "url": "https://aws.amazon.com/workspace/document/edit?client_id=corp_0271&session=522467&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-272",
+    "url": "https://okta.com/webhook/receiver/event?client_id=corp_0272&session=854356&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-273",
+    "url": "https://okta.com/oauth/callback?client_id=corp_0273&session=438298&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-274",
+    "url": "https://dropbox.com/api/v1/tokens?client_id=corp_0274&session=786885&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-275",
+    "url": "https://dropbox.com/workspace/document/edit?client_id=corp_0275&session=300496&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-276",
+    "url": "https://github.com/api/v1/tokens?client_id=corp_0276&session=848676&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-277",
+    "url": "https://login.microsoftonline.com/secure/download/attachment?client_id=corp_0277&session=665650&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-278",
+    "url": "https://atlassian.net/reports/quarterly/export?client_id=corp_0278&session=479711&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-279",
+    "url": "https://hubspot.com/reports/quarterly/export?client_id=corp_0279&session=402312&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-280",
+    "url": "https://hubspot.com/secure/download/attachment?client_id=corp_0280&session=592919&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-281",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0281&session=618464&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-282",
+    "url": "https://stripe.com/webhook/receiver/event?client_id=corp_0282&session=932269&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-283",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0283&session=597396&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-284",
+    "url": "https://atlassian.net/reports/quarterly/export?client_id=corp_0284&session=974193&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-285",
+    "url": "http://stripe.com/settings/profile/security?client_id=corp_0285&session=425811&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-286",
+    "url": "https://login.microsoftonline.com/reports/quarterly/export?client_id=corp_0286&session=687221&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-287",
+    "url": "https://slack.com/oauth/callback?client_id=corp_0287&session=400431&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-288",
+    "url": "https://login.microsoftonline.com/dashboard/analytics?client_id=corp_0288&session=519913&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-289",
+    "url": "https://service-now.com/api/v1/tokens?client_id=corp_0289&session=930310&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-290",
+    "url": "https://atlassian.net/secure/download/attachment?client_id=corp_0290&session=384440&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-291",
+    "url": "https://box.com/assets/cdn/vendor/bundle?client_id=corp_0291&session=855061&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-292",
+    "url": "https://zendesk.com/api/v1/tokens?client_id=corp_0292&session=566665&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-293",
+    "url": "https://box.com/settings/profile/security?client_id=corp_0293&session=446211&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-294",
+    "url": "https://slack.com/settings/profile/security?client_id=corp_0294&session=882462&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-295",
+    "url": "https://salesforce.com/api/v1/tokens?client_id=corp_0295&session=802287&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-296",
+    "url": "https://sharepoint.com/auth/v2/verify?client_id=corp_0296&session=314341&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-297",
+    "url": "https://sharepoint.com/assets/cdn/vendor/bundle?client_id=corp_0297&session=669652&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-298",
+    "url": "https://atlassian.net/assets/cdn/vendor/bundle?client_id=corp_0298&session=704916&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-299",
+    "url": "https://slack.com/secure/download/attachment?client_id=corp_0299&session=682620&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-300",
+    "url": "http://zoom.us/workspace/document/edit?client_id=corp_0300&session=265773&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-301",
+    "url": "https://okta.com/auth/v2/verify?client_id=corp_0301&session=737003&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-302",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0302&session=765617&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-303",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0303&session=626343&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-304",
+    "url": "https://github.com/secure/download/attachment?client_id=corp_0304&session=209940&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-305",
+    "url": "https://hubspot.com/settings/profile/security?client_id=corp_0305&session=768768&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-306",
+    "url": "https://dropbox.com/auth/v2/verify?client_id=corp_0306&session=299480&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-307",
+    "url": "https://zendesk.com/assets/cdn/vendor/bundle?client_id=corp_0307&session=627929&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-308",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0308&session=593420&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-309",
+    "url": "https://sharepoint.com/reports/quarterly/export?client_id=corp_0309&session=998952&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-310",
+    "url": "https://atlassian.net/webhook/receiver/event?client_id=corp_0310&session=152550&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-311",
+    "url": "https://sharepoint.com/secure/download/attachment?client_id=corp_0311&session=747137&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-312",
+    "url": "https://github.com/oauth/callback?client_id=corp_0312&session=769958&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-313",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0313&session=714360&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-314",
+    "url": "https://salesforce.com/dashboard/analytics?client_id=corp_0314&session=590779&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-315",
+    "url": "http://salesforce.com/api/v1/tokens?client_id=corp_0315&session=654855&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-316",
+    "url": "https://atlassian.net/secure/download/attachment?client_id=corp_0316&session=305191&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-317",
+    "url": "https://dropbox.com/secure/download/attachment?client_id=corp_0317&session=304813&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-318",
+    "url": "https://login.microsoftonline.com/assets/cdn/vendor/bundle?client_id=corp_0318&session=364149&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-319",
+    "url": "https://sharepoint.com/dashboard/analytics?client_id=corp_0319&session=995528&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-320",
+    "url": "https://atlassian.net/dashboard/analytics?client_id=corp_0320&session=833053&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-321",
+    "url": "https://atlassian.net/secure/download/attachment?client_id=corp_0321&session=850417&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-322",
+    "url": "https://salesforce.com/settings/profile/security?client_id=corp_0322&session=585727&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-323",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0323&session=660908&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-324",
+    "url": "https://slack.com/settings/profile/security?client_id=corp_0324&session=264850&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-325",
+    "url": "https://atlassian.net/settings/profile/security?client_id=corp_0325&session=703202&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-326",
+    "url": "https://zendesk.com/dashboard/analytics?client_id=corp_0326&session=172218&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-327",
+    "url": "https://github.com/reports/quarterly/export?client_id=corp_0327&session=107195&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-328",
+    "url": "https://slack.com/settings/profile/security?client_id=corp_0328&session=964409&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-329",
+    "url": "https://login.microsoftonline.com/secure/download/attachment?client_id=corp_0329&session=402819&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-330",
+    "url": "http://sharepoint.com/dashboard/analytics?client_id=corp_0330&session=351547&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-331",
+    "url": "https://okta.com/secure/download/attachment?client_id=corp_0331&session=100102&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-332",
+    "url": "https://stripe.com/settings/profile/security?client_id=corp_0332&session=836090&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-333",
+    "url": "https://salesforce.com/workspace/document/edit?client_id=corp_0333&session=923309&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-334",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0334&session=982317&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-335",
+    "url": "https://dropbox.com/secure/download/attachment?client_id=corp_0335&session=266514&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-336",
+    "url": "https://okta.com/reports/quarterly/export?client_id=corp_0336&session=268555&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-337",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0337&session=712697&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-338",
+    "url": "https://github.com/oauth/callback?client_id=corp_0338&session=399606&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-339",
+    "url": "https://slack.com/workspace/document/edit?client_id=corp_0339&session=544498&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-340",
+    "url": "https://aws.amazon.com/auth/v2/verify?client_id=corp_0340&session=405132&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-341",
+    "url": "https://slack.com/webhook/receiver/event?client_id=corp_0341&session=192143&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-342",
+    "url": "https://zoom.us/reports/quarterly/export?client_id=corp_0342&session=961490&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-343",
+    "url": "https://okta.com/api/v1/tokens?client_id=corp_0343&session=475575&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-344",
+    "url": "https://okta.com/assets/cdn/vendor/bundle?client_id=corp_0344&session=415183&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-345",
+    "url": "http://aws.amazon.com/assets/cdn/vendor/bundle?client_id=corp_0345&session=343798&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-346",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0346&session=406243&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-347",
+    "url": "https://box.com/reports/quarterly/export?client_id=corp_0347&session=564744&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-348",
+    "url": "https://zendesk.com/dashboard/analytics?client_id=corp_0348&session=788990&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-349",
+    "url": "https://zoom.us/api/v1/tokens?client_id=corp_0349&session=580664&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-350",
+    "url": "https://aws.amazon.com/dashboard/analytics?client_id=corp_0350&session=781732&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-351",
+    "url": "https://sharepoint.com/reports/quarterly/export?client_id=corp_0351&session=521134&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-352",
+    "url": "https://github.com/dashboard/analytics?client_id=corp_0352&session=151768&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-353",
+    "url": "https://salesforce.com/oauth/callback?client_id=corp_0353&session=716490&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-354",
+    "url": "https://atlassian.net/oauth/callback?client_id=corp_0354&session=544073&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-355",
+    "url": "https://stripe.com/webhook/receiver/event?client_id=corp_0355&session=641697&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-356",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0356&session=354941&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-357",
+    "url": "https://atlassian.net/api/v1/tokens?client_id=corp_0357&session=302677&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-358",
+    "url": "https://box.com/settings/profile/security?client_id=corp_0358&session=479940&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-359",
+    "url": "https://okta.com/reports/quarterly/export?client_id=corp_0359&session=611404&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-360",
+    "url": "http://aws.amazon.com/reports/quarterly/export?client_id=corp_0360&session=546653&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-361",
+    "url": "https://salesforce.com/workspace/document/edit?client_id=corp_0361&session=629586&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-362",
+    "url": "https://aws.amazon.com/oauth/callback?client_id=corp_0362&session=653637&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-363",
+    "url": "https://sharepoint.com/webhook/receiver/event?client_id=corp_0363&session=903879&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-364",
+    "url": "https://salesforce.com/dashboard/analytics?client_id=corp_0364&session=830452&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-365",
+    "url": "https://sharepoint.com/dashboard/analytics?client_id=corp_0365&session=500088&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-366",
+    "url": "https://atlassian.net/assets/cdn/vendor/bundle?client_id=corp_0366&session=378950&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-367",
+    "url": "https://stripe.com/auth/v2/verify?client_id=corp_0367&session=642436&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-368",
+    "url": "https://dropbox.com/auth/v2/verify?client_id=corp_0368&session=595396&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-369",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0369&session=502697&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-370",
+    "url": "https://box.com/auth/v2/verify?client_id=corp_0370&session=145914&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-371",
+    "url": "https://service-now.com/reports/quarterly/export?client_id=corp_0371&session=872015&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-372",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0372&session=977442&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-373",
+    "url": "https://github.com/assets/cdn/vendor/bundle?client_id=corp_0373&session=537463&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-374",
+    "url": "https://service-now.com/settings/profile/security?client_id=corp_0374&session=333323&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-375",
+    "url": "http://stripe.com/workspace/document/edit?client_id=corp_0375&session=451261&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-376",
+    "url": "https://service-now.com/secure/download/attachment?client_id=corp_0376&session=301208&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-377",
+    "url": "https://zoom.us/settings/profile/security?client_id=corp_0377&session=257130&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-378",
+    "url": "https://login.microsoftonline.com/settings/profile/security?client_id=corp_0378&session=813852&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-379",
+    "url": "https://dropbox.com/auth/v2/verify?client_id=corp_0379&session=409345&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-380",
+    "url": "https://salesforce.com/settings/profile/security?client_id=corp_0380&session=489293&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-381",
+    "url": "https://aws.amazon.com/workspace/document/edit?client_id=corp_0381&session=157158&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-382",
+    "url": "https://stripe.com/webhook/receiver/event?client_id=corp_0382&session=689193&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-383",
+    "url": "https://login.microsoftonline.com/auth/v2/verify?client_id=corp_0383&session=100202&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-384",
+    "url": "https://salesforce.com/settings/profile/security?client_id=corp_0384&session=774843&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-385",
+    "url": "https://dropbox.com/workspace/document/edit?client_id=corp_0385&session=602891&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-386",
+    "url": "https://box.com/oauth/callback?client_id=corp_0386&session=207117&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-387",
+    "url": "https://login.microsoftonline.com/webhook/receiver/event?client_id=corp_0387&session=348177&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-388",
+    "url": "https://hubspot.com/webhook/receiver/event?client_id=corp_0388&session=161681&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-389",
+    "url": "https://sharepoint.com/oauth/callback?client_id=corp_0389&session=832616&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-390",
+    "url": "http://login.microsoftonline.com/assets/cdn/vendor/bundle?client_id=corp_0390&session=315895&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-391",
+    "url": "https://login.microsoftonline.com/webhook/receiver/event?client_id=corp_0391&session=167888&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-392",
+    "url": "https://service-now.com/workspace/document/edit?client_id=corp_0392&session=880971&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-393",
+    "url": "https://slack.com/secure/download/attachment?client_id=corp_0393&session=894094&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-394",
+    "url": "https://salesforce.com/oauth/callback?client_id=corp_0394&session=541063&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-395",
+    "url": "https://box.com/dashboard/analytics?client_id=corp_0395&session=238654&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-396",
+    "url": "https://aws.amazon.com/assets/cdn/vendor/bundle?client_id=corp_0396&session=291003&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-397",
+    "url": "https://dropbox.com/assets/cdn/vendor/bundle?client_id=corp_0397&session=270685&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-398",
+    "url": "https://dropbox.com/webhook/receiver/event?client_id=corp_0398&session=128171&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-399",
+    "url": "https://slack.com/api/v1/tokens?client_id=corp_0399&session=136099&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-400",
+    "url": "https://box.com/secure/download/attachment?client_id=corp_0400&session=271773&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-401",
+    "url": "https://sharepoint.com/webhook/receiver/event?client_id=corp_0401&session=666668&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-402",
+    "url": "https://zendesk.com/dashboard/analytics?client_id=corp_0402&session=688068&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-403",
+    "url": "https://zoom.us/workspace/document/edit?client_id=corp_0403&session=343282&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-404",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0404&session=577248&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-405",
+    "url": "http://slack.com/secure/download/attachment?client_id=corp_0405&session=298846&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-406",
+    "url": "https://atlassian.net/auth/v2/verify?client_id=corp_0406&session=308509&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-407",
+    "url": "https://zoom.us/settings/profile/security?client_id=corp_0407&session=920065&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-408",
+    "url": "https://okta.com/dashboard/analytics?client_id=corp_0408&session=380922&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-409",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0409&session=113037&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-410",
+    "url": "https://login.microsoftonline.com/secure/download/attachment?client_id=corp_0410&session=906063&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-411",
+    "url": "https://login.microsoftonline.com/webhook/receiver/event?client_id=corp_0411&session=273121&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-412",
+    "url": "https://hubspot.com/workspace/document/edit?client_id=corp_0412&session=315652&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-413",
+    "url": "https://sharepoint.com/assets/cdn/vendor/bundle?client_id=corp_0413&session=361207&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-414",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0414&session=567979&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-415",
+    "url": "https://slack.com/assets/cdn/vendor/bundle?client_id=corp_0415&session=346303&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-416",
+    "url": "https://salesforce.com/settings/profile/security?client_id=corp_0416&session=578514&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-417",
+    "url": "https://dropbox.com/auth/v2/verify?client_id=corp_0417&session=872206&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-418",
+    "url": "https://dropbox.com/workspace/document/edit?client_id=corp_0418&session=141525&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-419",
+    "url": "https://stripe.com/secure/download/attachment?client_id=corp_0419&session=498154&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-420",
+    "url": "http://salesforce.com/auth/v2/verify?client_id=corp_0420&session=197243&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-421",
+    "url": "https://aws.amazon.com/settings/profile/security?client_id=corp_0421&session=468296&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-422",
+    "url": "https://salesforce.com/workspace/document/edit?client_id=corp_0422&session=780754&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-423",
+    "url": "https://aws.amazon.com/auth/v2/verify?client_id=corp_0423&session=564541&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-424",
+    "url": "https://aws.amazon.com/auth/v2/verify?client_id=corp_0424&session=963128&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-425",
+    "url": "https://salesforce.com/reports/quarterly/export?client_id=corp_0425&session=670267&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-426",
+    "url": "https://aws.amazon.com/assets/cdn/vendor/bundle?client_id=corp_0426&session=466971&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-427",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0427&session=269880&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-428",
+    "url": "https://github.com/webhook/receiver/event?client_id=corp_0428&session=411920&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-429",
+    "url": "https://salesforce.com/secure/download/attachment?client_id=corp_0429&session=792259&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-430",
+    "url": "https://slack.com/oauth/callback?client_id=corp_0430&session=195272&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-431",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0431&session=607021&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-432",
+    "url": "https://hubspot.com/auth/v2/verify?client_id=corp_0432&session=743331&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-433",
+    "url": "https://slack.com/auth/v2/verify?client_id=corp_0433&session=168704&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-434",
+    "url": "https://slack.com/webhook/receiver/event?client_id=corp_0434&session=259969&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-435",
+    "url": "http://slack.com/api/v1/tokens?client_id=corp_0435&session=963785&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-436",
+    "url": "https://login.microsoftonline.com/workspace/document/edit?client_id=corp_0436&session=546121&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-437",
+    "url": "https://github.com/dashboard/analytics?client_id=corp_0437&session=971329&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-438",
+    "url": "https://service-now.com/reports/quarterly/export?client_id=corp_0438&session=679888&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-439",
+    "url": "https://hubspot.com/oauth/callback?client_id=corp_0439&session=747102&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-440",
+    "url": "https://service-now.com/oauth/callback?client_id=corp_0440&session=514749&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-441",
+    "url": "https://zoom.us/auth/v2/verify?client_id=corp_0441&session=160552&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-442",
+    "url": "https://zendesk.com/workspace/document/edit?client_id=corp_0442&session=378201&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-443",
+    "url": "https://dropbox.com/reports/quarterly/export?client_id=corp_0443&session=971719&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-444",
+    "url": "https://zoom.us/api/v1/tokens?client_id=corp_0444&session=413904&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-445",
+    "url": "https://service-now.com/dashboard/analytics?client_id=corp_0445&session=772228&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-446",
+    "url": "https://service-now.com/assets/cdn/vendor/bundle?client_id=corp_0446&session=945679&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-447",
+    "url": "https://salesforce.com/workspace/document/edit?client_id=corp_0447&session=208289&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-448",
+    "url": "https://sharepoint.com/dashboard/analytics?client_id=corp_0448&session=925284&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-449",
+    "url": "https://login.microsoftonline.com/settings/profile/security?client_id=corp_0449&session=627358&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-450",
+    "url": "http://atlassian.net/oauth/callback?client_id=corp_0450&session=100487&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-451",
+    "url": "https://github.com/settings/profile/security?client_id=corp_0451&session=903216&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-452",
+    "url": "https://okta.com/oauth/callback?client_id=corp_0452&session=425923&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-453",
+    "url": "https://github.com/dashboard/analytics?client_id=corp_0453&session=884441&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-454",
+    "url": "https://hubspot.com/webhook/receiver/event?client_id=corp_0454&session=675232&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-455",
+    "url": "https://dropbox.com/oauth/callback?client_id=corp_0455&session=163005&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-456",
+    "url": "https://github.com/auth/v2/verify?client_id=corp_0456&session=663893&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-457",
+    "url": "https://stripe.com/secure/download/attachment?client_id=corp_0457&session=184645&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-458",
+    "url": "https://okta.com/oauth/callback?client_id=corp_0458&session=634744&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-459",
+    "url": "https://zendesk.com/api/v1/tokens?client_id=corp_0459&session=737383&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-460",
+    "url": "https://box.com/api/v1/tokens?client_id=corp_0460&session=752472&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-461",
+    "url": "https://hubspot.com/webhook/receiver/event?client_id=corp_0461&session=759325&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-462",
+    "url": "https://zoom.us/oauth/callback?client_id=corp_0462&session=720526&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-463",
+    "url": "https://box.com/dashboard/analytics?client_id=corp_0463&session=680111&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-464",
+    "url": "https://dropbox.com/settings/profile/security?client_id=corp_0464&session=430217&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-465",
+    "url": "http://github.com/assets/cdn/vendor/bundle?client_id=corp_0465&session=872734&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-466",
+    "url": "https://service-now.com/api/v1/tokens?client_id=corp_0466&session=956806&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-467",
+    "url": "https://service-now.com/reports/quarterly/export?client_id=corp_0467&session=182982&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-468",
+    "url": "https://box.com/api/v1/tokens?client_id=corp_0468&session=814902&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-469",
+    "url": "https://stripe.com/workspace/document/edit?client_id=corp_0469&session=256366&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-470",
+    "url": "https://zoom.us/assets/cdn/vendor/bundle?client_id=corp_0470&session=292908&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-471",
+    "url": "https://aws.amazon.com/reports/quarterly/export?client_id=corp_0471&session=470720&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-472",
+    "url": "https://zendesk.com/api/v1/tokens?client_id=corp_0472&session=763276&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-473",
+    "url": "https://github.com/dashboard/analytics?client_id=corp_0473&session=991522&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-474",
+    "url": "https://aws.amazon.com/api/v1/tokens?client_id=corp_0474&session=647917&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-475",
+    "url": "https://box.com/auth/v2/verify?client_id=corp_0475&session=802337&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-476",
+    "url": "https://slack.com/reports/quarterly/export?client_id=corp_0476&session=813264&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-477",
+    "url": "https://hubspot.com/secure/download/attachment?client_id=corp_0477&session=387794&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-478",
+    "url": "https://github.com/workspace/document/edit?client_id=corp_0478&session=108108&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-479",
+    "url": "https://okta.com/workspace/document/edit?client_id=corp_0479&session=131919&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-480",
+    "url": "http://service-now.com/api/v1/tokens?client_id=corp_0480&session=635487&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-481",
+    "url": "https://dropbox.com/oauth/callback?client_id=corp_0481&session=732239&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-482",
+    "url": "https://github.com/api/v1/tokens?client_id=corp_0482&session=910169&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-483",
+    "url": "https://dropbox.com/assets/cdn/vendor/bundle?client_id=corp_0483&session=375695&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-484",
+    "url": "https://aws.amazon.com/oauth/callback?client_id=corp_0484&session=254132&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-485",
+    "url": "https://service-now.com/auth/v2/verify?client_id=corp_0485&session=268359&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-486",
+    "url": "https://service-now.com/auth/v2/verify?client_id=corp_0486&session=352095&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-487",
+    "url": "https://salesforce.com/oauth/callback?client_id=corp_0487&session=913215&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-488",
+    "url": "https://github.com/webhook/receiver/event?client_id=corp_0488&session=497654&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-489",
+    "url": "https://dropbox.com/settings/profile/security?client_id=corp_0489&session=358832&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-490",
+    "url": "https://okta.com/assets/cdn/vendor/bundle?client_id=corp_0490&session=700736&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-491",
+    "url": "https://login.microsoftonline.com/webhook/receiver/event?client_id=corp_0491&session=953589&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-492",
+    "url": "https://login.microsoftonline.com/reports/quarterly/export?client_id=corp_0492&session=174255&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-493",
+    "url": "https://dropbox.com/assets/cdn/vendor/bundle?client_id=corp_0493&session=645422&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-494",
+    "url": "https://zoom.us/webhook/receiver/event?client_id=corp_0494&session=867524&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-495",
+    "url": "http://atlassian.net/settings/profile/security?client_id=corp_0495&session=887186&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-496",
+    "url": "https://hubspot.com/assets/cdn/vendor/bundle?client_id=corp_0496&session=399539&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-497",
+    "url": "https://login.microsoftonline.com/api/v1/tokens?client_id=corp_0497&session=899401&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-498",
+    "url": "https://zendesk.com/reports/quarterly/export?client_id=corp_0498&session=697531&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-499",
+    "url": "https://aws.amazon.com/assets/cdn/vendor/bundle?client_id=corp_0499&session=293211&ref=email",
+    "expected_verdict": "Safe"
+  },
+  {
+    "id": "PERF-500",
+    "url": "https://stripe.com/webhook/receiver/event?client_id=corp_0500&session=803494&ref=email",
+    "expected_verdict": "Safe"
+  }
+]

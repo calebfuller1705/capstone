@@ -15,3 +15,14 @@
 ### Tier Ranking
 * **Tier 1 (Boundary + Acceptance Path):** Seam 6 (vt_client -> VirusTotal API), Seam 3 (Web Client -> api_router), Seam 1 (User -> Web Client DOM), Seam 8 (Uptime Monitor -> health_check).
 * **Tier 2 (In-Process Module Calls):** Seams 2, 4, 5, 7.
+
+## Week 12 — Rep 2: One Integration Test per Tier 1 Seam
+
+### Probing the Seven Seam Failure Modes
+1. **Contract drift:** `test_seam_contract_drift_upstream_omits_stats` (verified safe fallback when upstream omits attributes).
+2. **Unit mismatch:** `test_seam_unit_mismatch_latency_metric` (verified metric units).
+3. **Time zone & encoding:** `test_seam_encoding_idn_and_query_parameters` (verified base64url URL-safe characters without padding).
+4. **Identity:** `test_seam_identity_trailing_slash_normalization` (prevented split cache identities on root domain slashes).
+5. **Ordering:** `test_seam_ordering_missing_config_fails_fast` (verified empty API key fails prior to network calls).
+6. **Error semantics:** `test_seam_error_semantics_timeout_mapping` (verified upstream timeout maps to HTTP 504 rather than unhandled 500).
+7. **Partial failure:** `test_seam_partial_failure_zero_disk_persistence` (asserted zero disk persistence invariant).

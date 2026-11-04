@@ -1,4 +1,6 @@
 import os
+from contextlib import asynccontextmanager
+import httpx
 from fastapi import FastAPI, HTTPException, status
 from src.api.schemas import ScanRequest, ScanResponse
 from src.services.vt_client import (
@@ -7,10 +9,25 @@ from src.services.vt_client import (
     UpstreamRateLimitError,
 )
 
+http_resources = {}
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Manage application lifecycle resources with tuned connection limits."""
+    limits = httpx.Limits(max_keepalive_connections=50, max_connections=100, keepalive_expiry=30.0)
+    http_resources["client"] = httpx.AsyncClient(timeout=5.0, limits=limits)
+    yield
+    client: httpx.AsyncClient = http_resources.get("client")
+    if client and not client.is_closed:
+        await client.aclose()
+
+
 app = FastAPI(
     title="URL Security Scanner",
     description="Stateless URL safety verification against VirusTotal v3",
-    version="0.9.0-rc.1"
+    version="0.9.0-rc.1",
+    lifespan=lifespan
 )
 
 
@@ -31,12 +48,12 @@ async def scan_url(request: ScanRequest):
         )
 
     try:
-        # Normalize trailing slashes on domain roots to prevent split cache identity
         normalized_url = request.url
         if normalized_url.endswith("/") and normalized_url.count("/") == 3:
             normalized_url = normalized_url.rstrip("/")
 
-        report = await fetch_url_report(normalized_url, api_key)
+        shared_client = http_resources.get("client")
+        report = await fetch_url_report(normalized_url, api_key, client=shared_client)
         return ScanResponse(**report)
 
     except UpstreamRateLimitError as exc:

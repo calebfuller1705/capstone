@@ -1,7 +1,8 @@
 import base64
 import json
 import os
-from typing import Any, Dict, Optional
+import time
+from typing import Any, Dict, Optional, Tuple
 import httpx
 
 VT_BASE_URL = "https://www.virustotal.com/api/v3"
@@ -9,6 +10,10 @@ DEFAULT_TIMEOUT_SECONDS = 5.0
 
 MALICIOUS_DANGER_THRESHOLD = 2
 SUSPICIOUS_DANGER_THRESHOLD = 3
+
+# Ephemeral in-memory TTL cache: url -> (timestamp, report_dict)
+_REPORT_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
+CACHE_TTL_SECONDS = 300.0
 
 
 class UpstreamServiceError(Exception):
@@ -57,14 +62,21 @@ async def fetch_url_report(
     api_key: str,
     client: Optional[httpx.AsyncClient] = None
 ) -> Dict[str, Any]:
-    """Fetch URL security analysis from VirusTotal v3."""
+    """Fetch URL security analysis from VirusTotal v3 with in-memory caching."""
     if not api_key or not str(api_key).strip():
         raise ValueError("VirusTotal API key is required and cannot be empty")
+
+    now = time.monotonic()
+    if url in _REPORT_CACHE:
+        cached_time, cached_report = _REPORT_CACHE[url]
+        if now - cached_time < CACHE_TTL_SECONDS:
+            return cached_report
 
     url_id = encode_vt_url_id(url)
     headers = {
         "x-apikey": api_key.strip(),
         "Accept": "application/json",
+        "Accept-Encoding": "gzip, deflate"
     }
     endpoint = f"{VT_BASE_URL}/urls/{url_id}"
 
@@ -78,7 +90,7 @@ async def fetch_url_report(
         if response.status_code == 429:
             raise UpstreamRateLimitError("VirusTotal API quota exceeded (HTTP 429)")
         if response.status_code == 404:
-            return {
+            report = {
                 "url": url,
                 "verdict": "Safe",
                 "positives": 0,
@@ -87,6 +99,8 @@ async def fetch_url_report(
                 "cached": False,
                 "raw_details": {}
             }
+            _REPORT_CACHE[url] = (now, report)
+            return report
         if response.status_code != 200:
             raise UpstreamServiceError(f"VirusTotal API returned HTTP {response.status_code}")
 
@@ -98,7 +112,7 @@ async def fetch_url_report(
         attributes = data.get("data", {}).get("attributes", {})
         stats = attributes.get("last_analysis_stats", {})
 
-        return {
+        report = {
             "url": url,
             "verdict": evaluate_verdict(stats),
             "positives": stats.get("malicious", 0) + stats.get("suspicious", 0),
@@ -107,6 +121,8 @@ async def fetch_url_report(
             "cached": True,
             "raw_details": attributes
         }
+        _REPORT_CACHE[url] = (now, report)
+        return report
     except httpx.TimeoutException as exc:
         raise UpstreamServiceError("Upstream service timed out") from exc
     except httpx.RequestError as exc:
