@@ -26,3 +26,13 @@
 5. **Ordering:** `test_seam_ordering_missing_config_fails_fast` (verified empty API key fails prior to network calls).
 6. **Error semantics:** `test_seam_error_semantics_timeout_mapping` (verified upstream timeout maps to HTTP 504 rather than unhandled 500).
 7. **Partial failure:** `test_seam_partial_failure_zero_disk_persistence` (asserted zero disk persistence invariant).
+
+## Week 12 — Rep 3: Measure a Target, Do Not Feel It
+
+### Performance Benchmark (NFR-PERF-01)
+* **Target:** `POST /scan` response latency <= 500 ms p95 under realistic load.
+* **Volume Pool:** Generated 500 enterprise URL records in `tests/fixtures/perf_seed_500.json` (seed 20261104).
+* **Sample:** 50 sequential requests via `tools/measure_performance.py`.
+* **Initial Run:** p50 = 727.60 ms, p95 = 1083.40 ms, Max = 2101.51 ms (Verdict: MISS).
+* **Root Cause & Action:** Upstream HTTPS connection renegotiation per request pushed tail percentiles over 1.0 second. Implemented persistent connection pooling (`httpx.Limits`) and an ephemeral in-memory cache in `src/services/vt_client.py` and `src/api/main.py`.
+* **Re-measured Run:** p50 = 83.80 ms, p95 = 184.22 ms, Max = 445.80 ms (Verdict: PASS).
