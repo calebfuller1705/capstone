@@ -36,3 +36,25 @@
 * **Initial Run:** p50 = 727.60 ms, p95 = 1083.40 ms, Max = 2101.51 ms (Verdict: MISS).
 * **Root Cause & Action:** Upstream HTTPS connection renegotiation per request pushed tail percentiles over 1.0 second. Implemented persistent connection pooling (`httpx.Limits`) and an ephemeral in-memory cache in `src/services/vt_client.py` and `src/api/main.py`.
 * **Re-measured Run:** p50 = 83.80 ms, p95 = 184.22 ms, Max = 445.80 ms (Verdict: PASS).
+
+## Week 12 — Rep 5: Break Your Dependency on Purpose
+
+### Dependency Fault Injection Suite (`tests/integration/test_dependency_faults.py`)
+* **Simulated Scenarios:**
+  1. Upstream Quota Exhaustion (`HTTP 429`) -> maps to HTTP 429 with actionable quota message.
+  2. Upstream Timeout (`httpx.ReadTimeout`) -> maps to HTTP 504 Gateway Timeout.
+  3. Upstream Outage (`HTTP 500`, `502`, `503`) -> maps to HTTP 502 Bad Gateway.
+  4. Malformed/Poisoned Payload (HTML gateway text returned instead of JSON) -> maps to HTTP 502 Bad Gateway without unhandled crash.
+  5. Total Network Disconnect (`httpx.ConnectError` / DNS drop) -> maps to HTTP 502 Bad Gateway.
+* **Verification:** All 7 test cases pass deterministically via monkeypatched HTTP transport harnesses.
+
+## Week 12 — Rep 6: The Assistant as Security Reviewer, Then the Advisory Database
+
+### Assistant Security Audit Verification Scorecard
+* **Target File Reviewed:** `src/api/main.py`
+* **Audit Scorecard:**
+  * Findings claimed: 7 (4 code findings + 3 dependency advisories)
+  * Findings confirmed real: 3 (SSRF input vulnerability, 500 exception disclosure, certifi advisory)
+  * Advisory IDs that existed: 3 / 3
+  * Affected range actually included my version: 1 / 3 (PYSEC-2026-4320 in certifi==2026.7.22)
+  * Real issues it MISSED that I found myself: 1 (DEF-003 upstream socket timeout / connection starvation)
