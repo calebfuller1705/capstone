@@ -1,5 +1,4 @@
-﻿
-## B-04 — Server-Side Action Audit Logging (`FR-SYS-02`)
+﻿## B-04 — Server-Side Action Audit Logging (`FR-SYS-02`)
 * **Original Requirement:** FR-SYS-02 — Action Logging (Should)
 * **Deferred From:** Week 12 Scope Cut (CR-005, 2026-11-06)
 * **Estimated Effort:** 5.0 h

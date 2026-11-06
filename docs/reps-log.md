@@ -58,3 +58,27 @@
   * Advisory IDs that existed: 3 / 3
   * Affected range actually included my version: 1 / 3 (PYSEC-2026-4320 in certifi==2026.7.22)
   * Real issues it MISSED that I found myself: 1 (DEF-003 upstream socket timeout / connection starvation)
+
+## Week 12 — Rep 7: Three Requests, Three Impact Analyses
+
+### Change Requests Logged (`docs/change-requests/` & `CHANGELOG.md`)
+* `CR-001-clipboard-export.md` — **ACCEPT**: 1-click clipboard summary export in UI (1.5 h).
+* `CR-002-batch-csv-upload.md` — **DEFER**: Batch CSV upload (10.0 h), deferred to backlog as B-03 (post-handoff v1.1) due to upstream API rate limit constraints.
+* `CR-003-user-scan-history.md` — **REJECT**: Persistent user accounts and scan history database, rejected due to violation of core architecture constraint `CON-04` and zero-retention guarantee `NFR-SEC-02`.
+
+## Week 12 — Rep 8: The Cut You Have Been Avoiding
+
+### Capacity Computation & Scope Balance
+* **Average Weekly Build Hours:** 12.5 h/week
+* **4-Week Gross Capacity:** 50.0 h
+* **Non-Negotiable Deadlines:** Week 13 Doc (14.0 h) + Week 14 Deploy (14.0 h) + Week 15 Presentation (12.0 h) = 40.0 h
+* **Real Remaining Build Capacity:** 10.0 h
+* **Unfinished Requirements (15.0 h total):** FR-EVAL-04 (2.0 h), FR-DASH-01 (2.5 h), FR-EVAL-02 (3.0 h), FR-DASH-02 (1.5 h), FR-DASH-03 (1.0 h), FR-SYS-02 (5.0 h).
+* **The Cut:** Deferred `FR-SYS-02` (Action Logging, 5.0 h) to `docs/backlog.md` as B-04 via `CR-005`. Balanced load = 10.0 h.
+
+## Week 12 - Rep 9: Change Request Triage
+
+### Complete Scorecard
+Run 1 (instinct):  shipped 4 / slipped 6 ; costliest decision: Accepting batch CSV file upload (+10.0 h)
+Run 2 (policy):    shipped 8 / slipped 0 ; costliest decision: Accepting quick-copy clipboard export (+1.5 h)
+Times my run-1 decisions violated my own written policy: 4
