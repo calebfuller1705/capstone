@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Security Scanner</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="badge">Stateless Intelligence</div>
+      <h1>URL Security Scanner</h1>
+      <p>Analyze target URLs against multi-engine threat intelligence with zero scan persistence.</p>
+    </header>
+
+    <main>
+      <form id="scan-form" class="scan-form" novalidate>
+        <div class="input-group">
+          <input
+            type="url"
+            id="url-input"
+            name="url"
+            placeholder="https://example.com/login"
+            required
+            maxlength="2048"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="submit" id="submit-btn">
+            <span class="btn-text">Scan URL</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+        </div>
+        <p class="field-hint">Enforces strict HTTP/HTTPS protocols and blocks private intranet ranges.</p>
+      </form>
+
+      <!-- Error Envelope Display -->
+      <div id="error-card" class="alert-card alert-error hidden" role="alert">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-content">
+          <h4 id="error-title">Submission Error</h4>
+          <p id="error-message"></p>
+        </div>
+      </div>
+
+      <!-- Result Card Display -->
+      <section id="results-card" class="results-card hidden" aria-live="polite">
+        <div class="results-header">
+          <div>
+            <span id="verdict-badge" class="verdict-badge">CLEAN</span>
+            <h2 id="scanned-url" class="scanned-url"></h2>
+          </div>
+          <div class="scan-timestamp">
+            <span>Scanned:</span>
+            <time id="scan-time"></time>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-value malicious" id="count-malicious">0</span>
+            <span class="metric-label">Malicious</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-value suspicious" id="count-suspicious">0</span>
+            <span class="metric-label">Suspicious</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-value harmless" id="count-harmless">0</span>
+            <span class="metric-label">Harmless</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-value undetected" id="count-undetected">0</span>
+            <span class="metric-label">Undetected</span>
+          </div>
+        </div>
+
+        <div class="engine-breakdown">
+          <h3>Detection Breakdown</h3>
+          <ul id="detection-list" class="detection-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>URL Security Scanner • Built with FastAPI and VirusTotal v3 API</p>
+    </footer>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

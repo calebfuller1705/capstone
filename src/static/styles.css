@@ -1,0 +1,304 @@
+﻿:root {
+  --bg-primary: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-elevated: #334155;
+  --border-color: #475569;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --color-primary: #38bdf8;
+  --color-primary-hover: #0ea5e9;
+  --color-clean: #22c55e;
+  --color-suspicious: #f59e0b;
+  --color-malicious: #ef4444;
+  --color-neutral: #64748b;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(56, 189, 248, 0.15);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.header h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.scan-form {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.input-group input {
+  flex: 1;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--color-primary);
+}
+
+.input-group button {
+  background-color: var(--color-primary);
+  color: #0f172a;
+  border: none;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+  min-width: 120px;
+}
+
+.input-group button:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.input-group button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #0f172a;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.loading .spinner {
+  display: inline-block;
+}
+
+.loading .btn-text {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.65rem;
+}
+
+.alert-card {
+  display: flex;
+  gap: 1rem;
+  background-color: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  align-items: flex-start;
+}
+
+.alert-icon {
+  font-size: 1.25rem;
+}
+
+.alert-content h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-malicious);
+  margin-bottom: 0.25rem;
+}
+
+.alert-content p {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  word-break: break-word;
+}
+
+.results-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.verdict-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.verdict-clean { background-color: rgba(34, 197, 94, 0.2); color: var(--color-clean); }
+.verdict-suspicious { background-color: rgba(245, 158, 11, 0.2); color: var(--color-suspicious); }
+.verdict-malicious { background-color: rgba(239, 68, 68, 0.2); color: var(--color-malicious); }
+
+.scanned-url {
+  font-size: 1.1rem;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.scan-timestamp {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.metric-box {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.metric-value.malicious { color: var(--color-malicious); }
+.metric-value.suspicious { color: var(--color-suspicious); }
+.metric-value.harmless { color: var(--color-clean); }
+.metric-value.undetected { color: var(--color-neutral); }
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.engine-breakdown h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+}
+
+.detection-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.detection-item {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detection-engine {
+  font-weight: 500;
+}
+
+.detection-status.clean { color: var(--color-clean); }
+.detection-status.malicious { color: var(--color-malicious); font-weight: 600; }
+.detection-status.suspicious { color: var(--color-suspicious); font-weight: 600; }
+
+.hidden {
+  display: none !important;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 1rem 0;
+}

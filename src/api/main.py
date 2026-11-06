@@ -1,9 +1,12 @@
 import ipaddress
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 from urllib.parse import urlparse
 import httpx
 from fastapi import FastAPI, HTTPException, status
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from src.api.schemas import ScanRequest, ScanResponse
 from src.services.vt_client import (
     fetch_url_report,
@@ -12,6 +15,7 @@ from src.services.vt_client import (
 )
 
 http_resources = {}
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 
 def is_private_or_intranet_url(url: str) -> bool:
@@ -63,6 +67,19 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Mount static asset bundle
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+
+@app.get("/", include_in_schema=False)
+async def serve_index():
+    """Serve the single-page application shell."""
+    index_file = STATIC_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    return {"status": "ok", "app": "URL Security Scanner"}
+
 
 @app.get("/health", status_code=status.HTTP_200_OK)
 async def health_check():
@@ -84,6 +101,7 @@ async def scan_url(request: ScanRequest):
     if normalized_url.endswith("/") and normalized_url.count("/") == 3:
         normalized_url = normalized_url.rstrip("/")
 
+    # Guard against SSRF to private and internal networks (FR-EVAL-01)
     if is_private_or_intranet_url(normalized_url):
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -113,6 +131,7 @@ async def scan_url(request: ScanRequest):
             detail=f"Upstream service error: {exc}"
         )
     except Exception:
+        # Prevent stack trace or credential leakage on unexpected runtime failures
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An unexpected internal error occurred while processing the request"
