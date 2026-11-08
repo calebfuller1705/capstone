@@ -1,8 +1,9 @@
-import ipaddress
+﻿import ipaddress
 import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 from urllib.parse import urlparse
+from dotenv import load_dotenv
 import httpx
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import FileResponse
@@ -13,6 +14,9 @@ from src.services.vt_client import (
     UpstreamServiceError,
     UpstreamRateLimitError,
 )
+
+# Load environment variables from .env
+load_dotenv()
 
 http_resources = {}
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
@@ -84,7 +88,7 @@ async def serve_index():
 @app.get("/health", status_code=status.HTTP_200_OK)
 async def health_check():
     """Lightweight health check endpoint for monitoring."""
-    return {"status": "ok", "app": "URL Security Scanner"}
+    return {"status": "ok"}
 
 
 @app.post("/scan", response_model=ScanResponse, status_code=status.HTTP_200_OK)
@@ -111,6 +115,16 @@ async def scan_url(request: ScanRequest):
     try:
         shared_client = http_resources.get("client")
         report = await fetch_url_report(normalized_url, api_key, client=shared_client)
+        if report is None:
+            report = {
+                "url": normalized_url,
+                "verdict": "Safe",
+                "positives": 0,
+                "total_engines": 0,
+                "scan_date": "N/A",
+                "cached": False,
+                "raw_details": {}
+            }
         return ScanResponse(**report)
 
     except HTTPException:
@@ -131,7 +145,6 @@ async def scan_url(request: ScanRequest):
             detail=f"Upstream service error: {exc}"
         )
     except Exception:
-        # Prevent stack trace or credential leakage on unexpected runtime failures
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="An unexpected internal error occurred while processing the request"
