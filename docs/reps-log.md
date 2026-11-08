@@ -82,3 +82,26 @@
 Run 1 (instinct):  shipped 4 / slipped 6 ; costliest decision: Accepting batch CSV file upload (+10.0 h)
 Run 2 (policy):    shipped 8 / slipped 0 ; costliest decision: Accepting quick-copy clipboard export (+1.5 h)
 Times my run-1 decisions violated my own written policy: 4
+
+## Week 12 — Rep 10: Freeze, Gate, Tag
+
+### Exit Criteria Evaluation
+* [x] Every Must-have requirement has a passing acceptance test (30 assertions green)
+* [x] Zero open Critical or High defects (DEF-001 closed, no open S1/S2 bugs)
+* [x] Security pass complete; every finding fixed or explicitly accepted (docs/security-review.md)
+* [x] Every performance target measured; each miss has a recorded decision (NFR-PERF-01 p95 = 3.12 s <= 10.0 s)
+* [x] A clean clone sets up, runs, and passes tests using only documented steps
+
+### Release Gate Execution
+* **Setup Command:** `pip install -r requirements.txt`
+* **Test Command:** `pytest tests/ -v`
+* **Gate Verdict:** Clean clone verified green (60 passed, 0 failed).
+
+## Week 12 — Rep 11: Rewrite a Bad Change-Log Entry
+
+### Changelog Audit & Transformation
+* **Input:** Vague, non-traceable entries ("various bug fixes", "updated dependencies", "refactored the backend").
+* **Output:** Structured Keep a Changelog format categorized under Added, Changed, Fixed, Security, and Known Issues.
+* **Traceability:** Mapped entries directly to active requirements (`FR-INP-01`, `FR-UI-01`, `FR-ACT-01`, `FR-SYS-01`), defect logs (`DEF-001`), and change requests (`CR-002`).
+* **Operator Instructions:** Documented explicit prerequisite commands (`pip install -r requirements.txt` and `.env` initialization).
+* **Known Issues:** Documented `KI-001` (lack of HTTP redirect trace on shortened URLs) with manual expansion workaround.
