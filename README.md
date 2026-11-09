@@ -19,42 +19,81 @@ Senior capstone by Caleb Fuller, Fall 2026.
 
 ## How to run it
 
-## Run it (about five minutes)
+## Quick Start & Verification (About 5 minutes)
 
-Requires: Python 3.12 (pinned in `.python-version`)
+### Prerequisites
+- Python 3.12+ (tested through Python 3.14)
+- Git
+
+---
+
+### 1. Clone and Environment Setup
 
 ```bash
 git clone [https://github.com/calebfuller1705/capstone.git](https://github.com/calebfuller1705/capstone.git)
 cd capstone
-cp .env.example .env              # provides default development settings
-./script/setup                    # installs pinned dependencies from requirements.lock
-./script/start                    # serves API on [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-# In a second terminal, verify the system by running:
-./script/smoke
+# Start environment configuration
+cp .env.example .env
+Note on API Keys: Automated unit, integration, and security tests run offline using internal mock transports and do not require external credentials. To execute live scans against VirusTotal v3, edit .env and set VIRUSTOTAL_API_KEY=your_64_char_key.
 
-# Success looks like: SMOKE OK: http://127.0.0.1:8000/scan returned the seeded row (Safe). The skeleton walks.
+Windows (PowerShell)
+PowerShell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\pip install -r requirements.txt
 
-# Verifying Success
-# 1. Health Endpoint
-#Open http://127.0.0.1:8000/health in your browser. You should see:
+macOS / Linux (Bash)
+Bash
+python3 -m venv .venv
+./.venv/bin/python -m pip install --upgrade pip
+./.venv/bin/pip install -r requirements.txt
 
-JSON
-{"status":"ok"}
+2. Run the Test Suite
+Verify all 60 acceptance, security boundary, and contract tests pass:
 
-#2. Walking Skeleton Scan Route
+Bash
+# Windows
+.\.venv\Scripts\python -m pytest tests/ -v
 
-# In a separate terminal, test the real request dispatch hop:
+macOS / Linux
+./.venv/bin/pytest tests/ -v
+Expected output:
+
+Plaintext
+======================= 60 passed in ~6.0s =======================
+
+## 3. Launch the Application
+Start the local Uvicorn development server:
+
+Bash
+# Windows
+.\.venv\Scripts\python -m uvicorn src.api.main:app --reload
+
+# macOS / Linux
+./.venv/bin/uvicorn src.api.main:app --reload
+The application serves:
+
+Interactive UI: Open http://127.0.0.1:8000 in your browser.
+
+Health Check: http://127.0.0.1:8000/health returns {"status":"ok"}.
+
+4. Verify API Endpoints
+In a second terminal, verify the primary scan endpoint:
+
 Bash
 curl -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) \
   -H "Content-Type: application/json" \
   -d '{"url":"[https://example.com](https://example.com)"}'
+Expected response schema:
 
-# Expected response:
 JSON
 {
   "url": "[https://example.com](https://example.com)",
   "verdict": "Safe",
-  "source": "skeleton-stub",
-  "scan_time_ms": 15
+  "positives": 0,
+  "total_engines": 0,
+  "scan_date": "N/A",
+  "cached": false,
+  "raw_details": {}
 }
