@@ -1,21 +1,21 @@
-import pytest
+﻿import pytest
 from pydantic import ValidationError
 from src.api.schemas import ScanRequest
 
 
 def test_url_boundary_inside_minimum():
-    """Boundary: exactly 1 character (inside range)."""
+    """Boundary: 1 character domain."""
     req = ScanRequest(url="a")
     assert req.url == "a"
 
 
 def test_url_boundary_inside_maximum():
-    """Boundary: exactly 2,048 characters (inside range)."""
+    """Boundary: Exactly 2,048 characters."""
     base = "https://example.com/"
-    long_url = base + "a" * (2048 - len(base))
-    assert len(long_url) == 2048
-    req = ScanRequest(url=long_url)
-    assert len(req.url) == 2048
+    exact_url = base + "a" * (2048 - len(base))
+    assert len(exact_url) == 2048
+    req = ScanRequest(url=exact_url)
+    assert req.url == exact_url
 
 
 def test_url_boundary_below_zero_length():
@@ -42,6 +42,6 @@ def test_url_boundary_above_hostile_10k():
 
 
 def test_url_boundary_absent_null():
-    """Boundary: null / None. Expects validation error."""
+    """Boundary: Null value. Expects validation error."""
     with pytest.raises(ValidationError):
         ScanRequest(url=None)

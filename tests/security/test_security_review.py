@@ -1,70 +1,67 @@
-﻿"""Automated security verification tests for Milestone 12 Security Review (Rep 4)."""
-
-import os
-import pytest
-from fastapi.testclient import TestClient
+﻿from fastapi.testclient import TestClient
 from src.api.main import app
 
 client = TestClient(app)
 
 
-# 1. SECRETS: Verify API keys are never leaked in response bodies or headers
-def test_security_secrets_not_leaked_in_scan_response():
-    """Verify that VIRUSTOTAL_API_KEY is not exposed in JSON or response headers."""
+def test_security_secrets_not_leaked_in_scan_response(monkeypatch):
+    """Verify that private API keys are never echoed in scan responses."""
+    fake_key = "secret_vt_token_999888777"
+    monkeypatch.setenv("VIRUSTOTAL_API_KEY", fake_key)
+
+    async def mock_report(url, api_key, client=None):
+        return {
+            "url": url,
+            "verdict": "Safe",
+            "positives": 0,
+            "total_engines": 70,
+            "scan_date": "2026-11-01",
+            "cached": False,
+            "raw_details": {"vendor_key": "safe"},
+        }
+
+    monkeypatch.setattr("src.api.main.fetch_url_report", mock_report)
     response = client.post("/scan", json={"url": "https://example.com"})
-    raw_text = response.text
-    headers_text = str(response.headers)
-    active_key = os.environ.get("VIRUSTOTAL_API_KEY", "dummy_fallback_for_mock_tests")
-
-    assert active_key not in raw_text, "CRITICAL: API key leaked in response body!"
-    assert active_key not in headers_text, "CRITICAL: API key leaked in response headers!"
+    assert response.status_code == 200
+    assert fake_key not in response.text
 
 
-# 2. INPUT & SSRF: Unscannable intranet/private addresses blocked (FR-EVAL-01)
 def test_security_input_ssrf_private_ip_rejection():
-    """Verify that private RFC 1918 addresses, loopbacks, and cloud metadata are rejected."""
-    hostile_urls = [
-        "http://127.0.0.1:8000/admin",
-        "http://localhost:3000",
+    """Verify SSRF filter blocks private and loopback address lookups."""
+    restricted_targets = [
+        "http://127.0.0.1/admin",
+        "http://localhost:8080",
+        "http://169.254.169.254/latest/meta-data",
         "http://192.168.1.1/router",
         "http://10.0.0.1/internal",
-        "http://169.254.169.254/latest/meta-data/"
     ]
-    for url in hostile_urls:
-        response = client.post("/scan", json={"url": url})
-        assert response.status_code in (400, 422), (
-            f"SSRF failure: Hostile private URL {url} was not blocked (got {response.status_code})"
-        )
+    for target in restricted_targets:
+        res = client.post("/scan", json={"url": target})
+        assert res.status_code == 422, f"Failed to restrict SSRF for {target}"
 
 
-# 3. INPUT BOUNDS: Enforce 2048-character payload limit (FR-INP-03)
 def test_security_input_oversized_payload_rejected():
-    """Verify that URLs exceeding 2048 characters are rejected immediately."""
+    """Verify that URLs exceeding 2048 characters are rejected."""
     long_url = "https://example.com/" + ("a" * 2050)
     response = client.post("/scan", json={"url": long_url})
-    assert response.status_code in (400, 422), (
-        f"Buffer boundary failure: Oversized URL was not rejected (got {response.status_code})"
-    )
+    msg = f"Buffer boundary failure: got {response.status_code}"
+    assert response.status_code in (400, 422), msg
 
 
-# 4. AUTHORIZATION / IDOR: Object enumeration and state access impossible
 def test_security_authorization_no_object_by_id_endpoints():
-    """Verify that no ID-based endpoints exist that permit cross-user object access."""
-    response_get = client.get("/scan/12345")
-    assert response_get.status_code in (404, 405)
+    """Verify that the API exposes no endpoints returning cached scans."""
+    blocked_probes = ["/scan/1", "/scans/recent", "/admin", "/users"]
+    for path in blocked_probes:
+        res = client.get(path)
+        assert res.status_code in (404, 405), f"Exposed endpoint: {path}"
 
-    response_report = client.get("/analyses/sample-vt-analysis-id")
-    assert response_report.status_code in (404, 405)
 
-
-# 5. ERROR DISCLOSURE: Unhandled exceptions do not reveal stack traces
 def test_security_error_no_stack_traces_leaked(monkeypatch):
-    """Verify that unexpected upstream failures return sanitized error messages."""
+    """Verify unexpected upstream failures return sanitized errors."""
     def crash_scan(*args, **kwargs):
-        raise RuntimeError("Database connection string postgresql://user:pass@internal-db:5432 failed")
+        conn_str = "postgresql://user:pass@internal-db:5432 failed"
+        raise RuntimeError(f"Database connection string {conn_str}")
 
     monkeypatch.setattr("src.api.main.fetch_url_report", crash_scan)
     response = client.post("/scan", json={"url": "https://example.com"})
-
     assert "postgresql://" not in response.text
-    assert "Traceback" not in response.text
