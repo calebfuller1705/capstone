@@ -1,4 +1,4 @@
-import base64
+﻿import base64
 import json
 import os
 import time
@@ -11,18 +11,19 @@ DEFAULT_TIMEOUT_SECONDS = 5.0
 MALICIOUS_DANGER_THRESHOLD = 2
 SUSPICIOUS_DANGER_THRESHOLD = 3
 
-# Ephemeral in-memory TTL cache: url -> (timestamp, report_dict)
 _REPORT_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
 CACHE_TTL_SECONDS = 300.0
 
 
 class UpstreamServiceError(Exception):
-    """Raised when upstream API fails, returns malformed data, or times out."""
+    """Raised when upstream API fails, returns bad data, or times out."""
+
     pass
 
 
 class UpstreamRateLimitError(UpstreamServiceError):
     """Raised when upstream API returns HTTP 429."""
+
     pass
 
 
@@ -35,7 +36,8 @@ def get_vt_api_key() -> str:
     """Retrieve and validate the VirusTotal API key from environment."""
     key = os.environ.get("VIRUSTOTAL_API_KEY", "").strip()
     if not key:
-        raise ValueError("VIRUSTOTAL_API_KEY environment variable is missing or empty")
+        msg = "VIRUSTOTAL_API_KEY environment variable is missing or empty"
+        raise ValueError(msg)
     return key
 
 
@@ -43,7 +45,8 @@ def encode_vt_url_id(url: str) -> str:
     """Encode URL to VirusTotal v3 unpadded base64url identifier."""
     if not url:
         raise ValueError("URL cannot be empty")
-    return base64.urlsafe_b64encode(url.encode("utf-8")).decode("ascii").rstrip("=")
+    raw = base64.urlsafe_b64encode(url.encode("utf-8")).decode("ascii")
+    return raw.rstrip("=")
 
 
 def evaluate_verdict(stats: Optional[Dict[str, int]]) -> str:
@@ -54,7 +57,10 @@ def evaluate_verdict(stats: Optional[Dict[str, int]]) -> str:
     malicious = stats.get("malicious", 0)
     suspicious = stats.get("suspicious", 0)
 
-    if malicious >= MALICIOUS_DANGER_THRESHOLD or suspicious >= SUSPICIOUS_DANGER_THRESHOLD:
+    if (
+        malicious >= MALICIOUS_DANGER_THRESHOLD
+        or suspicious >= SUSPICIOUS_DANGER_THRESHOLD
+    ):
         return "Unsafe"
     if malicious > 0 or suspicious > 0:
         return "Ambiguous"
@@ -69,17 +75,19 @@ def _is_mock_client(client: Optional[httpx.AsyncClient]) -> bool:
     if "Mock" in type(client).__name__ or hasattr(client, "mock_calls"):
         return True
     transport = getattr(client, "_transport", None)
-    if transport is not None and ("Mock" in type(transport).__name__ or isinstance(transport, httpx.MockTransport)):
-        return True
+    if transport is not None:
+        is_mock_type = "Mock" in type(transport).__name__
+        if is_mock_type or isinstance(transport, httpx.MockTransport):
+            return True
     return False
 
 
 async def fetch_url_report(
     url: str,
     api_key: str,
-    client: Optional[httpx.AsyncClient] = None
+    client: Optional[httpx.AsyncClient] = None,
 ) -> Optional[Dict[str, Any]]:
-    """Fetch URL security analysis from VirusTotal v3 with in-memory caching."""
+    """Fetch URL security analysis from VirusTotal v3 with TTL caching."""
     if not api_key or not str(api_key).strip():
         raise ValueError("VirusTotal API key is required and cannot be empty")
 
@@ -97,7 +105,7 @@ async def fetch_url_report(
     headers = {
         "x-apikey": api_key.strip(),
         "Accept": "application/json",
-        "Accept-Encoding": "gzip, deflate"
+        "Accept-Encoding": "gzip, deflate",
     }
     endpoint = f"{VT_BASE_URL}/urls/{url_id}"
 
@@ -109,19 +117,23 @@ async def fetch_url_report(
     try:
         response = await client.get(endpoint, headers=headers)
         if response.status_code == 429:
-            raise UpstreamRateLimitError("VirusTotal API quota exceeded (HTTP 429)")
+            msg = "VirusTotal API quota exceeded (HTTP 429)"
+            raise UpstreamRateLimitError(msg)
         if response.status_code == 404:
             return None
         if response.status_code != 200:
-            raise UpstreamServiceError(f"VirusTotal API returned HTTP {response.status_code}")
+            msg = f"VirusTotal API returned HTTP {response.status_code}"
+            raise UpstreamServiceError(msg)
 
         try:
             data = response.json()
         except (json.JSONDecodeError, ValueError) as exc:
-            raise UpstreamServiceError("Malformed upstream response: expected valid JSON") from exc
+            msg = "Malformed upstream response: expected valid JSON"
+            raise UpstreamServiceError(msg) from exc
 
         if not isinstance(data, dict):
-            raise UpstreamServiceError("Malformed upstream response: expected valid JSON object")
+            msg = "Malformed upstream response: expected valid JSON object"
+            raise UpstreamServiceError(msg)
 
         data_obj = data.get("data")
         if not isinstance(data_obj, dict):
@@ -132,18 +144,20 @@ async def fetch_url_report(
             attributes = {}
 
         stats = attributes.get("last_analysis_stats", {})
+        malicious_count = stats.get("malicious", 0)
+        suspicious_count = stats.get("suspicious", 0)
 
         report = {
             "url": url,
             "verdict": evaluate_verdict(stats),
-            "positives": stats.get("malicious", 0) + stats.get("suspicious", 0),
+            "positives": malicious_count + suspicious_count,
             "total_engines": sum(stats.values()) if stats else 0,
             "scan_date": attributes.get("last_analysis_date"),
             "cached": True,
             "raw_details": attributes,
             "harmless": stats.get("harmless", 0),
-            "malicious": stats.get("malicious", 0),
-            "suspicious": stats.get("suspicious", 0),
+            "malicious": malicious_count,
+            "suspicious": suspicious_count,
             "undetected": stats.get("undetected", 0),
             **stats,
         }
@@ -155,7 +169,8 @@ async def fetch_url_report(
     except httpx.TimeoutException as exc:
         raise UpstreamServiceError("Upstream service timed out") from exc
     except httpx.RequestError as exc:
-        raise UpstreamServiceError(f"Network error contacting upstream: {exc}") from exc
+        msg = f"Network error contacting upstream: {exc}"
+        raise UpstreamServiceError(msg) from exc
     finally:
         if should_close:
             await client.aclose()

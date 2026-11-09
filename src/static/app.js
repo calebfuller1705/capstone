@@ -50,12 +50,18 @@
     }
 
     if (!/^https?:\/\//i.test(rawUrl)) {
-      showError("Protocol Error", "URL must explicitly begin with http:// or https:// (FR-INP-01).");
+      showError(
+        "Protocol Error",
+        "URL must explicitly begin with http:// or https:// (FR-INP-01)."
+      );
       return;
     }
 
     if (rawUrl.length > 2048) {
-      showError("Boundary Error", "Target URL exceeds the maximum length of 2048 characters (FR-INP-03).");
+      showError(
+        "Boundary Error",
+        "Target URL exceeds the maximum length of 2048 characters (FR-INP-03)."
+      );
       return;
     }
 
@@ -72,7 +78,8 @@
 
       if (!response.ok) {
         let title = "Scan Failed";
-        let detail = data.detail || `Server responded with status code ${response.status}.`;
+        let detail =
+          data.detail || `Server responded with status code ${response.status}.`;
 
         if (response.status === 422) {
           title = "Invalid URL / Restricted Range (422)";
@@ -88,44 +95,86 @@
         return;
       }
 
-      // Populate verdict and metrics
+      // Populate URL and timestamp
       scannedUrlElem.textContent = data.url || rawUrl;
       scanTimeElem.textContent = new Date().toLocaleTimeString();
 
-      const malicious = data.malicious_count || 0;
-      const suspicious = data.suspicious_count || 0;
-      const harmless = data.harmless_count || 0;
-      const undetected = data.undetected_count || 0;
+      // Normalize counter metrics
+      const malicious =
+        data.malicious_count ?? data.malicious ?? data.positives ?? 0;
+      const suspicious = data.suspicious_count ?? data.suspicious ?? 0;
+      const harmless =
+        data.harmless_count ??
+        data.harmless ??
+        data.raw_details?.last_analysis_stats?.harmless ??
+        0;
+      const undetected =
+        data.undetected_count ??
+        data.undetected ??
+        data.raw_details?.last_analysis_stats?.undetected ??
+        0;
+
+      const totalEngines =
+        data.total_engines ??
+        malicious + suspicious + harmless + undetected;
+      const verdict = (data.verdict || "").toUpperCase();
 
       countMalicious.textContent = malicious;
       countSuspicious.textContent = suspicious;
       countHarmless.textContent = harmless;
       countUndetected.textContent = undetected;
 
+      // Reset badge styles and map backend verdict
       verdictBadge.className = "verdict-badge";
-      if (malicious > 0) {
-        verdictBadge.textContent = "MALICIOUS";
+
+      if (
+        verdict === "UNKNOWN" ||
+        verdict === "UNSCANNED" ||
+        totalEngines === 0
+      ) {
+        verdictBadge.textContent = "UNSCANNED";
+        verdictBadge.classList.add("verdict-unknown");
+      } else if (verdict === "UNSAFE" || malicious >= 2 || suspicious >= 3) {
+        verdictBadge.textContent = "UNSAFE";
         verdictBadge.classList.add("verdict-malicious");
-      } else if (suspicious > 0) {
-        verdictBadge.textContent = "SUSPICIOUS";
+      } else if (verdict === "AMBIGUOUS" || malicious > 0 || suspicious > 0) {
+        verdictBadge.textContent = "AMBIGUOUS";
         verdictBadge.classList.add("verdict-suspicious");
       } else {
         verdictBadge.textContent = "CLEAN";
         verdictBadge.classList.add("verdict-clean");
       }
 
-      // Populate engine breakdown
+      // Detection Breakdown: Only display vendors that flagged the URL
       detectionList.innerHTML = "";
-      const results = data.engine_results || {};
+      const results =
+        data.engine_results ||
+        data.raw_details?.last_analysis_results ||
+        {};
       const engines = Object.keys(results);
 
-      if (engines.length === 0) {
+      const flaggedEngines = engines.filter((name) => {
+        const cat = (results[name]?.category || "").toLowerCase();
+        return cat === "malicious" || cat === "suspicious";
+      });
+
+      if (
+        verdict === "UNKNOWN" ||
+        verdict === "UNSCANNED" ||
+        totalEngines === 0
+      ) {
         const item = document.createElement("li");
-        item.className = "detection-item";
-        item.textContent = "No specific vendor flags reported.";
+        item.className = "detection-item empty-state";
+        item.textContent =
+          "URL not previously evaluated by VirusTotal. No historical engine records exist.";
+        detectionList.appendChild(item);
+      } else if (flaggedEngines.length === 0) {
+        const item = document.createElement("li");
+        item.className = "detection-item empty-state";
+        item.textContent = `All ${totalEngines} security vendors verified this URL as harmless or undetected. No threats reported.`;
         detectionList.appendChild(item);
       } else {
-        engines.forEach((name) => {
+        flaggedEngines.forEach((name) => {
           const item = document.createElement("li");
           item.className = "detection-item";
 
@@ -133,7 +182,7 @@
           engineSpan.className = "detection-engine";
           engineSpan.textContent = name;
 
-          const cat = results[name]?.category || "undetected";
+          const cat = results[name]?.category || "suspicious";
           const catSpan = document.createElement("span");
           catSpan.className = `detection-status ${cat}`;
           catSpan.textContent = cat;
@@ -146,7 +195,10 @@
 
       resultsCard.classList.remove("hidden");
     } catch (err) {
-      showError("Network Error", "Failed to communicate with the scanner API. Please check your network connection.");
+      showError(
+        "Network Error",
+        "Failed to communicate with the scanner API. Please check your network connection."
+      );
     } finally {
       setLoading(false);
     }

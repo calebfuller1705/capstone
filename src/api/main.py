@@ -15,7 +15,6 @@ from src.services.vt_client import (
     UpstreamRateLimitError,
 )
 
-# Load environment variables from .env
 load_dotenv()
 
 http_resources = {}
@@ -23,7 +22,7 @@ STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 
 def is_private_or_intranet_url(url: str) -> bool:
-    """Validate whether target URL points to a loopback, private RFC 1918 IP, or cloud metadata."""
+    """Validate target URL against loopback, private IP, or metadata."""
     try:
         parsed = urlparse(url)
         hostname = parsed.hostname
@@ -34,7 +33,8 @@ def is_private_or_intranet_url(url: str) -> bool:
         if hostname_lower in ("localhost", "127.0.0.1", "::1", "0.0.0.0"):
             return True
 
-        if hostname_lower.endswith(".local") or hostname_lower.endswith(".internal") or hostname_lower.endswith(".lan"):
+        internal_suffixes = (".local", ".internal", ".lan")
+        if any(hostname_lower.endswith(s) for s in internal_suffixes):
             return True
 
         try:
@@ -56,7 +56,11 @@ def is_private_or_intranet_url(url: str) -> bool:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage application lifecycle resources with connection pooling."""
-    limits = httpx.Limits(max_keepalive_connections=50, max_connections=100, keepalive_expiry=30.0)
+    limits = httpx.Limits(
+        max_keepalive_connections=50,
+        max_connections=100,
+        keepalive_expiry=30.0,
+    )
     http_resources["client"] = httpx.AsyncClient(timeout=5.0, limits=limits)
     yield
     client: httpx.AsyncClient = http_resources.get("client")
@@ -68,7 +72,7 @@ app = FastAPI(
     title="URL Security Scanner",
     description="Stateless URL safety verification against VirusTotal v3",
     version="0.9.0-rc.1",
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 # Mount static asset bundle
@@ -94,11 +98,11 @@ async def health_check():
 @app.post("/scan", response_model=ScanResponse, status_code=status.HTTP_200_OK)
 async def scan_url(request: ScanRequest):
     """Scan a target URL string against VirusTotal v3."""
-    api_key = os.environ.get("VIRUSTOTAL_API_KEY", "dummy_fallback_for_mock_tests")
+    api_key = os.environ.get("VIRUSTOTAL_API_KEY", "").strip()
     if not api_key:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Server configuration error: missing VIRUSTOTAL_API_KEY"
+            detail="Server configuration error: missing VIRUSTOTAL_API_KEY",
         )
 
     normalized_url = request.url
@@ -109,21 +113,26 @@ async def scan_url(request: ScanRequest):
     if is_private_or_intranet_url(normalized_url):
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Unscannable intranet URL: private, loopback, and metadata addresses are restricted (FR-EVAL-01)"
+            detail=(
+                "Unscannable intranet URL: private, loopback, and metadata "
+                "addresses are restricted (FR-EVAL-01)"
+            ),
         )
 
     try:
         shared_client = http_resources.get("client")
-        report = await fetch_url_report(normalized_url, api_key, client=shared_client)
+        report = await fetch_url_report(
+            normalized_url, api_key, client=shared_client
+        )
         if report is None:
             report = {
                 "url": normalized_url,
-                "verdict": "Safe",
+                "verdict": "Unknown",
                 "positives": 0,
                 "total_engines": 0,
                 "scan_date": "N/A",
                 "cached": False,
-                "raw_details": {}
+                "raw_details": {},
             }
         return ScanResponse(**report)
 
@@ -132,20 +141,20 @@ async def scan_url(request: ScanRequest):
     except UpstreamRateLimitError as exc:
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-            detail=str(exc)
+            detail=str(exc),
         )
     except UpstreamServiceError as exc:
         if "timed out" in str(exc).lower():
             raise HTTPException(
                 status_code=status.HTTP_504_GATEWAY_TIMEOUT,
-                detail="Upstream threat intelligence service timed out"
+                detail="Upstream threat intelligence service timed out",
             )
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
-            detail=f"Upstream service error: {exc}"
+            detail=f"Upstream service error: {exc}",
         )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="An unexpected internal error occurred while processing the request"
+            detail="An unexpected internal error occurred while processing the request",
         )

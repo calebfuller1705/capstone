@@ -206,9 +206,26 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.verdict-clean { background-color: rgba(34, 197, 94, 0.2); color: var(--color-clean); }
-.verdict-suspicious { background-color: rgba(245, 158, 11, 0.2); color: var(--color-suspicious); }
-.verdict-malicious { background-color: rgba(239, 68, 68, 0.2); color: var(--color-malicious); }
+.verdict-clean {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: var(--color-clean);
+}
+
+.verdict-suspicious {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: var(--color-suspicious);
+}
+
+.verdict-malicious {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: var(--color-malicious);
+}
+
+.verdict-unknown {
+  background-color: rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
 
 .scanned-url {
   font-size: 1.1rem;
@@ -284,13 +301,46 @@ body {
   align-items: center;
 }
 
+.detection-item.empty-state {
+  grid-column: 1 / -1;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 0.85rem 1rem;
+  border: 1px dashed rgba(148, 163, 184, 0.25);
+  background-color: rgba(15, 23, 42, 0.4);
+}
+
 .detection-engine {
   font-weight: 500;
 }
 
-.detection-status.clean { color: var(--color-clean); }
-.detection-status.malicious { color: var(--color-malicious); font-weight: 600; }
-.detection-status.suspicious { color: var(--color-suspicious); font-weight: 600; }
+.detection-status {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.detection-status.clean,
+.detection-status.harmless {
+  color: var(--color-clean);
+  font-weight: 600;
+}
+
+.detection-status.suspicious {
+  color: var(--color-suspicious);
+  font-weight: 600;
+}
+
+.detection-status.malicious {
+  color: var(--color-malicious);
+  font-weight: 600;
+}
+
+.detection-status.undetected {
+  color: var(--color-neutral);
+}
 
 .hidden {
   display: none !important;

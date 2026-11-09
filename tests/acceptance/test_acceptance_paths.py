@@ -56,3 +56,58 @@ def test_FR_UI_01_AC1_health_endpoint_contract():
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
+
+
+def test_FR_EVAL_02_AC1_seeded_malware_returns_unsafe(monkeypatch):
+    """FR-EVAL-02-AC1: Seeded malware URL returns Unsafe verdict."""
+    async def mock_malicious_report(url, api_key, client=None):
+        return {
+            "url": url,
+            "verdict": "Unsafe",
+            "positives": 15,
+            "total_engines": 72,
+            "scan_date": "2026-11-09 12:00:00 UTC",
+            "cached": True,
+            "malicious_count": 15,
+            "suspicious_count": 2,
+            "harmless_count": 50,
+            "undetected_count": 5,
+        }
+
+    monkeypatch.setattr("src.api.main.fetch_url_report", mock_malicious_report)
+
+    response = client.post(
+        "/scan", json={"url": "http://malware.testing.google.test/test"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["verdict"] == "Unsafe"
+    assert data["positives"] == 15
+    assert data["total_engines"] == 72
+
+
+def test_FR_EVAL_02_AC2_borderline_url_returns_ambiguous(monkeypatch):
+    """FR-EVAL-02-AC2: Single detection returns Ambiguous verdict."""
+    async def mock_borderline_report(url, api_key, client=None):
+        return {
+            "url": url,
+            "verdict": "Ambiguous",
+            "positives": 1,
+            "total_engines": 70,
+            "scan_date": "2026-11-09 12:00:00 UTC",
+            "cached": True,
+            "malicious_count": 1,
+            "suspicious_count": 0,
+            "harmless_count": 65,
+            "undetected_count": 4,
+        }
+
+    monkeypatch.setattr("src.api.main.fetch_url_report", mock_borderline_report)
+
+    response = client.post(
+        "/scan", json={"url": "https://borderline-site.example.com"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["verdict"] == "Ambiguous"
+    assert data["positives"] == 1

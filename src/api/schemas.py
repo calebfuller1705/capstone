@@ -1,15 +1,22 @@
-from datetime import datetime, timezone
+﻿from datetime import datetime, timezone
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_validator,
+    model_validator,
+)
 
 
 class ScanRequest(BaseModel):
-    """Schema for incoming URL scan submission payload with boundary validation."""
+    """Schema for incoming URL scan submission with boundary checks."""
+
     url: str = Field(
         ...,
         min_length=1,
         max_length=2048,
-        description="Target HTTP or HTTPS URL to scan"
+        description="Target HTTP or HTTPS URL to scan",
     )
 
     @field_validator("url")
@@ -28,6 +35,7 @@ class ScanRequest(BaseModel):
 
 class ScanResponse(BaseModel):
     """Schema for finalized scan verdict and engine statistics."""
+
     model_config = ConfigDict(extra="allow")
 
     url: str
@@ -53,15 +61,26 @@ class ScanResponse(BaseModel):
         if isinstance(data, dict):
             if "positives" not in data and "malicious_count" in data:
                 data["positives"] = data["malicious_count"]
-            if "malicious_count" not in data and "positives" in data:
-                data["malicious_count"] = data["positives"]
-            if "total_engines" not in data:
-                mal = data.get("malicious_count", 0)
-                susp = data.get("suspicious_count", 0)
-                harm = data.get("harmless_count", 0)
-                undet = data.get("undetected_count", 0)
+
+            if data.get("malicious_count") is None:
+                data["malicious_count"] = data.get(
+                    "malicious", data.get("positives", 0)
+                )
+            if data.get("suspicious_count") is None:
+                data["suspicious_count"] = data.get("suspicious", 0)
+            if data.get("harmless_count") is None:
+                data["harmless_count"] = data.get("harmless", 0)
+            if data.get("undetected_count") is None:
+                data["undetected_count"] = data.get("undetected", 0)
+
+            if not data.get("total_engines"):
+                mal = data.get("malicious_count", 0) or 0
+                susp = data.get("suspicious_count", 0) or 0
+                harm = data.get("harmless_count", 0) or 0
+                undet = data.get("undetected_count", 0) or 0
                 total = mal + susp + harm + undet
                 data["total_engines"] = total if total > 0 else 0
+
             if "verdict" not in data:
                 pos = data.get("positives", 0)
                 data["verdict"] = "Safe" if pos == 0 else "Unsafe"
@@ -76,5 +95,6 @@ class ScanResponse(BaseModel):
         if value is None:
             return "N/A"
         if isinstance(value, (int, float)):
-            return datetime.fromtimestamp(value, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+            dt = datetime.fromtimestamp(value, tz=timezone.utc)
+            return dt.strftime("%Y-%m-%d %H:%M:%S UTC")
         return str(value)
