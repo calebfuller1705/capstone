@@ -1,13 +1,13 @@
-# Capstone — TBD
+# Capstone — Phishing URL Scanner
 
 Senior capstone by Caleb Fuller, Fall 2026. 
 
 ## Current Status (Milestone 11)
-- Shipped: Milestone 11 complete: Test engineering practices, automated verification suites, and dress rehearsal gates passed. Authored comprehensive test plan (`docs/test-plan.md`) covering 4 test levels and checkable exit criteria. Generated deterministic test fixtures (`tools/generate_test_data.py`, seed 20261031) yielding 50 records across happy, boundary, and hostile families. Established 7-field defect tracking standard in `docs/defect-log.md`. Resolved `DEF-001` (URL length constraints on [FR-INP-03]) through a strict 3-commit Red-Green-Prove regression cycle (`test_tc_inp_03_url_length_exceeds_2048` proven red on pre-fix commit). Conducted empirical AI test generation audit exposing change detector failure modes (2 vs. 7 errors across spec vs. code contexts). Implemented VirusTotal v3 seam verification in `tests/integration/test_vt_contracts.py` with structure checks, property invariants, 5 golden set fixtures, and 5 stubbed failure paths (429, timeout, malformed HTML/JSON, missing attributes, 503). Completed 45-minute unscripted exploratory testing ("pesticide check") discovering `DEF-011` through `DEF-015` and adding client-side concurrency and debounce testing to the test plan. Executed clean-room verification dress rehearsal in a fresh clone (`capstone-rehearsal`) with 28 passing tests (100% green in 2.39s), generated `docs/test-results.md`, verified 35% Must requirement coverage via `tools/coverage_report.py`, audited exit criteria, and documented operational workarounds for all open items.
-- Cut: 15 unverified Must requirements ([FR-INP-01], [FR-UI-01], [FR-UI-02], [NFR-ACC-01..05], etc.) and 3 exploratory defects (`DEF-011` submit debounce, `DEF-014` raw 422 banner display, `DEF-015` keyboard focus indicator) explicitly deferred to Iteration 2 frontend web UI construction and accessibility styling passes (Milestone 12).
-- Hours: actual 11.75 h (Milestone 11 total)
-- Blocked on: nothing
-- Ship confidence: green
+Shipped:     v0.9.0-rc.1 release candidate: end-to-end URL safety scanner with VirusTotal v3 integration, zero-persistence SSRF guard, full fault degradation, clean-clone verification (60/60 tests green), and Keep a Changelog release notes.
+Cut:         Deferred recursive redirect unshortening for shortened links (bit.ly/tinyurl) via CR-003 to docs/backlog.md (B-01) for v1.1.
+Hours:       planned 15.0 / actual 14.0        (from docs/hours-log.csv)
+Blocked on:  nothing
+Ship confidence: green
 
 ## What is here
 - `docs/charter.md` — scope, constraints, non-goals, risks, working agreement

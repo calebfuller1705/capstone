@@ -17,3 +17,15 @@ This document tracks empirical measurements for non-functional requirements. In 
 * **Measurement Tool:** `tools/measure_performance.py`
 * **Sample Count:** 50 consecutive requests outside the editor session
 * **Tail Metric:** 95th percentile ($\text{p95}$) evaluated against the 500 ms ceiling
+
+
+### Week 12 - Release Candidate Dress Rehearsal (v0.9.0-rc.1)
+- **Measurement Date:** 2026-11-09
+- **Environment:** Clean clone into temporary directory, fresh Python virtual environment.
+- **Time to First Successful Run (TTFSR):** 4 minutes and 47 seconds
+  - Clone and setup: Automated dependency installation via `requirements.txt` (`cp .env.example .env`).
+  - Acceptance suite: 60/60 tests green.
+  - Acceptance probes: 3/3 grader verification paths verified.
+  - Fault degradation: Upstream dependency severance cleanly returned HTTP 502.
+  - Deviation count from README: 0.
+- **Status:** PASS.
