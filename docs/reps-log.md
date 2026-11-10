@@ -1,107 +1,56 @@
-## Week 12 — Rep 1: The Seam Map
+## Week 13 Reps
 
-### Component Seam Map
-| Seam | Crosses (process / network / storage?) | On an acceptance path? | Tested today? | Tier |
-|---|---|---|---|---|
-| 1. User -> ui_controller (Web Client) | Process (User input event to browser process) | Yes (FR-INP-01, NFR-USE-01, NFR-ACC-01..05) | Partially (Tested manually in Rep 12; automated DOM tests absent) | Tier 1 |
-| 2. ui_controller -> input_validator | In-process (JavaScript function call) | Yes (FR-INP-01, FR-INP-02, FR-INP-03) | No (Client-side validation component not yet built) | Tier 2 |
-| 3. ui_controller (Client) -> api_router (FastAPI) | Network & Process (HTTPS / JSON POST /scan) | Yes (FR-INP-01, FR-6, NFR-PERF-01) | Partially (Verified via TestClient; live browser fetch untested) | Tier 1 |
-| 4. api_router -> poller | In-process (Python async coroutine call) | Yes (FR-SYS-01, NFR-PERF-01) | Partially (Direct fetch implemented; polling loop deferred) | Tier 2 |
-| 5. poller -> vt_client | In-process (Python async function call) | Yes (FR-SYS-01, FR-API-02) | Yes (test_vt_client.py, test_vt_contracts.py) | Tier 2 |
-| 6. vt_client -> VirusTotal v3 REST API | Network (External 3rd-party HTTPS REST API) | Yes (FR-2, FR-API-01, FR-API-02, NFR-1, NFR-SEC-01) | Yes (test_vt_contracts.py with mock transport and stubs) | Tier 1 |
-| 7. poller -> evaluator | In-process (Python function call) | Yes (FR-4, FR-UI-01, FR-UI-02) | Yes (test_verdict_characterization.py) | Tier 2 |
-| 8. Uptime Monitor -> health_check | Network (HTTPS GET /health) | Yes (NFR-REL-01) | Yes (test_health.py) | Tier 1 |
+## Rep 1 — Score your README before you touch it
 
-### Tier Ranking
-* **Tier 1 (Boundary + Acceptance Path):** Seam 6 (vt_client -> VirusTotal API), Seam 3 (Web Client -> api_router), Seam 1 (User -> Web Client DOM), Seam 8 (Uptime Monitor -> health_check).
-* **Tier 2 (In-Process Module Calls):** Seams 2, 4, 5, 7.
+Score key: 2 = present and complete, 1 = present but thin or vague, 0 = missing
 
-## Week 12 — Rep 2: One Integration Test per Tier 1 Seam
+ 1. What it is / who it is for: 1
+ 2. Demo (screenshot, GIF, session): 0
+ 3. Prerequisites with versions: 1
+ 4. Install: 1
+ 5. Configure: 1
+ 6. Run (+ the action that proves it works): 1
+ 7. Test: 1
+ 8. Project layout: 1
+ 9. Troubleshooting: 0
+10. License: 0
+11. Contact / further reading: 0
+TOTAL: 7 / 22
 
-### Probing the Seven Seam Failure Modes
-1. **Contract drift:** `test_seam_contract_drift_upstream_omits_stats` (verified safe fallback when upstream omits attributes).
-2. **Unit mismatch:** `test_seam_unit_mismatch_latency_metric` (verified metric units).
-3. **Time zone & encoding:** `test_seam_encoding_idn_and_query_parameters` (verified base64url URL-safe characters without padding).
-4. **Identity:** `test_seam_identity_trailing_slash_normalization` (prevented split cache identities on root domain slashes).
-5. **Ordering:** `test_seam_ordering_missing_config_fails_fast` (verified empty API key fails prior to network calls).
-6. **Error semantics:** `test_seam_error_semantics_timeout_mapping` (verified upstream timeout maps to HTTP 504 rather than unhandled 500).
-7. **Partial failure:** `test_seam_partial_failure_zero_disk_persistence` (asserted zero disk persistence invariant).
+**Widget Comparison:**
+- Self-Score: 6 / 22 (~27%)
+- README Grader Widget Score: 48 / 100
+- Projected Time to First Successful Run: 1h 13m (Target: 15 min)
+- Grader Flags:
+  - ⚑ Configuration referenced but not explained (−6 pts)
+  - ✕ Missing: Screenshot/demo, Project layout, Troubleshooting, License, Contact
+  - ~ Thin: Configure, Run, Test
 
-## Week 12 — Rep 3: Measure a Target, Do Not Feel It
+  ## Rep 2 — Pin what you actually have
 
-### Performance Benchmark (NFR-PERF-01)
-* **Target:** `POST /scan` response latency <= 500 ms p95 under realistic load.
-* **Volume Pool:** Generated 500 enterprise URL records in `tests/fixtures/perf_seed_500.json` (seed 20261104).
-* **Sample:** 50 sequential requests via `tools/measure_performance.py`.
-* **Initial Run:** p50 = 727.60 ms, p95 = 1083.40 ms, Max = 2101.51 ms (Verdict: MISS).
-* **Root Cause & Action:** Upstream HTTPS connection renegotiation per request pushed tail percentiles over 1.0 second. Implemented persistent connection pooling (`httpx.Limits`) and an ephemeral in-memory cache in `src/services/vt_client.py` and `src/api/main.py`.
-* **Re-measured Run:** p50 = 83.80 ms, p95 = 184.22 ms, Max = 445.80 ms (Verdict: PASS).
+### Prerequisites Table
 
-## Week 12 — Rep 5: Break Your Dependency on Purpose
+| Requirement | Tested-On Version | Check Command | What Breaks and How You Will Recognize It |
+|---|---|---|---|
+| **Python** | `Python 3.14.2` | `python --version` (Windows) or `python3 --version` | Running Python < 3.12 fails during dependency installation or Pydantic V2 model validation in `src/api/schemas.py`. If Python is not installed or not added to `PATH`, running the command prints `'python' is not recognized as an internal or external command` (Windows) or `command not found: python3` (macOS/Linux). |
+| **Git** | `git version 2.47.0.windows.2` | `git --version` | Without Git, the reader cannot clone the repository or checkout tags like `v0.9.0-rc.1`. The terminal prints `'git' is not recognized as an internal or external command`. |
+| **pip / venv** | Bundled with Python 3.14 (`pip 24.3.1`) | `python -m pip --version` | Without `venv` (common on clean Debian/Ubuntu Linux installs), creating the virtual environment fails with: `The virtual environment was not created successfully because ensurepip is not available. You need to install the python3-venv package`. |
+| **VirusTotal v3 API Key** | v3 Public API (64-character hex string) | `echo $env:VIRUSTOTAL_API_KEY` (PS) or `echo $VIRUSTOTAL_API_KEY` (Bash) | Automated tests run offline via mocks and pass without a key. However, live scans submitted through the UI or `/scan` will fail with an HTTP 401 Unauthorized upstream error from VirusTotal if the key is missing, empty, or malformed.
 
-### Dependency Fault Injection Suite (`tests/integration/test_dependency_faults.py`)
-* **Simulated Scenarios:**
-  1. Upstream Quota Exhaustion (`HTTP 429`) -> maps to HTTP 429 with actionable quota message.
-  2. Upstream Timeout (`httpx.ReadTimeout`) -> maps to HTTP 504 Gateway Timeout.
-  3. Upstream Outage (`HTTP 500`, `502`, `503`) -> maps to HTTP 502 Bad Gateway.
-  4. Malformed/Poisoned Payload (HTML gateway text returned instead of JSON) -> maps to HTTP 502 Bad Gateway without unhandled crash.
-  5. Total Network Disconnect (`httpx.ConnectError` / DNS drop) -> maps to HTTP 502 Bad Gateway.
-* **Verification:** All 7 test cases pass deterministically via monkeypatched HTTP transport harnesses.
+## Rep 3 — Find the invisible accounts and the personal paths
 
-## Week 12 — Rep 6: The Assistant as Security Reviewer, Then the Advisory Database
+### Pass 1: Mechanical Audit (Personal Paths & Undocumented Ports)
 
-### Assistant Security Audit Verification Scorecard
-* **Target File Reviewed:** `src/api/main.py`
-* **Audit Scorecard:**
-  * Findings claimed: 7 (4 code findings + 3 dependency advisories)
-  * Findings confirmed real: 3 (SSRF input vulnerability, 500 exception disclosure, certifi advisory)
-  * Advisory IDs that existed: 3 / 3
-  * Affected range actually included my version: 1 / 3 (PYSEC-2026-4320 in certifi==2026.7.22)
-  * Real issues it MISSED that I found myself: 1 (DEF-003 upstream socket timeout / connection starvation)
+Audit command executed:
+```powershell
+Get-ChildItem -Recurse -Include README.md,*.md docs,README.md | Select-String -Pattern "C:\\Users|/home/|localhost:[0-9]{4}|127\.0\.0\.1"
 
-## Week 12 — Rep 7: Three Requests, Three Impact Analyses
+Audit Findings:
+Personal absolute paths (C:\Users, /home/): 0 hits. No machine-specific developer paths exist in README.md or docs/.
+Loopback IP / Localhost (127.0.0.1, localhost:8000):
+Legitimate security test targets: Appears across docs/security-review.md, docs/iteration-1-plan.md, and test traceability matrices as an SSRF boundary test case (blocking loopback access).
+Local runtime address: Appears in README.md and docs/skeleton-trace.md referring to the default Uvicorn bind address (http://127.0.0.1:8000).
 
-### Change Requests Logged (`docs/change-requests/` & `CHANGELOG.md`)
-* `CR-001-clipboard-export.md` — **ACCEPT**: 1-click clipboard summary export in UI (1.5 h).
-* `CR-002-batch-csv-upload.md` — **DEFER**: Batch CSV upload (10.0 h), deferred to backlog as B-03 (post-handoff v1.1) due to upstream API rate limit constraints.
-* `CR-003-user-scan-history.md` — **REJECT**: Persistent user accounts and scan history database, rejected due to violation of core architecture constraint `CON-04` and zero-retention guarantee `NFR-SEC-02`.
-
-## Week 12 — Rep 8: The Cut You Have Been Avoiding
-
-### Capacity Computation & Scope Balance
-* **Average Weekly Build Hours:** 12.5 h/week
-* **4-Week Gross Capacity:** 50.0 h
-* **Non-Negotiable Deadlines:** Week 13 Doc (14.0 h) + Week 14 Deploy (14.0 h) + Week 15 Presentation (12.0 h) = 40.0 h
-* **Real Remaining Build Capacity:** 10.0 h
-* **Unfinished Requirements (15.0 h total):** FR-EVAL-04 (2.0 h), FR-DASH-01 (2.5 h), FR-EVAL-02 (3.0 h), FR-DASH-02 (1.5 h), FR-DASH-03 (1.0 h), FR-SYS-02 (5.0 h).
-* **The Cut:** Deferred `FR-SYS-02` (Action Logging, 5.0 h) to `docs/backlog.md` as B-04 via `CR-005`. Balanced load = 10.0 h.
-
-## Week 12 - Rep 9: Change Request Triage
-
-### Complete Scorecard
-Run 1 (instinct):  shipped 4 / slipped 6 ; costliest decision: Accepting batch CSV file upload (+10.0 h)
-Run 2 (policy):    shipped 8 / slipped 0 ; costliest decision: Accepting quick-copy clipboard export (+1.5 h)
-Times my run-1 decisions violated my own written policy: 4
-
-## Week 12 — Rep 10: Freeze, Gate, Tag
-
-### Exit Criteria Evaluation
-* [x] Every Must-have requirement has a passing acceptance test (30 assertions green)
-* [x] Zero open Critical or High defects (DEF-001 closed, no open S1/S2 bugs)
-* [x] Security pass complete; every finding fixed or explicitly accepted (docs/security-review.md)
-* [x] Every performance target measured; each miss has a recorded decision (NFR-PERF-01 p95 = 3.12 s <= 10.0 s)
-* [x] A clean clone sets up, runs, and passes tests using only documented steps
-
-### Release Gate Execution
-* **Setup Command:** `pip install -r requirements.txt`
-* **Test Command:** `pytest tests/ -v`
-* **Gate Verdict:** Clean clone verified green (60 passed, 0 failed).
-
-## Week 12 — Rep 11: Rewrite a Bad Change-Log Entry
-
-### Changelog Audit & Transformation
-* **Input:** Vague, non-traceable entries ("various bug fixes", "updated dependencies", "refactored the backend").
-* **Output:** Structured Keep a Changelog format categorized under Added, Changed, Fixed, Security, and Known Issues.
-* **Traceability:** Mapped entries directly to active requirements (`FR-INP-01`, `FR-UI-01`, `FR-ACT-01`, `FR-SYS-01`), defect logs (`DEF-001`), and change requests (`CR-002`).
-* **Operator Instructions:** Documented explicit prerequisite commands (`pip install -r requirements.txt` and `.env` initialization).
-* **Known Issues:** Documented `KI-001` (lack of HTTP redirect trace on shortened URLs) with manual expansion workaround.
+| External dependency | Where you get it | Free? (verify with vendor) | What happens without it |
+|VirusTotal v3 API Key|Register a free Community account at virustotal.com and copy the 64-character API key from your user profile API settings.|Yes (Free public tier provides 4 requests/min, 500 requests/day, 15.5k requests/month as of Fall 2026; verify current quotas with vendor).|Automated test suites (pytest tests/) continue to pass because they run offline using mock HTTP transports. However, live URL submissions from the web UI (/) or POST /scan will fail with upstream 401 Unauthorized errors from VirusTotal.|
+|PyPI (Python Package Index)|Public package registry accessed automatically by pip.|Yes (Public internet access required).|Running pip install -r requirements.txt fails if the machine is behind an unconfigured corporate proxy or completely offline, blocking initial environment setup.|
