@@ -8,6 +8,30 @@ This system is a strictly stateless, zero-budget web application that allows cor
 * **In scope:** URL string validation (FR-INP-01 to 04), asynchronous 3rd-party polling (FR-SYS-01, FR-API-01, 02), Safe/Unsafe UI state management (FR-UI-01, 02), and accessibility compliance (NFR-ACC-*).
 * **Out of scope:** Database persistence, user accounts, and scan history logs. 
 
+### §0 — Architecture Overview
+Code snippet
+flowchart LR
+    U[Browser Client<br/>Vanilla HTML/JS] -->|POST /scan<br/>JSON payload| R[Rate Limiter<br/>slowapi in-memory]
+    R -->|Validated IP| A[API Router & Schemas<br/>FastAPI / Pydantic]
+    A -->|Normalized URL| P[Polling Coordinator<br/>10s timeout loop]
+    P -->|Base64 ID + Auth Header| V[VirusTotal Client<br/>httpx REST]
+    V -->|HTTPS REST| EXT[(VirusTotal v3 API<br/>Cloud Database)]
+    EXT -->|Analysis JSON| V
+    V -->|Engine counts| E[Risk Evaluator<br/>Scoring threshold]
+    E -->|Verdict: Safe/Unsafe| A
+    A -->|HTTP 200 Response| U
+    H[Uptime Ping] -->|GET /health| A
+
+The Phishing URL Scanner is a stateless, zero-persistence security gateway that evaluates the reputation of submitted web addresses against the VirusTotal v3 threat intelligence API. Operating under a strict zero-retention security boundary, the application accepts single URL submissions via browser or REST client, normalizes and validates protocol targets, submits URL artifacts to upstream analysis queues, and coordinates polling until an authoritative reputation verdict is formed. The system exposes no persistent user accounts or historical logging endpoints, functioning entirely as an ephemeral verification pipeline designed for real-time risk assessment without data residue.
+
+The system is partitioned into seven distinct components across two deployment containers. The client-side container (ui_controller, input_validator) executes within an untrusted browser context, owning DOM updates, accessible state management, and a 12-second client abort controller while holding no business scoring rules or upstream secrets. The server-side container acts as the primary trust boundary: api_router and schemas.py enforce Pydantic payload validation and in-memory rate limiting; poller manages the asynchronous polling lifecycle and watches for early client disconnections; vt_client uniquely owns the VirusTotal API key, base64 target translation, and outbound HTTP timeouts; evaluator applies deterministic mathematical threshold logic (malicious > 0); and health_check serves monitoring pings without external I/O. No component shares state or initiates circular dependencies.
+
+Authoritative data in this architecture is ephemeral and strictly split between three transient structures. First, the in-flight scan_request object exists only in Python process memory for the duration of the HTTP request, holding the normalized target string, the upstream base64 analysis identifier, and raw engine hit counters before garbage collection discards it immediately upon response transmission. Second, client rate-limiting state is tracked via an ephemeral in-memory bucket (slowapi), tracking sliding request counts per client IP without disk persistence. Third, external reputation data remains authoritatively hosted in VirusTotal's threat database. The system maintains no SQL tables, document stores, or persistent log volumes; migrations/0001-stateless.sql exists solely as a structural sentinel to guarantee CI/CD deployment routines never provision a database.
+
+An end-to-end transaction initiates when a user enters a URL into the web interface and triggers the submission form. The client-side validator trims whitespace, confirms http:// or https:// protocol prefixing, and dispatches an asynchronous POST /scan JSON payload across HTTPS to the API server. Upon entry, api_router evaluates the client IP against the in-memory rate limit (2 req/min) and invokes Pydantic schema validation. Once verified, vt_client transforms the target string into an unpadded URL-safe base64 identifier and transmits an authenticated POST request to VirusTotal v3. The poller loop queries /api/v3/analyses/{id} at timed intervals; if request.is_disconnected() returns true at any point, polling terminates immediately to prevent quota leakage. Once VirusTotal returns a completed state, evaluator maps detection stats to a definitive Safe or Unsafe verdict, which flows back to the client as an HTTP 200 payload to trigger the corresponding UI state.
+
+The primary system design reflects key architectural decisions: decoupling persistence via a stateless runtime (ADR-0001 / CON-04), enforcing unpadded base64 identifier hashing to match VirusTotal v3 API requirements (DR-001), capping external execution cycles to a strict 10.0-second timeout with an automatic 504 Gateway Timeout error envelope (DR-004, DR-011), and isolating upstream credentials inside the server environment. The thing that would surprise a new reader is that the application contains no database, no caching layer, and no persistent logs of any kind; every scan is treated as an isolated, ephemeral transaction that leaves zero traces on disk or in memory after the HTTP response completes.
+
 ## 2. System Context (Level 1)
 Diagram: `docs/diagrams/context.mmd`
 
