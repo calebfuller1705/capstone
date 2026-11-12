@@ -135,7 +135,7 @@ Fix:
 
 Generate or copy a valid key from virustotal.com profile settings.
 
-Paste into .env as VIRUSTOTAL_API_KEY=your_64_character_hex_key.
+Paste into .env as VIRUSTOTAL_API_KEY=<your-virustotal-api-key>.
 
 Restart Uvicorn.
 
