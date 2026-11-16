@@ -47,9 +47,12 @@ $ curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "C
 ### Install
 1. Installation
 Step 1: Clone the repository
-Bash
-git clone https://github.com/calebfuller1705/capstone.git
-cd capstone
+
+Clone the repository into a parent workspace folder (do **not** manually create an empty `capstone` folder first, or you will end up inside `capstone\capstone`):
+   ```bash
+   git clone [https://github.com/calebfuller1705/capstone.git](https://github.com/calebfuller1705/capstone.git)
+   cd capstone
+```
 
 Expected: Cloning into 'capstone'... followed by Resolving deltas: 100% (xx/xx), done. — takes about 3 seconds.
 
@@ -72,7 +75,7 @@ If you see (Linux): The virtual environment was not created successfully because
 Step 3: Upgrade pip and install dependenciesPowerShell
 PowerShell
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
 Bash
 ./.venv/bin/python -m pip install --upgrade pip
@@ -120,10 +123,10 @@ Start the FastAPI server from the repository root with your virtual environment 
 python -m uvicorn src.api.main:app --reload
 
 # Or directly via .venv (Windows PowerShell)
-.\.venv\Scripts\python -m uvicorn src.api.main:app --reload
+.\.venv\Scripts\python.exe -m uvicorn src.api.main:app --reload
 
 # Or directly via .venv (macOS / Linux)
-./.venv/bin/uvicorn src.api.main:app --reload
+./.venv/bin/python -m uvicorn src.api.main:app --reload
 ```
 
 What a working start looks like:
