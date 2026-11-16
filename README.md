@@ -2,6 +2,7 @@
 
 Senior capstone by Caleb Fuller, Fall 2026. A stateless, zero-persistence web application that evaluates URLs against the VirusTotal v3 threat intelligence API to deliver real-time Safe or Unsafe verdicts without storing user browsing history.
 
+## Who is It For
 Corporate employees, IT helpdesk staff, and security reviewers frequently encounter suspicious links in emails and messages, yet pasting unverified URLs into public web tools or logging scan histories risks leaking sensitive internal destinations. Phishing URL Scanner solves this problem by providing a fast, zero-persistence web interface and REST API that evaluates URLs against the VirusTotal v3 threat intelligence engine and immediately discards all request data from memory once a Safe or Unsafe verdict is returned.
 
 - **Status:** Working (`v0.9.0-rc.1` release candidate). End-to-end URL safety scanner with VirusTotal v3 integration, zero-persistence SSRF guard, full fault degradation, clean-clone verification (60/60 tests green), and Keep a Changelog release notes.
@@ -32,10 +33,8 @@ $ curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "C
 {"url":"[https://example.com](https://example.com)","verdict":"Safe","positives":0,"total_engines":0,"scan_date":"N/A","cached":false,"raw_details":{}}
 ```
 
-### Prerequisites Table
-
+### Prerequisites
 **Tested on Python 3.14.2 (supports Python 3.12+), Git 2.47.0, and pip 24.3.1.**
-
 | Requirement | Tested-On Version | Check Command | What Breaks and How You Will Recognize It |
 |---|---|---|---|
 | **Python** | Python 3.14.2 (supports `3.12–3.14`; **do not use `3.15+`** on Windows due to missing pre-built binary wheels) | `python --version` (Windows) or `python3 --version` (macOS/Linux) | Python `< 3.12` fails Pydantic V2 validation; Python `3.15+` on Windows fails dependency installation trying to compile C extensions (`Microsoft Visual C++ 14.0 or greater is required`). |
