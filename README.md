@@ -2,7 +2,7 @@
 
 Senior capstone by Caleb Fuller, Fall 2026. A stateless, zero-persistence web application that evaluates URLs against the VirusTotal v3 threat intelligence API to deliver real-time Safe or Unsafe verdicts without storing user browsing history.
 
-## Who is It For
+## What It Is and Who It Is For
 Corporate employees, IT helpdesk staff, and security reviewers frequently encounter suspicious links in emails and messages, yet pasting unverified URLs into public web tools or logging scan histories risks leaking sensitive internal destinations. Phishing URL Scanner solves this problem by providing a fast, zero-persistence web interface and REST API that evaluates URLs against the VirusTotal v3 threat intelligence engine and immediately discards all request data from memory once a Safe or Unsafe verdict is returned.
 
 - **Status:** Working (`v0.9.0-rc.1` release candidate). End-to-end URL safety scanner with VirusTotal v3 integration, zero-persistence SSRF guard, full fault degradation, clean-clone verification (60/60 tests green), and Keep a Changelog release notes.
@@ -34,8 +34,10 @@ $ curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "C
 ```
 
 ### Prerequisites
-**Tested on Python 3.14.2 (supports Python 3.12+), Git 2.47.0, and pip 24.3.1.**
-| Requirement | Tested-On Version | Check Command | What Breaks and How You Will Recognize It |
+
+**Tested with fastapi-0.115.0 httpx-0.28.1 pydantic-2.10.0 pytest-8.3.0 uvicorn-0.34.0**
+
+Version | Check Command | What Breaks and How You Will Recognize It |
 |---|---|---|---|
 | **Python** | Python 3.14.2 (supports `3.12–3.14`; **do not use `3.15+`** on Windows due to missing pre-built binary wheels) | `python --version` (Windows) or `python3 --version` (macOS/Linux) | Python `< 3.12` fails Pydantic V2 validation; Python `3.15+` on Windows fails dependency installation trying to compile C extensions (`Microsoft Visual C++ 14.0 or greater is required`). |
 | **Git** | git version 2.47.0.windows.2 | `git --version` | Without Git, the reader cannot clone the repository or checkout tags like `v0.9.0-rc.1`. The terminal prints `'git' is not recognized as an internal or external command`. |
@@ -80,7 +82,7 @@ Bash
 ./.venv/bin/python -m pip install --upgrade pip
 ./.venv/bin/pip install -r requirements.txt
 
-Expected: Successfully installed fastapi-... httpx-... pydantic-... pytest-... uvicorn-... — takes about 12 seconds.
+Expected: Successfully installed fastapi-0.115.0 httpx-0.28.1 pydantic-2.10.0 pytest-8.3.0 uvicorn-0.34.0 — takes about 12 seconds.
 
 If you see: WARNING: There was an error checking the latest version of pip, ignore it; dependency installation completes successfully regardless of pip upgrade notices.
 
@@ -113,7 +115,7 @@ Expected: Offline test suites (pytest tests/) bypass external calls using mock t
 If you see: Live scan submissions return HTTP 401 Unauthorized or UI banner Invalid or missing VirusTotal API key, confirm your 64-character hex key contains no leading/trailing quotes, spaces, or stray line breaks.
 
 
-## Running the Application
+## Run
 
 Start the FastAPI server from the repository root with your virtual environment activated (or by calling the `.venv` interpreter directly):
 
@@ -143,7 +145,7 @@ If you see: ERROR: [Errno 10048] error while attempting to bind on address ('127
 
 If you see: ERROR: [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): address already in use (or [Errno 98] on Linux), terminate the lingering process on port 8000 or append --port 8001 to bind to an alternate port.   
 
-Verification Action   
+## Verification Action   
 
 Prove the entire application pipeline functions end-to-end rather than merely confirming process startup:
 

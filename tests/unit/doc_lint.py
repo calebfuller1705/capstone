@@ -101,7 +101,7 @@ def main(path, profile=None):
             report("ERROR", i, "possible real secret in documentation — use a placeholder")
             errors += 1
 
-    prereq = re.search(r"(?is)^#+ .*(prerequisit|requirement).*$(.*?)(^#+ |\Z)", text, re.M)
+    prereq = re.search(r"(?im)^#+ .*(prerequisit|requirement).*$([\s\S]*?)(^#+ |\Z)", text)
     if prereq and not VERSIONISH.search(prereq.group(2)):
         report("ERROR", 0, "prerequisites section names no versions — pin what you tested on")
         errors += 1
