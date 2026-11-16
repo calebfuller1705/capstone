@@ -10,7 +10,7 @@ Corporate employees, IT helpdesk staff, and security reviewers frequently encoun
 ## Current Status (Milestone 13)
 Shipped:     Complete Milestone 13 operational documentation suite (README, architecture §0, runbook, onboarding, ADR index, AI/API usage, and verified clean-machine test) for v0.9.0-rc.1.
 Cut:         Deferred recursive redirect unshortening (B-01) and persistent server-side action logging (B-04) to v1.1 (tracked in docs/backlog.md).
-Hours:       planned 15.0 / actual 12.5 (from docs/hours-log.csv)
+Hours:       planned 15.0 / actual 13.5 (from docs/hours-log.csv)
 Blocked on:  nothing
 Ship confidence: green
 

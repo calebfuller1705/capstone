@@ -1,4 +1,4 @@
-﻿import ipaddress
+import ipaddress
 import os
 from contextlib import asynccontextmanager
 from pathlib import Path
