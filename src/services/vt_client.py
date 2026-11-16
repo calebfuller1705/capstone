@@ -91,7 +91,11 @@ async def fetch_url_report(
     if not api_key or not str(api_key).strip():
         raise ValueError("VirusTotal API key is required and cannot be empty")
 
-    if api_key.strip() in {"ci-smoke-test-key", "unit-test-key", "YourVirusTotalAPIKeyHere", "your-api-key", "<your-api-key>"}:
+    if api_key.strip() in {"ci-smoke-test-key", 
+                           "unit-test-key", 
+                           "YourVirusTotalAPIKeyHere", 
+                           "your-api-key", 
+                           "<your-api-key>"}:
         return {
             "url": url,
             "verdict": "Safe",
