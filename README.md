@@ -8,11 +8,11 @@ Corporate employees, IT helpdesk staff, and security reviewers frequently encoun
 - **What it does not do:** No database persistence, user accounts, or historical scan logs (strictly stateless per privacy constraint `CON-04`); no recursive redirect unshortening for shortened links (`bit.ly`/`tinyurl`, deferred via CR-003 to `docs/backlog.md` item B-01 for `v1.1`).
 
 ## Current Status (Milestone 13)
-- **Shipped:** `v0.9.0-rc.1` release candidate + full Milestone 13 operational and architectural documentation set.
-- **Cut:** Deferred recursive redirect unshortening (`B-01`) and persistent server-side action logging (`B-04`) to `v1.1`.
-- **Hours:** planned 15.0 / actual 14.0 (from `docs/hours-log.csv`)
-- **Blocked on:** nothing
-- **Ship confidence:** green
+Shipped:     Complete Milestone 13 operational documentation suite (README, architecture §0, runbook, onboarding, ADR index, AI/API usage, and verified clean-machine test) for v0.9.0-rc.1.
+Cut:         Deferred recursive redirect unshortening (B-01) and persistent server-side action logging (B-04) to v1.1 (tracked in docs/backlog.md).
+Hours:       planned 15.0 / actual 12.5 (from docs/hours-log.csv)
+Blocked on:  nothing
+Ship confidence: green
 
 ---
 

@@ -71,4 +71,4 @@ date,start,end,hours,phase,hat,task,estimate_hours,blocked_hours,notes,ai_used?
 2026-11-10,11:00,14:00,3.0, Documentation, Technical Writer,"Milestone 13 Reps 4-8, Group B", 3.50 ,0.00, Will continue one with Group C of Week 13 next, No
 2026-11-12,06:30,9:30,3.0, Documentation, Technical Writer,"Milestone 13 Reps 9-11, Linter, AI troubleshooting table draft, most volatile third-party dependency", 3.0 ,0.00, Will run clean-machine test next, Yes
 2026-11-15,07:30,08:30,1.50, Test, Tester,"Milestone 13: Ran the self-test clean-machine verification on a freshly cloned repo with a different Windows account", 1.5,0.00, Clean-machine verification passed with no errors; will continue with Milestone 13 documentation and clean-machine verification next, No
-2026-11-16,08:00,09:45,2.50, Documentation, Technical Writer,"Milestone 13 Clean-Machine Test, Fixes, and Re-Run", 2.0 ,0.00, Milestone 13 documentation and clean-machine verification complete, No
+2026-11-16,08:00,11:30,3.50, Documentation, Technical Writer,"Milestone 13 Clean-Machine Test, Fixes, and Re-Run", 2.0 ,0.00, Milestone 13 documentation and clean-machine verification complete, No
