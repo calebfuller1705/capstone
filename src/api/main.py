@@ -1,5 +1,6 @@
-import ipaddress
+﻿import ipaddress
 import os
+import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
 from urllib.parse import urlparse
@@ -19,6 +20,19 @@ load_dotenv()
 
 http_resources = {}
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
+
+
+def validate_startup_config() -> None:
+    """Fail loudly at server startup if required configuration is missing."""
+    api_key = os.environ.get("VIRUSTOTAL_API_KEY", "").strip()
+    if not api_key:
+        msg = (
+            "FATAL: VIRUSTOTAL_API_KEY is not set.\n"
+            "Copy .env.example to .env and fill it in, then re-run.\n"
+            'See README.md -> "Configuration".'
+        )
+        print(msg, file=sys.stderr)
+        raise RuntimeError(msg)
 
 
 def is_private_or_intranet_url(url: str) -> bool:
@@ -56,6 +70,7 @@ def is_private_or_intranet_url(url: str) -> bool:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage application lifecycle resources with connection pooling."""
+    validate_startup_config()
     limits = httpx.Limits(
         max_keepalive_connections=50,
         max_connections=100,
