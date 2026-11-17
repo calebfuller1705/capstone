@@ -1,4 +1,4 @@
-﻿import ipaddress
+import ipaddress
 import os
 import sys
 from contextlib import asynccontextmanager
