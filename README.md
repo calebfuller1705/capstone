@@ -76,11 +76,11 @@ If you see (Linux): The virtual environment was not created successfully because
 Step 3: Upgrade pip and install dependenciesPowerShell
 PowerShell
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.lock
 
 Bash
 ./.venv/bin/python -m pip install --upgrade pip
-./.venv/bin/pip install -r requirements.txt
+./.venv/bin/pip install -r requirements.lock
 
 Expected: Successfully installed fastapi-0.115.0 httpx-0.28.1 pydantic-2.10.0 pytest-8.3.0 uvicorn-0.34.0 — takes about 12 seconds.
 
