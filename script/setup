@@ -1,23 +1,52 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "==> Setting up environment..."
+echo "==> Checking prerequisites..."
+PYTHON_BIN=""
+if command -v python3 >/dev/null 2>&1; then
+    PYTHON_BIN="python3"
+elif command -v python >/dev/null 2>&1; then
+    PYTHON_BIN="python"
+else
+    echo "MISSING: python3 (Python 3.12-3.14) — see README.md prerequisites" >&2
+    exit 1
+fi
 
-if [ ! -f .env ] && [ -f .env.example ]; then
-    cp .env.example .env
+if [ ! -f "requirements.lock" ]; then
+    echo "MISSING: requirements.lock — run from the repository root" >&2
+    exit 1
+fi
+
+if [ ! -f ".env" ]; then
+    if [ -f ".env.example" ]; then
+        cp .env.example .env
+        echo "Created .env from .env.example (edit VIRUSTOTAL_API_KEY for live scans, or keep placeholder for offline mode)."
+    else
+        echo "MISSING: .env.example — repository incomplete" >&2
+        exit 1
+    fi
 fi
 
 if [ ! -d ".venv" ]; then
-    python3 -m venv .venv 2>/dev/null || python -m venv .venv
+    echo "==> Creating virtual environment (.venv)..."
+    "$PYTHON_BIN" -m venv .venv
 fi
 
 if [ -f ".venv/bin/activate" ]; then
+    # shellcheck disable=SC1091
     source .venv/bin/activate
 elif [ -f ".venv/Scripts/activate" ]; then
+    # shellcheck disable=SC1091
     source .venv/Scripts/activate
 fi
 
+echo "==> Installing pinned dependencies from requirements.lock..."
 python -m pip install --upgrade pip --quiet
-python -m pip install --prefer-binary --requirement requirements.lock
+python -m pip install --prefer-binary --requirement requirements.lock --quiet
 
-echo "==> Setup complete."
+echo ""
+echo "Setup complete."
+echo "Next steps:"
+echo "  1. Start the server: ./script/start  (or: .\\.venv\\Scripts\\python.exe -m uvicorn src.api.main:app --port 8000)"
+echo "  2. Expected output:  Uvicorn running on http://127.0.0.1:8000"
+echo "  3. Run test suite:   ./script/test   (or: .\\.venv\\Scripts\\python.exe -m pytest tests/ -v)"
