@@ -1,6 +1,6 @@
 # Capstone — Phishing URL Scanner
 
-Senior capstone by Caleb Fuller, Fall 2026. A stateless, zero-persistence web application that evaluates URLs against the VirusTotal v3 threat intelligence API to deliver real-time Safe or Unsafe verdicts without storing user browsing history.
+Senior capstone by Caleb Fuller, Fall 2026. Licensed under the MIT License (SPDX-License-Identifier: MIT — see LICENSE). A stateless, zero-persistence web application that evaluates URLs against the VirusTotal v3 threat intelligence API to deliver real-time Safe or Unsafe verdicts without storing user browsing history.
 
 ## What It Is and Who It Is For
 Corporate employees, IT helpdesk staff, and security reviewers frequently encounter suspicious links in emails and messages, yet pasting unverified URLs into public web tools or logging scan histories risks leaking sensitive internal destinations. Phishing URL Scanner solves this problem by providing a fast, zero-persistence web interface and REST API that evaluates URLs against the VirusTotal v3 threat intelligence engine and immediately discards all request data from memory once a Safe or Unsafe verdict is returned.
