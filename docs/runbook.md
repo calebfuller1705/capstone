@@ -21,6 +21,7 @@ Where the logs actually live: Standard output (stdout) / terminal console stream
 ## 2. Start, Stop, and Restart
 
 ### Start Backend
+> **Single-Worker Requirement (`--workers 1`):** Do **not** pass `--workers > 1` to Uvicorn. The 300s TTL cache and SlowAPI rate limiter live in process RAM; multiple workers split rate-limit state and trigger upstream VirusTotal `429` throttling. Allow **3–4 seconds** on Windows cold start before polling `/health`.
 ```powershell
 # Windows (PowerShell)
 .\.venv\Scripts\python -m uvicorn src.api.main:app --reload --port 8000
@@ -54,7 +55,7 @@ Unhealthy Output: Connection refused (curl: (7) Failed to connect...), HTTP 500 
 | Back up the data | N/A| Never | Stateless architecture (CON-04, NFR-SEC-02); 0 bytes of persistent scan history or database tables exist to back up. |
 | Restore from a backup | N/A | on demand | Stateless; disaster recovery consists of restarting Uvicorn and verifying curl -s [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health) returns {"status":"ok"}. |
 | Apply a schema change | Inspect migrations/0001-stateless.sql | on release | Confirmed sentinel file remains empty with documentation header; verifies no database tables or migrations are provisioned. | 
-| Rotate a key or secret | 1. Revoke old key at virustotal.com 2. Generate new key 3. Update VIRUSTOTAL_API_KEY in .env 4. Restart Uvicorn | Every 90 days or right away with exposure| Run curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "Content-Type: application/json" -d '{"url":"[https://example.com](https://example.com)"}' and verify HTTP 200 with "verdict": "Safe".
+| Rotate a key or secret | 1. Free tier has no in-place regenerate button: create a replacement VirusTotal account, copy its 64-char key, and delete the old account 3. Update VIRUSTOTAL_API_KEY in .env 4. Restart Uvicorn | Every 90 days or right away with exposure| Run curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "Content-Type: application/json" -d '{"url":"[https://example.com](https://example.com)"}' and verify HTTP 200 with "verdict": "Safe".
 | Seed demo data | N/A | for demos | System relies on static fixture files (tests/fixtures/test_data_hostile.json) for automated tests, or live target entries ([https://example.com](https://example.com)) for manual UI demonstrations.   
 
 ## 5. Normal Readings & Baseline Telemetry

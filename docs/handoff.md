@@ -43,3 +43,12 @@ In-memory cache clears on process restart; VirusTotal free tier caps throughput 
 Secret Hygiene: Commit 304cde0e previously exposed a VirusTotal key that was rotated in Rep 8; keep .env untracked and run git status before every commit.
 
 Key Reference Docs: README.md (quickstart), docs/architecture.md (system design), docs/runbook.md (incident response), docs/adr/ (architecture decisions 0001–0006).
+
+## 6. Landmines & Tribal Knowledge Traps
+1. **Windows Shell Differences:** `./script/setup` and `./script/start` are POSIX shell scripts—run them in **Git Bash (`MINGW64`)** on Windows, or invoke `.\.venv\Scripts\python.exe` directly in PowerShell.
+2. **Python `3.15+` Wheel Trap:** Stick to Python `3.12–3.14`. Python `3.15+` on Windows lacks pre-built `pydantic-core` wheels and fails installation requiring Visual C++ Build Tools.
+3. **Never Scale Past 1 Uvicorn Worker:** In-memory TTL caching (`300s`) and rate limiting reside in single-process RAM; multiple workers multiply VirusTotal API calls past the `4 req/min` free-tier limit.
+4. **VirusTotal Free-Tier Key Rotation:** VirusTotal's public free tier has no "Regenerate" button—rotating requires creating a new account and retiring the old one.
+5. **Empty `migrations/0001-stateless.sql` Is Intentional:** Protected by `ADR-0005` and `test_stateless_migration_sentinel_exists`; there is no database to migrate.
+6. **Historical Secret Scanner False Alarm (`304cde0e`):** Commit `304cde0e` contains an old VirusTotal key (`750524a7135eea8e...`) that was already revoked and rotated in Week 14 Rep 8; ignore alerts on that historical commit hash.
+7. **License Nuance (`MPL-2.0` & PEP 639):** `certifi` is `MPL-2.0` (weak file-level copyleft), and 21 packages store license metadata in `.dist-info/licenses/` rather than legacy headers—see `THIRD-PARTY-NOTICES.md`.

@@ -22,6 +22,13 @@ http_resources = {}
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 
+PLACEHOLDER_API_KEYS = {
+    "YourVirusTotalAPIKeyHere",
+    "ci-smoke-test-key",
+    "test_api_key_00000000000000000000000000000000",
+    "mock-key-for-local-dev",
+}
+
 def validate_startup_config() -> None:
     """Fail loudly at server startup if required configuration is missing."""
     api_key = os.environ.get("VIRUSTOTAL_API_KEY", "").strip()
