@@ -4,9 +4,10 @@ from src.api.main import validate_startup_config
 
 
 def test_placeholder_key_rejected_outside_pytest(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Row 1 guard: placeholder keys must fail fast at startup when not running under pytest."""
+    """Row 1 guard: placeholder keys must fail fast at startup outside pytest and CI."""
     monkeypatch.setenv("VIRUSTOTAL_API_KEY", "YourVirusTotalAPIKeyHere")
     monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.delenv("CI", raising=False)
     with pytest.raises(RuntimeError, match="placeholder/mock value"):
         validate_startup_config()
 
