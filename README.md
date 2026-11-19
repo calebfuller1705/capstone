@@ -26,11 +26,11 @@ Sample terminal session starting the Uvicorn server and verifying a live URL sca
 
 ```text
 $ .\.venv\Scripts\python -m uvicorn src.api.main:app --reload
-INFO:     Uvicorn running on [http://127.0.0.1:8000](http://127.0.0.1:8000) (Press CTRL+C to quit)
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 INFO:     Application startup complete.
 
-$ curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "Content-Type: application/json" -d '{"url":"[https://example.com](https://example.com)"}'
-{"url":"[https://example.com](https://example.com)","verdict":"Safe","positives":0,"total_engines":0,"scan_date":"N/A","cached":false,"raw_details":{}}
+$ curl -s -X POST http://127.0.0.1:8000/scan -H "Content-Type: application/json" -d '{"url":"https://example.com"}'
+{"url":"https://example.com","verdict":"Safe","positives":0,"total_engines":0,"scan_date":"N/A","cached":false,"raw_details":{}}
 ```
 
 ### Prerequisites
@@ -51,7 +51,7 @@ Step 1: Clone the repository
 
 Clone the repository into a parent workspace folder (do **not** manually create an empty `capstone` folder first, or you will end up inside `capstone\capstone`):
    ```bash
-   git clone [https://github.com/calebfuller1705/capstone.git](https://github.com/calebfuller1705/capstone.git)
+   git clone https://github.com/calebfuller1705/capstone.git
    cd capstone
 ```
 
@@ -108,7 +108,7 @@ Sample ./.env file contents:
 
 Code snippet
 VIRUSTOTAL_API_KEY=<your-api-key>
-FRONTEND_URL=[http://127.0.0.1:8000](http://127.0.0.1:8000)
+FRONTEND_URL=http://127.0.0.1:8000
 
 Expected: Offline test suites (pytest tests/) bypass external calls using mock transports and pass without an active key.
 
@@ -134,7 +134,7 @@ What a working start looks like:
 Within ~1.5 seconds, Uvicorn binds to port 8000 and prints:
 
 INFO:     Will watch for changes in: ['...']
-INFO:     Uvicorn running on [http://127.0.0.1:8000](http://127.0.0.1:8000) (Press CTRL+C to quit)
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 INFO:     Started reloader process [...] using StatReload
 INFO:     Started server process [...]
 INFO:     Waiting for application startup.
@@ -150,7 +150,7 @@ If you see: ERROR: [Errno 10048] error while attempting to bind on address ('127
 Prove the entire application pipeline functions end-to-end rather than merely confirming process startup:
 
 Option A: Browser Interface
-Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) in a browser.Enter [https://example.com](https://example.com) into the URL input bar and click Scan URL.
+Navigate to http://127.0.0.1:8000 in a browser.Enter https://example.com into the URL input bar and click Scan URL.
 
 Expected: Within 1 second, the UI renders a green Verdict: Safe badge showing 0 detections across engines, confirming routing, template rendering, and scanner logic.
 
