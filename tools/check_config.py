@@ -76,7 +76,11 @@ def scan_sources(root):
 
 def main(argv):
     if not ((3, 12) <= sys.version_info[:2] <= (3, 14)):
-        print(f"ERROR: Unsupported Python {sys.version_info.major}.{sys.version_info.minor}. Use Python 3.12-3.14 (3.15+ lacks Windows binary wheels).", file=sys.stderr)
+        print(
+            f"ERROR: Unsupported Python {sys.version_info.major}.{sys.version_info.minor}. "
+            "Use Python 3.12-3.14 (3.15+ lacks Windows binary wheels).",
+            file=sys.stderr,
+        )
         sys.exit(2)
     args = argv[1:]
     scan_root, do_scan = ".", True

@@ -29,13 +29,24 @@ PLACEHOLDER_API_KEYS = {
     "mock-key-for-local-dev",
 }
 
+
 def validate_startup_config() -> None:
-    """Fail loudly at server startup if required configuration is missing."""
+    """Fail loudly at server startup if required configuration is missing or placeholder."""
     api_key = os.environ.get("VIRUSTOTAL_API_KEY", "").strip()
     if not api_key:
         msg = (
             "FATAL: VIRUSTOTAL_API_KEY is not set.\n"
             "Copy .env.example to .env and fill it in, then re-run.\n"
+            'See README.md -> "Configuration".'
+        )
+        print(msg, file=sys.stderr)
+        raise RuntimeError(msg)
+
+    # <-- NEW CHECK GOES RIGHT HERE (after the empty check, before the function ends)
+    if api_key in PLACEHOLDER_API_KEYS and not os.environ.get("PYTEST_CURRENT_TEST"):
+        msg = (
+            "FATAL: VIRUSTOTAL_API_KEY is still set to a placeholder/mock value.\n"
+            "Replace it in .env with a real 64-character VirusTotal v3 API key.\n"
             'See README.md -> "Configuration".'
         )
         print(msg, file=sys.stderr)

@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import pytest
 from src.api.main import validate_startup_config
