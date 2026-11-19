@@ -20,18 +20,6 @@ Ship confidence: green
 ## Video Walkthrough Demo
 Follow the link to view the video demonstration of the project: https://drive.google.com/file/d/1DrOW6yAYi_dGco_4G4RLE_AlnN27SuQi/view?usp=sharing
 
-## Demo
-
-Sample terminal session starting the Uvicorn server and verifying a live URL scan:
-
-```text
-$ .\.venv\Scripts\python -m uvicorn src.api.main:app --reload
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Application startup complete.
-
-$ curl -s -X POST http://127.0.0.1:8000/scan -H "Content-Type: application/json" -d '{"url":"https://example.com"}'
-{"url":"https://example.com","verdict":"Safe","positives":0,"total_engines":0,"scan_date":"N/A","cached":false,"raw_details":{}}
-```
 
 ### Prerequisites
 
@@ -108,7 +96,7 @@ Sample ./.env file contents:
 
 Code snippet
 VIRUSTOTAL_API_KEY=<your-api-key>
-FRONTEND_URL=http://127.0.0.1:8000
+FRONTEND_URL=[http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 Expected: Offline test suites (pytest tests/) bypass external calls using mock transports and pass without an active key.
 
@@ -134,7 +122,7 @@ What a working start looks like:
 Within ~1.5 seconds, Uvicorn binds to port 8000 and prints:
 
 INFO:     Will watch for changes in: ['...']
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Uvicorn running on [http://127.0.0.1:8000](http://127.0.0.1:8000) (Press CTRL+C to quit)
 INFO:     Started reloader process [...] using StatReload
 INFO:     Started server process [...]
 INFO:     Waiting for application startup.
@@ -150,14 +138,16 @@ If you see: ERROR: [Errno 10048] error while attempting to bind on address ('127
 Prove the entire application pipeline functions end-to-end rather than merely confirming process startup:
 
 Option A: Browser Interface
-Navigate to http://127.0.0.1:8000 in a browser.Enter https://example.com into the URL input bar and click Scan URL.
+Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) in a browser.Enter [https://example.com](https://example.com) into the URL input bar and click Scan URL.
 
 Expected: Within 1 second, the UI renders a green Verdict: Safe badge showing 0 detections across engines, confirming routing, template rendering, and scanner logic.
 
 **Note that in this method, your terminal in VS Code shows the results of the scan in your local terminal.**
 
 Option B: CLI Scan Request
-In a separate terminal, execute:Bashcurl -s -X POST http://127.0.0.1:8000/scan \
+In a separate terminal, execute:
+Bash:
+  curl -s -X POST http://127.0.0.1:8000/scan \
   -H "Content-Type: application/json" \
   -d '{"url":"https://example.com"}'
 
@@ -166,13 +156,26 @@ Response returns in <1 second with HTTP 200.
 
 If you see: curl: (7) Failed to connect to 127.0.0.1 port 8000, confirm the Uvicorn terminal process did not exit with an unhandled exception.
 
+## Demo
+
+Sample terminal session starting the Uvicorn server and verifying a live URL scan:
+
+```text
+$ .\.venv\Scripts\python -m uvicorn src.api.main:app --reload
+INFO:     Uvicorn running on [http://127.0.0.1:8000](http://127.0.0.1:8000) (Press CTRL+C to quit)
+INFO:     Application startup complete.
+
+$ curl -s -X POST [http://127.0.0.1:8000/scan](http://127.0.0.1:8000/scan) -H "Content-Type: application/json" -d '{"url":"[https://example.com](https://example.com)"}'
+{"url":"[https://example.com](https://example.com)","verdict":"Safe","positives":0,"total_engines":0,"scan_date":"N/A","cached":false,"raw_details":{}}
+```
+
 ## Test
 Execute the full offline verification suite (unit, integration, security boundary, and acceptance tests):
 
 PowerShell
 .\.venv\Scripts\python -m pytest tests/ -v
-macOS / Linux (Bash):
 
+macOS / Linux (Bash):
 Bash
 ./.venv/bin/pytest tests/ -v
 

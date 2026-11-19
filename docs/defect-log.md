@@ -130,3 +130,26 @@ This document tracks all identified defects across verification and testing. Eve
 * **Evidence:** Response payload returns `"scan_date": 1730500000` without timezone indicator.
 * **Severity & Priority:** S4 (Cosmetic formatting discrepancy; date information is legible) / P4 (Will fix in v1.1).
 * **Status:** Open (Ships as known defect). Owner: Caleb Fuller.
+
+## Week 14 Successor Documentation Issues (Rep 12)
+
+### ISSUE-DOC-01: Malformed Markdown link syntax inside `git clone` fenced code block (`README.md` §Install)
+- **Observed At:** `01:55` during clean-room successor simulation (`capstone-rep12-sim`)
+- **Symptom:** Copying `git clone [https://github.com/calebfuller1705/capstone.git](https://github.com/calebfuller1705/capstone.git)` verbatim into PowerShell/Bash fails with `fatal: protocol '[https' is not supported`.
+- **Acceptance Criteria:**
+  - [ ] `README.md` §Install Step 1 contains raw, unbracketed `git clone https://github.com/calebfuller1705/capstone.git` inside a fenced `bash` block.
+  - [ ] Copy-pasting the block verbatim into a clean directory clones the repository on the first attempt with exit code `0`.
+
+### ISSUE-DOC-02: `README.md` §Run lists unactivated `python -m uvicorn` first without activation step
+- **Observed At:** `06:30` during clean-room successor simulation
+- **Symptom:** Running the first command under `## Run` (`python -m uvicorn src.api.main:app --reload`) fails with `No module named uvicorn` because `Install` creates `.venv` without activating it.
+- **Acceptance Criteria:**
+  - [ ] `README.md` §Run places the explicit `.venv` interpreter commands (`.\.venv\Scripts\python.exe -m uvicorn ...` on Windows PowerShell and `./.venv/bin/python -m uvicorn ...` on macOS/Linux) first, or includes explicit `.venv` activation commands.
+  - [ ] Executing the first Windows PowerShell command in `## Run` starts Uvicorn cleanly without activating `.venv` globally.
+
+### ISSUE-DOC-03: Malformed code fence and missing PowerShell snippet in `README.md` §Verification Action Option B
+- **Observed At:** `10:43` during clean-room successor simulation
+- **Symptom:** Option B renders inline (`Bashcurl -s -X POST ...`) without a fenced code block and provides no native PowerShell `Invoke-RestMethod` command (where `curl` aliases to `Invoke-WebRequest` and fails on JSON single-quote escaping).
+- **Acceptance Criteria:**
+  - [ ] `README.md` §Verification Action Option B renders properly fenced code blocks for both Windows PowerShell (`Invoke-RestMethod`) and Bash (`curl`).
+  - [ ] Copy-pasting the PowerShell verification command against a running server returns HTTP `200` with a valid JSON verdict payload.
