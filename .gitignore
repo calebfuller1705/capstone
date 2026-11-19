@@ -5,7 +5,14 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
+
+# Environment & Secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
 
 # VS Code
 .vscode/
@@ -15,7 +22,7 @@ venv/
 Thumbs.db
 Desktop.ini
 
-# Mac (Just in case)
+# Mac
 .DS_Store
 
 # Logs and Databases

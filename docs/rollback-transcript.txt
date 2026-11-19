@@ -1,0 +1,57 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261119083048
+Username: CALEB\fulle
+RunAs User: CALEB\fulle
+Configuration Name: 
+Machine: CALEB (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\fulle\AppData\Local\Programs\Microsoft VS Code\69047191fc\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 17140
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\fulle\capstone\docs\rep10-rollback-transcript.txt
+=== STEP A: Deploy v0.9.0-rc.2 into isolated deployment directory ===
+
+PS>TerminatingError(Invoke-RestMethod): "Unable to connect to the remote server"
+Invoke-RestMethod : Unable to connect to the remote server
+At line:17 char:7
++ $h1 = Invoke-RestMethod -Uri "http://127.0.0.1:8015/health" -Method G ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], 
+WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+Invoke-RestMethod : Unable to connect to the remote server
+At line:17 char:7
++ $h1 = Invoke-RestMethod -Uri "http://127.0.0.1:8015/health" -Method G ...
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+
+Deployed v0.9.0-rc.2 health check:
+
+=== STEP B: Deploy deliberately broken change on top of v0.9.0-rc.2 ===
+
+
+
+Broken deploy process exited: False
+
+=== STEP C: Timed Rollback to v0.9.0-rc.2 (following docs/runbook.md + improvised git checkout) ===
+Port 8015 check after stop: ''
+
+
+PS>TerminatingError(Invoke-RestMethod): "The operation has timed out."
+PS>TerminatingError(Invoke-RestMethod): "The operation has timed out."
+Rollback recovered: True | Health: {"status":"ok"}
+Total Rollback Elapsed Time: 6.43 seconds
+
+**********************
+Windows PowerShell transcript end
+End time: 20261119083109
+**********************

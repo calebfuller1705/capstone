@@ -31,3 +31,24 @@
 Before: Uvicorn booted silently without VIRUSTOTAL_API_KEY and passed GET /health (200 OK), failing only later inside scan_url() (src/api/main.py:101) with HTTP 500: Server configuration error: missing VIRUSTOTAL_API_KEY when a user submitted POST /scan.
 
 After: FastAPI's lifespan() hook calls validate_startup_config() (and ./script/start checks .env), aborting boot immediately with FATAL: VIRUSTOTAL_API_KEY is not set. Copy .env.example to .env and fill it in, then re-run. See README.md -> "Configuration".
+
+# Rep 5 Summary - Amnesia Test
+Fresh-Clone Amnesia Test (2026-11-18, $env:TEMP\capstone-amnesia-test):
+
+Cloned [https://github.com/calebfuller1705/capstone.git](https://github.com/calebfuller1705/capstone.git) into an isolated temporary directory, copied .env.example to .env, created a clean .venv, installed all 37 pinned packages from requirements.lock, verified tools/check_config.py .env.example .env (0 required missing, 0 undocumented), ran pytest tests/ -q (69 passed in 6.60s), booted Uvicorn on port 8011, and verified GET /health ({"status":"ok"}) and POST /scan ("verdict":"Safe").
+
+Total wall-clock time: 02 min 41.41 s (clone → running → smoke verified).
+
+# Rep 7 - The Secret Hunt
+| Location | Finding Type | Redacted Value / Entropy | Classification | Action Required |
+| Commit 304cde0e (.env.example) | 64-char hex VIRUSTOTAL_API_KEY | 750524a7135eea8e... (H = 3.80) | Real historical secret | Revoke in VirusTotal portal & rotate to a new key (Rep 8) |
+| .github/workflows/ci.yml:52 | Mock CI token | ci-smoke-test-ke... (H = 3.18) | Safe synthetic fixture | None (offline CI mock key) |
+| tests/integration/test_vt_contracts.py:9 | Test fixture token | test_api_key_000... (H = 1.74) | Safe synthetic fixture | None (unit/integration mock) |
+| "README.md:105,110 & docs/runbook.md:138" | Documentation placeholder | <your-api-key>... (H = 3.52–3.98) | Safe doc placeholder | None |
+| Working tree (all tracked files) | Active real secrets | None (0 real findings) | Clean | ".gitignore hardened for .env.*, *.pem, *.key"|
+
+# Rep 8 - Rotate One Key on Purpose
+
+Credential Rotated: VIRUSTOTAL_API_KEY (replaced exposed historical key 750524a7135eea8e... found in commit 304cde0e with a fresh VirusTotal v3 API key stored strictly in untracked local .env).
+
+Verification: tools/check_config.py .env.example .env exited 0 (0 required missing, 4 warnings, 0 undocumented), git status remained clean, and POST /scan ([https://example.com](https://example.com)) returned 200 OK (verdict: Safe, total_engines: 93).

@@ -160,6 +160,13 @@ If that fails: Check VirusTotal API quota limits (4 requests/min, 500 requests/d
   4. Inspect git history via `git log -S "<old_key>" --all` to verify the credential was never committed to version control. If committed, purge git history using `git-filter-repo` before pushing any commits upstream.
 - **Contact:** Caleb Fuller (`calebfuller1705`), response time < 4 hours during active project milestones. After Week 14/16 course handoff, custody transfers to the capstone repository archive maintainer.
 
+## 8. Rollback to Last Known-Good Release Tag
+If a newly deployed commit or release candidate fails startup or `/health` verification, roll back using these exact steps:
+1. **Stop the broken service:** Press `CTRL+C` in the Uvicorn terminal (or terminate the PID via `Stop-Process -Id <PID> -Force` / `kill <PID>`).
+2. **Verify port release:** Run `netstat -ano | findstr :8000` (Windows) or `lsof -i :8000` (macOS/Linux) and confirm no listener remains bound.
+3. **Revert working tree to the last known-good annotated tag:** Run `git fetch --tags` followed by `git checkout --force v0.9.0-rc.2` (confirming `.env` remains untouched in `.gitignore`).
+4. **Restart Uvicorn & poll `/health`:** Start the server (`./script/start`) and poll `curl -s http://127.0.0.1:8000/health` for up to 15 seconds until it returns `{"status":"ok"}` (`HTTP 200`).
+
 ## 8. Last verified
 
 This runbook was executed end to end on November 11, 2026 by Caleb Fuller on Windows 11 (PowerShell 7, Python 3.14.2, Uvicorn 0.32.0).  
