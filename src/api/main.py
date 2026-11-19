@@ -43,7 +43,9 @@ def validate_startup_config() -> None:
         raise RuntimeError(msg)
 
     # <-- NEW CHECK GOES RIGHT HERE (after the empty check, before the function ends)
-    if api_key in PLACEHOLDER_API_KEYS and not (os.environ.get("PYTEST_CURRENT_TEST") or os.environ.get("CI") == "true"):
+    if api_key in PLACEHOLDER_API_KEYS and not (
+        os.environ.get("PYTEST_CURRENT_TEST") or os.environ.get("CI") == "true"
+    ):
         msg = (
             "FATAL: VIRUSTOTAL_API_KEY is still set to a placeholder/mock value.\n"
             "Replace it in .env with a real 64-character VirusTotal v3 API key.\n"
