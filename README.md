@@ -8,10 +8,10 @@ Corporate employees, IT helpdesk staff, and security reviewers frequently encoun
 - **Status:** Working (`v0.9.0-rc.1` release candidate). End-to-end URL safety scanner with VirusTotal v3 integration, zero-persistence SSRF guard, full fault degradation, clean-clone verification (60/60 tests green), and Keep a Changelog release notes.
 - **What it does not do:** No database persistence, user accounts, or historical scan logs (strictly stateless per privacy constraint `CON-04`); no recursive redirect unshortening for shortened links (`bit.ly`/`tinyurl`, deferred via CR-003 to `docs/backlog.md` item B-01 for `v1.1`).
 
-## Current Status (Milestone 13)
-Shipped:     Complete Milestone 13 operational documentation suite (README, architecture §0, runbook, onboarding, ADR index, AI/API usage, and verified clean-machine test) for v0.9.0-rc.1.
-Cut:         Deferred recursive redirect unshortening (B-01) and persistent server-side action logging (B-04) to v1.1 (tracked in docs/backlog.md).
-Hours:       planned 15.0 / actual 13.5 (from docs/hours-log.csv)
+## Current Status (Milestone 14)
+Shipped:     Complete Milestone 14 deployment, reproducibility, and successor handoff package (`docs/handoff.md` §0–§8, `docs/deployment.md`, `docs/release-checklist.md`, `THIRD-PARTY-NOTICES.md`, groomed top 5 backlog issues with `good-first-issue` starter task, `6.43s` rollback drill, 71/71 passing tests, and 95/100 Handoff Readiness Auditor score) tagged and released at `v1.0.0`.
+Cut:         Deferred recursive redirect unshortening (`B-01`), opt-in server-side action logging (`B-04`), Starlette deprecation constant cleanup (`B-05`), and bounded LRU cache eviction (`B-06`) to `v1.1` (tracked in `docs/backlog.md`).
+Hours:       planned 15.0 / actual 15.0 (from docs/hours-log.csv)
 Blocked on:  nothing
 Ship confidence: green
 
